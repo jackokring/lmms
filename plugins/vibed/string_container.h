@@ -24,14 +24,15 @@
 #ifndef _STRING_CONTAINER_H
 #define _STRING_CONTAINER_H
 
-#include <QtCore/QVector>
+#include <QVector>
 
 #include "vibrating_string.h"
-
+#include "MemoryManager.h"
 
 
 class stringContainer
 {
+	MM_OPERATORS
 public:
 	stringContainer(const float _pitch, 
 			const sample_rate_t _sample_rate,

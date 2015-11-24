@@ -22,15 +22,14 @@
  *
  */
 
-#include <QtXml/QDomElement>
-
 #include "AutomatableModel.h"
+
 #include "AutomationPattern.h"
 #include "ControllerConnection.h"
 #include "lmms_math.h"
 
 float AutomatableModel::s_copiedValue = 0;
-
+long AutomatableModel::s_periodCounter = 0;
 
 
 
@@ -49,8 +48,13 @@ AutomatableModel::AutomatableModel( DataType type,
 	m_centerValue( m_minValue ),
 	m_valueChanged( false ),
 	m_setValueDepth( 0 ),
+	m_hasStrictStepSize( false ),
 	m_hasLinkedModels( false ),
-	m_controllerConnection( NULL )
+	m_controllerConnection( NULL ),
+	m_valueBuffer( static_cast<int>( Engine::mixer()->framesPerPeriod() ) ),
+	m_lastUpdatedPeriod( -1 ),
+	m_hasSampleExactData( false )
+
 {
 	setInitValue( val );
 }
@@ -71,6 +75,8 @@ AutomatableModel::~AutomatableModel()
 		delete m_controllerConnection;
 	}
 
+	m_valueBuffer.clear();
+
 	emit destroyed( id() );
 }
 
@@ -81,8 +87,6 @@ bool AutomatableModel::isAutomated() const
 {
 	return AutomationPattern::isAutomated( this );
 }
-
-
 
 
 void AutomatableModel::saveSettings( QDomDocument& doc, QDomElement& element, const QString& name )
@@ -166,7 +170,7 @@ void AutomatableModel::loadSettings( const QDomElement& element, const QString& 
 			//m_controllerConnection->setTargetName( displayName() );
 		}
 	}
-	
+
 	// models can be stored as elements (port00) or attributes (port10):
 	// <ladspacontrols port10="4.41">
 	//   <port00 value="4.41" id="4249278"/>
@@ -205,10 +209,11 @@ void AutomatableModel::loadSettings( const QDomElement& element, const QString& 
 
 void AutomatableModel::setValue( const float value )
 {
+	m_oldValue = m_value;
 	++m_setValueDepth;
 	const float old_val = m_value;
 
-	m_value = fittedValue( value );
+	m_value = fittedValue( value, true );
 	if( old_val != m_value )
 	{
 		// add changes to history so user can undo it
@@ -298,6 +303,7 @@ void AutomatableModel::roundAt( T& value, const T& where ) const
 
 void AutomatableModel::setAutomatedValue( const float value )
 {
+	m_oldValue = m_value;
 	++m_setValueDepth;
 	const float oldValue = m_value;
 
@@ -312,8 +318,7 @@ void AutomatableModel::setAutomatedValue( const float value )
 									it != m_linkedModels.end(); ++it )
 		{
 			if( (*it)->m_setValueDepth < 1 &&
-				!(*it)->fittedValue( m_value ) !=
-							 (*it)->m_value )
+				(*it)->fittedValue( m_value ) != (*it)->m_value )
 			{
 				(*it)->setAutomatedValue( value );
 			}
@@ -364,11 +369,11 @@ void AutomatableModel::setStep( const float step )
 
 
 
-float AutomatableModel::fittedValue( float value ) const
+float AutomatableModel::fittedValue( float value, bool forceStep ) const
 {
 	value = tLimit<float>( value, m_minValue, m_maxValue );
 
-	if( m_step != 0 )
+	if( m_step != 0 && ( m_hasStrictStepSize || forceStep ) )
 	{
 		value = nearbyintf( value / m_step ) * m_step;
 	}
@@ -490,7 +495,7 @@ float AutomatableModel::controllerValue( int frameOffset ) const
 				"lacks implementation for a scale type");
 			break;
 		}
-		if( typeInfo<float>::isEqual( m_step, 1 ) )
+		if( typeInfo<float>::isEqual( m_step, 1 ) && m_hasStrictStepSize )
 		{
 			return qRound( v );
 		}
@@ -507,6 +512,91 @@ float AutomatableModel::controllerValue( int frameOffset ) const
 }
 
 
+ValueBuffer * AutomatableModel::valueBuffer()
+{
+	// if we've already calculated the valuebuffer this period, return the cached buffer
+	if( m_lastUpdatedPeriod == s_periodCounter )
+	{
+		return m_hasSampleExactData
+			? &m_valueBuffer
+			: NULL;
+	}
+	QMutexLocker m( &m_valueBufferMutex );
+	if( m_lastUpdatedPeriod == s_periodCounter )
+	{
+		return m_hasSampleExactData
+			? &m_valueBuffer
+			: NULL;
+	}
+
+	float val = m_value; // make sure our m_value doesn't change midway
+
+	ValueBuffer * vb;
+	if( m_controllerConnection && m_controllerConnection->getController()->isSampleExact() )
+	{
+		vb = m_controllerConnection->valueBuffer();
+		if( vb )
+		{
+			float * values = vb->values();
+			float * nvalues = m_valueBuffer.values();
+			switch( m_scaleType )
+			{
+			case Linear:
+				for( int i = 0; i < m_valueBuffer.length(); i++ )
+				{
+					nvalues[i] = minValue<float>() + ( range() * values[i] );
+				}
+				break;
+			case Logarithmic:
+				for( int i = 0; i < m_valueBuffer.length(); i++ )
+				{
+					nvalues[i] = logToLinearScale( values[i] );
+				}
+				break;
+			default:
+				qFatal("AutomatableModel::valueBuffer() "
+					"lacks implementation for a scale type");
+				break;
+			}
+			m_lastUpdatedPeriod = s_periodCounter;
+			m_hasSampleExactData = true;
+			return &m_valueBuffer;
+		}
+	}
+	AutomatableModel* lm = NULL;
+	if( m_hasLinkedModels )
+	{
+		lm = m_linkedModels.first();
+	}
+	if( lm && lm->controllerConnection() && lm->controllerConnection()->getController()->isSampleExact() )
+	{
+		vb = lm->valueBuffer();
+		float * values = vb->values();
+		float * nvalues = m_valueBuffer.values();
+		for( int i = 0; i < vb->length(); i++ )
+		{
+			nvalues[i] = fittedValue( values[i], false );
+		}
+		m_lastUpdatedPeriod = s_periodCounter;
+		m_hasSampleExactData = true;
+		return &m_valueBuffer;
+	}
+
+	if( m_oldValue != val )
+	{
+		m_valueBuffer.interpolate( m_oldValue, val );
+		m_oldValue = val;
+		m_lastUpdatedPeriod = s_periodCounter;
+		m_hasSampleExactData = true;
+		return &m_valueBuffer;
+	}
+
+	// if we have no sample-exact source for a ValueBuffer, return NULL to signify that no data is available at the moment
+	// in which case the recipient knows to use the static value() instead
+	m_lastUpdatedPeriod = s_periodCounter;
+	m_hasSampleExactData = false;
+	return NULL;
+}
 
 
 void AutomatableModel::unlinkControllerConnection()
@@ -575,11 +665,11 @@ float AutomatableModel::globalAutomationValueAt( const MidiTime& time )
 		{
 			int s = ( *it )->startPosition();
 			int e = ( *it )->endPosition();
-			if( s <= time && e >= time ) { patternsInRange += ( *it ); } 
+			if( s <= time && e >= time ) { patternsInRange += ( *it ); }
 		}
-		
+
 		AutomationPattern * latestPattern = NULL;
-		
+
 		if( ! patternsInRange.isEmpty() )
 		{
 			// if there are more than one overlapping patterns, just use the first one because
@@ -590,7 +680,7 @@ float AutomatableModel::globalAutomationValueAt( const MidiTime& time )
 		// if we find no patterns at the exact miditime, we need to search for the last pattern before time and use that
 		{
 			int latestPosition = 0;
-			
+
 			for( QVector<AutomationPattern *>::ConstIterator it = patterns.begin(); it != patterns.end(); it++ )
 			{
 				int e = ( *it )->endPosition();
@@ -601,7 +691,7 @@ float AutomatableModel::globalAutomationValueAt( const MidiTime& time )
 				}
 			}
 		}
-		
+
 		if( latestPattern )
 		{
 			// scale/fit the value appropriately and return it
@@ -609,12 +699,12 @@ float AutomatableModel::globalAutomationValueAt( const MidiTime& time )
 			const float scaled_value = scaledValue( value );
 			return fittedValue( scaled_value );
 		}
-		// if we still find no pattern, the value at that time is undefined so 
+		// if we still find no pattern, the value at that time is undefined so
 		// just return current value as the best we can do
 		else return m_value;
 	}
 }
 
 
-#include "moc_AutomatableModel.cxx"
+
 

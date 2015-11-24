@@ -24,13 +24,13 @@
  */
 
 
-#include <QtXml/QDomDocument>
-#include <QtGui/QPainter>
+#include <QDomDocument>
+#include <QPainter>
 
 #include "kicker.h"
-#include "engine.h"
+#include "Engine.h"
 #include "InstrumentTrack.h"
-#include "knob.h"
+#include "Knob.h"
 #include "NotePlayHandle.h"
 #include "KickerOsc.h"
 
@@ -163,8 +163,10 @@ typedef KickerOsc<DspEffectLibrary::MonoToStereoAdaptor<DistFX> > SweepOsc;
 void kickerInstrument::playNote( NotePlayHandle * _n,
 						sampleFrame * _working_buffer )
 {
+	const fpp_t frames = _n->framesLeftForCurrentPeriod();
+	const f_cnt_t offset = _n->noteOffset();
 	const float decfr = m_decayModel.value() *
-		engine::mixer()->processingSampleRate() / 1000.0f;
+		Engine::mixer()->processingSampleRate() / 1000.0f;
 	const f_cnt_t tfp = _n->totalFramesPlayed();
 
 	if ( tfp == 0 )
@@ -187,10 +189,8 @@ void kickerInstrument::playNote( NotePlayHandle * _n,
 		_n->noteOff();
 	}
 
-	const fpp_t frames = _n->framesLeftForCurrentPeriod();
-
 	SweepOsc * so = static_cast<SweepOsc *>( _n->m_pluginData );
-	so->update( _working_buffer, frames, engine::mixer()->processingSampleRate() );
+	so->update( _working_buffer + offset, frames, Engine::mixer()->processingSampleRate() );
 
 	if( _n->isReleased() )
 	{
@@ -199,12 +199,12 @@ void kickerInstrument::playNote( NotePlayHandle * _n,
 		for( fpp_t f = 0; f < frames; ++f )
 		{
 			const float fac = ( done+f < desired ) ? ( 1.0f - ( ( done+f ) / desired ) ) : 0;
-			_working_buffer[f][0] *= fac;
-			_working_buffer[f][1] *= fac;
+			_working_buffer[f+offset][0] *= fac;
+			_working_buffer[f+offset][1] *= fac;
 		}
 	}
 
-	instrumentTrack()->processAudioBuffer( _working_buffer, frames, _n );
+	instrumentTrack()->processAudioBuffer( _working_buffer, frames + offset, _n );
 }
 
 
@@ -226,11 +226,11 @@ PluginView * kickerInstrument::instantiateView( QWidget * _parent )
 
 
 
-class kickerKnob : public knob
+class kickerKnob : public Knob
 {
 public:
 	kickerKnob( QWidget * _parent ) :
-			knob( knobStyled, _parent )
+			Knob( knobStyled, _parent )
 	{
 		setFixedSize( 29, 29 );
 		setObjectName( "smallKnob" );
@@ -250,11 +250,11 @@ public:
 };
 
 
-class kickerLargeKnob : public knob
+class kickerLargeKnob : public Knob
 {
 public:
 	kickerLargeKnob( QWidget * _parent ) :
-			knob( knobStyled, _parent )
+			Knob( knobStyled, _parent )
 	{
 		setFixedSize( 34, 34 );
 		setObjectName( "largeKnob" );
@@ -280,49 +280,49 @@ kickerInstrumentView::kickerInstrumentView( Instrument * _instrument,
 	const int END_COL = COL1 + 48;
 	
 	m_startFreqKnob = new kickerLargeKnob( this );
-	m_startFreqKnob->setHintText( tr( "Start frequency:" ) + " ", "Hz" );
+	m_startFreqKnob->setHintText( tr( "Start frequency:" ), "Hz" );
 	m_startFreqKnob->move( COL1, ROW1 );
 
 	m_endFreqKnob = new kickerLargeKnob( this );
-	m_endFreqKnob->setHintText( tr( "End frequency:" ) + " ", "Hz" );
+	m_endFreqKnob->setHintText( tr( "End frequency:" ), "Hz" );
 	m_endFreqKnob->move( END_COL, ROW1 );
 
 	m_slopeKnob = new kickerKnob( this );
-	m_slopeKnob->setHintText( tr( "Frequency Slope:" ) + " ", "" );
+	m_slopeKnob->setHintText( tr( "Frequency Slope:" ), "" );
 	m_slopeKnob->move( COL3, ROW1 );
 
 	m_gainKnob = new kickerKnob( this );
-	m_gainKnob->setHintText( tr( "Gain:" ) + " ", "" );
+	m_gainKnob->setHintText( tr( "Gain:" ), "" );
 	m_gainKnob->move( COL1, ROW3 );
 
 	m_decayKnob = new kickerEnvKnob( this );
-	m_decayKnob->setHintText( tr( "Envelope Length:" ) + " ", "ms" );
+	m_decayKnob->setHintText( tr( "Envelope Length:" ), "ms" );
 	m_decayKnob->move( COL2, ROW3 );
 
 	m_envKnob = new kickerKnob( this );
-	m_envKnob->setHintText( tr( "Envelope Slope:" ) + " ", "" );
+	m_envKnob->setHintText( tr( "Envelope Slope:" ), "" );
 	m_envKnob->move( COL3, ROW3 );
 
 	m_clickKnob = new kickerKnob( this );
-	m_clickKnob->setHintText( tr( "Click:" ) + " ", "" );
+	m_clickKnob->setHintText( tr( "Click:" ), "" );
 	m_clickKnob->move( COL5, ROW1 );
 
 	m_noiseKnob = new kickerKnob( this );
-	m_noiseKnob->setHintText( tr( "Noise:" ) + " ", "" );
+	m_noiseKnob->setHintText( tr( "Noise:" ), "" );
 	m_noiseKnob->move( COL5, ROW3 );
 
 	m_distKnob = new kickerKnob( this );
-	m_distKnob->setHintText( tr( "Distortion Start:" ) + " ", "" );
+	m_distKnob->setHintText( tr( "Distortion Start:" ), "" );
 	m_distKnob->move( COL4, ROW2 );
 
 	m_distEndKnob = new kickerKnob( this );
-	m_distEndKnob->setHintText( tr( "Distortion End:" ) + " ", "" );
+	m_distEndKnob->setHintText( tr( "Distortion End:" ), "" );
 	m_distEndKnob->move( COL5, ROW2 );
 
-	m_startNoteToggle = new ledCheckBox( "", this, "", ledCheckBox::Green );
+	m_startNoteToggle = new LedCheckBox( "", this, "", LedCheckBox::Green );
 	m_startNoteToggle->move( COL1 + 8, LED_ROW );
 
-	m_endNoteToggle = new ledCheckBox( "", this, "", ledCheckBox::Green );
+	m_endNoteToggle = new LedCheckBox( "", this, "", LedCheckBox::Green );
 	m_endNoteToggle->move( END_COL + 8, LED_ROW );
 
 	setAutoFillBackground( true );
@@ -375,5 +375,5 @@ Plugin * PLUGIN_EXPORT lmms_plugin_main( Model *, void * _data )
 }
 
 
-#include "moc_kicker.cxx"
+
 

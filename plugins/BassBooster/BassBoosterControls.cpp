@@ -23,7 +23,7 @@
  */
 
 
-#include <QtXml/QDomElement>
+#include <QDomElement>
 
 #include "BassBoosterControls.h"
 #include "BassBooster.h"
@@ -37,7 +37,7 @@ BassBoosterControls::BassBoosterControls( BassBoosterEffect* effect ) :
 	m_gainModel( 1.0f, 0.1f, 5.0f, 0.05f, this, tr( "Gain" ) ),
 	m_ratioModel( 2.0f, 0.1f, 10.0f, 0.1f, this, tr( "Ratio" ) )
 {
-	connect( engine::mixer(), SIGNAL( sampleRateChanged() ), this, SLOT( changeFrequency() ) );
+	connect( Engine::mixer(), SIGNAL( sampleRateChanged() ), this, SLOT( changeFrequency() ) );
 }
 
 
@@ -67,5 +67,5 @@ void BassBoosterControls::saveSettings( QDomDocument& doc, QDomElement& _this )
 
 
 
-#include "moc_BassBoosterControls.cxx"
+
 

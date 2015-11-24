@@ -25,18 +25,18 @@
 #ifndef FX_MIXER_VIEW_H
 #define FX_MIXER_VIEW_H
 
-#include <QtGui/QWidget>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QStackedLayout>
-#include <QtGui/QScrollArea>
+#include <QWidget>
+#include <QHBoxLayout>
+#include <QStackedLayout>
+#include <QScrollArea>
 
 #include "FxLine.h"
 #include "FxMixer.h"
 #include "ModelView.h"
-#include "engine.h"
-#include "fader.h"
-#include "pixmap_button.h"
-#include "tooltip.h"
+#include "Engine.h"
+#include "Fader.h"
+#include "PixmapButton.h"
+#include "ToolTip.h"
 #include "embed.h"
 #include "EffectRackView.h"
 
@@ -53,9 +53,12 @@ public:
 	public:
 		FxChannelView(QWidget * _parent, FxMixerView * _mv, int _chIndex );
 
+		void setChannelIndex( int index );
+
 		FxLine * m_fxLine;
-		pixmapButton * m_muteBtn;
-		fader * m_fader;
+		PixmapButton * m_muteBtn;
+		PixmapButton * m_soloBtn;
+		Fader * m_fader;
 		EffectRackView * m_rackView;
 	};
 
@@ -78,6 +81,7 @@ public:
 		return m_fxChannelViews[index];
 	}
 
+
 	void setCurrentFxLine( FxLine * _line );
 	void setCurrentFxLine( int _line );
 
@@ -90,17 +94,27 @@ public:
 	// notify the view that an fx channel was deleted
 	void deleteChannel(int index);
 
+	// delete all unused channels
+	void deleteUnusedChannels();
+
 	// move the channel to the left or right
 	void moveChannelLeft(int index);
+	void moveChannelLeft(int index, int focusIndex);
 	void moveChannelRight(int index);
 
 	// make sure the display syncs up with the fx mixer.
 	// useful for loading projects
 	void refreshDisplay();
+
+public slots:
+	int addNewChannel();
+
+protected:
+	virtual void closeEvent( QCloseEvent * _ce );
 	
 private slots:
 	void updateFaders();
-	void addNewChannel();
+	void toggledSolo();
 
 private:
 

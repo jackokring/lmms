@@ -25,12 +25,13 @@
 #ifndef AUTOMATABLE_MODEL_H
 #define AUTOMATABLE_MODEL_H
 
-#include "lmms_math.h"
+#include <QtCore/QMutex>
 
 #include "JournallingObject.h"
 #include "Model.h"
 #include "MidiTime.h"
-
+#include "ValueBuffer.h"
+#include "MemoryManager.h"
 
 // simple way to map a property of a view to a model
 #define mapPropertyFromModelPtr(type,getfunc,setfunc,modelname)	\
@@ -64,6 +65,7 @@ class ControllerConnection;
 class EXPORT AutomatableModel : public Model, public JournallingObject
 {
 	Q_OBJECT
+	MM_OPERATORS
 public:
 	typedef QVector<AutomatableModel *> AutoModelVector;
 
@@ -99,6 +101,10 @@ public:
 	}
 
 	bool isAutomated() const;
+	bool isAutomatedOrControlled() const
+	{
+		return isAutomated() || m_controllerConnection != NULL;
+	}
 
 	ControllerConnection* controllerConnection() const
 	{
@@ -135,6 +141,10 @@ public:
 
 	float controllerValue( int frameOffset ) const;
 
+	//! @brief Function that returns sample-exact data as a ValueBuffer
+	//! @return pointer to model's valueBuffer when s.ex.data exists, NULL otherwise
+	ValueBuffer * valueBuffer();
+
 	template<class T>
 	T initValue() const
 	{
@@ -163,7 +173,7 @@ public:
 	{
 		return castValue<T>( m_step );
 	}
-	
+
 	//! @brief Returns value scaled with the scale type and min/max values of this model
 	float scaledValue( float value ) const;
 	//! @brief Returns value applied with the inverse of this model's scale type
@@ -245,7 +255,7 @@ public:
 	// has to be accessed by more than one object, then this function shouldn't be used.
 	bool isValueChanged()
 	{
-		if( m_valueChanged )
+		if( m_valueChanged || valueBuffer() )
 		{
 			m_valueChanged = false;
 			return true;
@@ -254,6 +264,26 @@ public:
 	}
 
 	float globalAutomationValueAt( const MidiTime& time );
+
+	bool hasStrictStepSize() const
+	{
+		return m_hasStrictStepSize;
+	}
+
+	void setStrictStepSize( const bool b )
+	{
+		m_hasStrictStepSize = b;
+	}
+
+	static void incrementPeriodCounter()
+	{
+		++s_periodCounter;
+	}
+
+	static void resetPeriodCounter()
+	{
+		s_periodCounter = 0;
+	}
 
 public slots:
 	virtual void reset();
@@ -267,7 +297,7 @@ protected:
 	//! max() and aligned according to the step size (step size 0.05 -> value
 	//! 0.12345 becomes 0.10 etc.). You should always call it at the end after
 	//! doing your own calculations.
-	float fittedValue( float value ) const;
+	float fittedValue( float value, bool forceStep = false ) const;
 
 
 private:
@@ -302,13 +332,16 @@ private:
 	float m_step;
 	float m_range;
 	float m_centerValue;
-	
+
 	bool m_valueChanged;
 
-	// most objects will need this temporarily (until sampleExact is
-	// standard)
+	// currently unused?
 	float m_oldValue;
 	int m_setValueDepth;
+
+	// used to determine if step size should be applied strictly (ie. always)
+	// or only when value set from gui (default)
+	bool m_hasStrictStepSize;
 
 	AutoModelVector m_linkedModels;
 	bool m_hasLinkedModels;
@@ -320,6 +353,14 @@ private:
 
 	static float s_copiedValue;
 
+	ValueBuffer m_valueBuffer;
+	long m_lastUpdatedPeriod;
+	static long s_periodCounter;
+
+	bool m_hasSampleExactData;
+
+	// prevent several threads from attempting to write the same vb at the same time
+	QMutex m_valueBufferMutex;
 
 signals:
 	void initValueChanged( float val );

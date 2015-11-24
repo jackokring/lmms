@@ -23,67 +23,71 @@
  *
  */
 
-#include <QtGui/QApplication>
-#include <QtGui/QLayout>
-#include <QtGui/QMdiSubWindow>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QMdiArea>
+#include <QApplication>
+#include <QLayout>
+#include <QMdiSubWindow>
+#include <QPushButton>
+#include <QScrollArea>
+#include <QScrollBar>
+#include <QVBoxLayout>
+#include <QMdiArea>
 #include <QMessageBox>
+#include <QVBoxLayout>
 
-#include "song.h"
+#include "Song.h"
 #include "embed.h"
+#include "GuiApplication.h"
 #include "MainWindow.h"
-#include "group_box.h"
+#include "GroupBox.h"
 #include "ControllerRackView.h"
 #include "ControllerView.h"
 #include "LfoController.h"
 
 
 ControllerRackView::ControllerRackView( ) :
-	QWidget()
+	QWidget(),
+	m_nextIndex(0)
 {
-	setMinimumWidth( 250 );
-	setMaximumWidth( 250 );
-	resize( 250, 160 );
-
 	setWindowIcon( embed::getIconPixmap( "controller" ) );
 	setWindowTitle( tr( "Controller Rack" ) );
 
 	m_scrollArea = new QScrollArea( this );
-	m_scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
-	m_scrollArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
 	m_scrollArea->setPalette( QApplication::palette( m_scrollArea ) );
-	m_scrollArea->setMinimumHeight( 64 );
+	m_scrollArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+
+	QWidget * scrollAreaWidget = new QWidget( m_scrollArea );
+	m_scrollAreaLayout = new QVBoxLayout( scrollAreaWidget );
+	m_scrollAreaLayout->addStretch();
+	scrollAreaWidget->setLayout( m_scrollAreaLayout );
+
+	m_scrollArea->setWidget( scrollAreaWidget );
+	m_scrollArea->setWidgetResizable( true );
 
 	m_addButton = new QPushButton( this );
 	m_addButton->setText( tr( "Add" ) );
 
-	QWidget * w = new QWidget();
-	m_scrollArea->setWidget( w );
-
 	connect( m_addButton, SIGNAL( clicked() ),
 			this, SLOT( addController() ) );
 
-	connect( engine::getSong(), SIGNAL( dataChanged() ),
-			this, SLOT( update() ) );
+	Song * song = Engine::getSong();
+	connect( song, SIGNAL( controllerAdded( Controller* ) ), SLOT( onControllerAdded( Controller* ) ) );
+	connect( song, SIGNAL( controllerRemoved( Controller* ) ), SLOT( onControllerRemoved( Controller* ) ) );
 
 	QVBoxLayout * layout = new QVBoxLayout();
 	layout->addWidget( m_scrollArea );
 	layout->addWidget( m_addButton );
 	this->setLayout( layout );
 
-	QMdiSubWindow * subWin =
-			engine::mainWindow()->workspace()->addSubWindow( this );
+	QMdiSubWindow * subWin = gui->mainWindow()->addWindowedWidget( this );
 
 	// No maximize button
 	Qt::WindowFlags flags = subWin->windowFlags();
 	flags &= ~Qt::WindowMaximizeButtonHint;
 	subWin->setWindowFlags( flags );
 	
-	parentWidget()->setAttribute( Qt::WA_DeleteOnClose, false );
-	parentWidget()->move( 880, 310 );
+	subWin->setAttribute( Qt::WA_DeleteOnClose, false );
+	subWin->move( 680, 310 );
+	subWin->resize(400, 200);
 }
 
 
@@ -91,8 +95,6 @@ ControllerRackView::ControllerRackView( ) :
 
 ControllerRackView::~ControllerRackView()
 {
-	// delete scroll-area with all children
-	delete m_scrollArea;
 }
 
 
@@ -101,7 +103,7 @@ ControllerRackView::~ControllerRackView()
 void ControllerRackView::saveSettings( QDomDocument & _doc,
 							QDomElement & _this )
 {
-	MainWindow::saveWidgetState( this, _this );
+	MainWindow::saveWidgetState( this, _this, QSize( 400, 300) );
 }
 
 
@@ -119,8 +121,7 @@ void ControllerRackView::deleteController( ControllerView * _view )
 {
 	Controller * c = _view->getController();
 
-	int connectionCount = c->connectionCount();
-	if( connectionCount > 0 )
+	if( c->connectionCount() > 0 )
 	{
 		QMessageBox msgBox;
 		msgBox.setIcon( QMessageBox::Question );
@@ -134,58 +135,64 @@ void ControllerRackView::deleteController( ControllerView * _view )
 		}
 	}
 
-
-	m_controllerViews.erase( qFind( m_controllerViews.begin(),
-				m_controllerViews.end(), _view ) );
-	delete _view;
-	delete c;
-	update();
+	Song * song = Engine::getSong();
+	song->removeController( c );
 }
 
 
 
 
-void ControllerRackView::update()
+void ControllerRackView::onControllerAdded( Controller * controller )
 {
-	QWidget * w = m_scrollArea->widget();
-	song * s = engine::getSong();
+	QWidget * scrollAreaWidget = m_scrollArea->widget();
 
-	setUpdatesEnabled( false );
+	ControllerView * controllerView = new ControllerView( controller, scrollAreaWidget );
 
-	int i = 0;
-	for( i = 0; i < m_controllerViews.size(); ++i )
-	{
-		delete m_controllerViews[i];
-	}
+	connect( controllerView, SIGNAL( deleteController( ControllerView * ) ),
+		 this, SLOT( deleteController( ControllerView * ) ), Qt::QueuedConnection );
 
-	m_controllerViews.clear();
+	m_controllerViews.append( controllerView );
+	m_scrollAreaLayout->insertWidget( m_nextIndex, controllerView );
 
-	for( i = 0; i < s->m_controllers.size(); ++i )
-	{
-		ControllerView * v = new ControllerView( s->m_controllers[i], w );
-
-		connect( v, SIGNAL( deleteController( ControllerView * ) ),
-			this, SLOT( deleteController( ControllerView * ) ),
-						Qt::QueuedConnection );
-
-		m_controllerViews.append( v );
-		v->move( 0, i*32 );
-		v->show();
-	}
-
-	w->setFixedSize( 210, i*32 );
-
-	setUpdatesEnabled( true );
-	QWidget::update();
+	++m_nextIndex;
 }
+
+
+
+
+void ControllerRackView::onControllerRemoved( Controller * removedController )
+{
+	ControllerView * viewOfRemovedController = 0;
+
+	QVector<ControllerView *>::const_iterator end = m_controllerViews.end();
+	for ( QVector<ControllerView *>::const_iterator it = m_controllerViews.begin(); it != end; ++it)
+	{
+		ControllerView *currentControllerView = *it;
+		if ( currentControllerView->getController() == removedController )
+		{
+			viewOfRemovedController = currentControllerView;
+			break;
+		}
+	}
+
+	if (viewOfRemovedController )
+	{
+		m_controllerViews.erase( qFind( m_controllerViews.begin(),
+					m_controllerViews.end(), viewOfRemovedController ) );
+
+		delete viewOfRemovedController;
+		--m_nextIndex;
+	}
+}
+
+
 
 
 void ControllerRackView::addController()
 {
 	// TODO: Eventually let the user pick from available controller types
 
-	engine::getSong()->addController( new LfoController( engine::getSong() ) );
-	update();
+	Engine::getSong()->addController( new LfoController( Engine::getSong() ) );
 
 	// fix bug which always made ControllerRackView loose focus when adding
 	// new controller
@@ -194,5 +201,17 @@ void ControllerRackView::addController()
 
 
 
-#include "moc_ControllerRackView.cxx"
+
+void ControllerRackView::closeEvent( QCloseEvent * _ce )
+ {
+	if( parentWidget() )
+	{
+		parentWidget()->hide();
+	}
+	else
+	{
+		hide();
+	}
+	_ce->ignore();
+ }
 

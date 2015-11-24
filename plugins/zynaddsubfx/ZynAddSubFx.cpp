@@ -24,32 +24,28 @@
 
 #include "lmmsconfig.h"
 
-#ifndef LMMS_BUILD_APPLE
-#include <Qt/QtXml>
-#endif
-#ifdef LMMS_BUILD_APPLE 
-#include <QtXml>
-#endif
-#include <QtCore/QTemporaryFile>
-#include <QtGui/QDropEvent>
-#include <QtGui/QGridLayout>
-#include <QtGui/QPushButton>
+#include <QDir>
+#include <QDomDocument>
+#include <QTemporaryFile>
+#include <QDropEvent>
+#include <QGridLayout>
+#include <QPushButton>
 
 #include "ZynAddSubFx.h"
-#include "engine.h"
-#include "knob.h"
-#include "led_checkbox.h"
+#include "Engine.h"
+#include "Knob.h"
+#include "LedCheckbox.h"
 #include "DataFile.h"
 #include "InstrumentPlayHandle.h"
 #include "InstrumentTrack.h"
 #include "gui_templates.h"
-#include "string_pair_drag.h"
+#include "StringPairDrag.h"
 #include "RemoteZynAddSubFx.h"
 #include "LocalZynAddSubFx.h"
 #include "ControllerConnection.h"
 
 #include "embed.cpp"
-#include "moc_ZynAddSubFx.cxx"
+
 
 
 extern "C"
@@ -133,10 +129,10 @@ ZynAddSubFxInstrument::ZynAddSubFxInstrument(
 	connect( &m_resBandwidthModel, SIGNAL( dataChanged() ), this, SLOT( updateResBandwidth() ) );
 
 	// now we need a play-handle which cares for calling play()
-	InstrumentPlayHandle * iph = new InstrumentPlayHandle( this );
-	engine::mixer()->addPlayHandle( iph );
+	InstrumentPlayHandle * iph = new InstrumentPlayHandle( this, _instrumentTrack );
+	Engine::mixer()->addPlayHandle( iph );
 
-	connect( engine::mixer(), SIGNAL( sampleRateChanged() ),
+	connect( Engine::mixer(), SIGNAL( sampleRateChanged() ),
 			this, SLOT( reloadPlugin() ) );
 
 	connect( instrumentTrack()->pitchRangeModel(), SIGNAL( dataChanged() ),
@@ -148,7 +144,7 @@ ZynAddSubFxInstrument::ZynAddSubFxInstrument(
 
 ZynAddSubFxInstrument::~ZynAddSubFxInstrument()
 {
-	engine::mixer()->removePlayHandles( instrumentTrack() );
+	Engine::mixer()->removePlayHandles( instrumentTrack() );
 
 	m_pluginMutex.lock();
 	delete m_plugin;
@@ -337,7 +333,7 @@ void ZynAddSubFxInstrument::play( sampleFrame * _buf )
 		m_plugin->processAudio( _buf );
 	}
 	m_pluginMutex.unlock();
-	instrumentTrack()->processAudioBuffer( _buf, engine::mixer()->framesPerPeriod(), NULL );
+	instrumentTrack()->processAudioBuffer( _buf, Engine::mixer()->framesPerPeriod(), NULL );
 }
 
 
@@ -354,14 +350,16 @@ bool ZynAddSubFxInstrument::handleMidiEvent( const MidiEvent& event, const MidiT
 		return true;
 	}
 
+	MidiEvent localEvent = event;
+	localEvent.setChannel( 0 );
 	m_pluginMutex.lock();
 	if( m_remotePlugin )
 	{
-		m_remotePlugin->processMidiEvent( event, 0 );
+		m_remotePlugin->processMidiEvent( localEvent, 0 );
 	}
 	else
 	{
-		m_plugin->processMidiEvent( event );
+		m_plugin->processMidiEvent( localEvent );
 	}
 	m_pluginMutex.unlock();
 
@@ -439,19 +437,19 @@ void ZynAddSubFxInstrument::initPlugin()
 			RemotePlugin::message( IdZasfLmmsWorkingDirectory ).
 				addString(
 					QSTR_TO_STDSTR(
-						QString( configManager::inst()->workingDir() ) ) ) );
+						QString( ConfigManager::inst()->workingDir() ) ) ) );
 		m_remotePlugin->sendMessage(
 			RemotePlugin::message( IdZasfPresetDirectory ).
 				addString(
 					QSTR_TO_STDSTR(
-						QString( configManager::inst()->factoryPresetsDir() +
+						QString( ConfigManager::inst()->factoryPresetsDir() +
 								QDir::separator() + "ZynAddSubFX" ) ) ) );
 
-		m_remotePlugin->updateSampleRate( engine::mixer()->processingSampleRate() );
+		m_remotePlugin->updateSampleRate( Engine::mixer()->processingSampleRate() );
 
 		// temporary workaround until the VST synchronization feature gets stripped out of the RemotePluginClient class
 		// causing not to send buffer size information requests
-		m_remotePlugin->sendMessage( RemotePlugin::message( IdBufferSizeInformation ).addInt( engine::mixer()->framesPerPeriod() ) );
+		m_remotePlugin->sendMessage( RemotePlugin::message( IdBufferSizeInformation ).addInt( Engine::mixer()->framesPerPeriod() ) );
 
 		m_remotePlugin->showUI();
 		m_remotePlugin->unlock();
@@ -459,8 +457,8 @@ void ZynAddSubFxInstrument::initPlugin()
 	else
 	{
 		m_plugin = new LocalZynAddSubFx;
-		m_plugin->setSampleRate( engine::mixer()->processingSampleRate() );
-		m_plugin->setBufferSize( engine::mixer()->framesPerPeriod() );
+		m_plugin->setSampleRate( Engine::mixer()->processingSampleRate() );
+		m_plugin->setBufferSize( Engine::mixer()->framesPerPeriod() );
 	}
 
 	m_pluginMutex.unlock();
@@ -501,35 +499,35 @@ ZynAddSubFxView::ZynAddSubFxView( Instrument * _instrument, QWidget * _parent ) 
 	l->setVerticalSpacing( 16 );
 	l->setHorizontalSpacing( 10 );
 
-	m_portamento = new knob( knobBright_26, this );
-	m_portamento->setHintText( tr( "Portamento:" ) + "", "" );
+	m_portamento = new Knob( knobBright_26, this );
+	m_portamento->setHintText( tr( "Portamento:" ), "" );
 	m_portamento->setLabel( tr( "PORT" ) );
 
-	m_filterFreq = new knob( knobBright_26, this );
-	m_filterFreq->setHintText( tr( "Filter Frequency:" ) + "", "" );
+	m_filterFreq = new Knob( knobBright_26, this );
+	m_filterFreq->setHintText( tr( "Filter Frequency:" ), "" );
 	m_filterFreq->setLabel( tr( "FREQ" ) );
 
-	m_filterQ = new knob( knobBright_26, this );
-	m_filterQ->setHintText( tr( "Filter Resonance:" ) + "", "" );
+	m_filterQ = new Knob( knobBright_26, this );
+	m_filterQ->setHintText( tr( "Filter Resonance:" ), "" );
 	m_filterQ->setLabel( tr( "RES" ) );
 
-	m_bandwidth = new knob( knobBright_26, this );
-	m_bandwidth->setHintText( tr( "Bandwidth:" ) + "", "" );
+	m_bandwidth = new Knob( knobBright_26, this );
+	m_bandwidth->setHintText( tr( "Bandwidth:" ), "" );
 	m_bandwidth->setLabel( tr( "BW" ) );
 
-	m_fmGain = new knob( knobBright_26, this );
-	m_fmGain->setHintText( tr( "FM Gain:" ) + "", "" );
+	m_fmGain = new Knob( knobBright_26, this );
+	m_fmGain->setHintText( tr( "FM Gain:" ), "" );
 	m_fmGain->setLabel( tr( "FM GAIN" ) );
 
-	m_resCenterFreq = new knob( knobBright_26, this );
-	m_resCenterFreq->setHintText( tr( "Resonance center frequency:" ) + "", "" );
+	m_resCenterFreq = new Knob( knobBright_26, this );
+	m_resCenterFreq->setHintText( tr( "Resonance center frequency:" ), "" );
 	m_resCenterFreq->setLabel( tr( "RES CF" ) );
 
-	m_resBandwidth = new knob( knobBright_26, this );
-	m_resBandwidth->setHintText( tr( "Resonance bandwidth:" ) + "", "" );
+	m_resBandwidth = new Knob( knobBright_26, this );
+	m_resBandwidth->setHintText( tr( "Resonance bandwidth:" ), "" );
 	m_resBandwidth->setLabel( tr( "RES BW" ) );
 
-	m_forwardMidiCC = new ledCheckBox( tr( "Forward MIDI Control Changes" ), this );
+	m_forwardMidiCC = new LedCheckBox( tr( "Forward MIDI Control Changes" ), this );
 
 	m_toggleUIButton = new QPushButton( tr( "Show GUI" ), this );
 	m_toggleUIButton->setCheckable( true );
@@ -575,10 +573,10 @@ ZynAddSubFxView::~ZynAddSubFxView()
 
 void ZynAddSubFxView::dragEnterEvent( QDragEnterEvent * _dee )
 {
-	if( _dee->mimeData()->hasFormat( stringPairDrag::mimeType() ) )
+	if( _dee->mimeData()->hasFormat( StringPairDrag::mimeType() ) )
 	{
 		QString txt = _dee->mimeData()->data(
-						stringPairDrag::mimeType() );
+						StringPairDrag::mimeType() );
 		if( txt.section( ':', 0, 0 ) == "pluginpresetfile" )
 		{
 			_dee->acceptProposedAction();
@@ -599,8 +597,8 @@ void ZynAddSubFxView::dragEnterEvent( QDragEnterEvent * _dee )
 
 void ZynAddSubFxView::dropEvent( QDropEvent * _de )
 {
-	const QString type = stringPairDrag::decodeKey( _de );
-	const QString value = stringPairDrag::decodeValue( _de );
+	const QString type = StringPairDrag::decodeKey( _de );
+	const QString value = StringPairDrag::decodeValue( _de );
 	if( type == "pluginpresetfile" )
 	{
 		castModel<ZynAddSubFxInstrument>()->loadFile( value );

@@ -25,20 +25,22 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QLibrary>
-#include <QtGui/QMessageBox>
+#include <QMessageBox>
 
 #include "Plugin.h"
 #include "embed.h"
-#include "engine.h"
+#include "Engine.h"
+#include "GuiApplication.h"
 #include "Mixer.h"
-#include "config_mgr.h"
+#include "ConfigManager.h"
 #include "DummyPlugin.h"
 #include "AutomatableModel.h"
+#include "Song.h"
 
 
-static PixmapLoader __dummy_loader;
+static PixmapLoader dummyLoader;
 
-static Plugin::Descriptor dummy_plugin_descriptor =
+static Plugin::Descriptor dummyPluginDescriptor =
 {
 	"dummy",
 	"dummy",
@@ -46,21 +48,21 @@ static Plugin::Descriptor dummy_plugin_descriptor =
 	"Tobias Doerffel <tobydox/at/users.sf.net>",
 	0x0100,
 	Plugin::Undefined,
-	&__dummy_loader,
+	&dummyLoader,
 	NULL
 } ;
 
 
 
 
-Plugin::Plugin( const Descriptor * _descriptor, Model * parent ) :
+Plugin::Plugin( const Descriptor * descriptor, Model * parent ) :
 	Model( parent ),
 	JournallingObject(),
-	m_descriptor( _descriptor )
+	m_descriptor( descriptor )
 {
 	if( m_descriptor == NULL )
 	{
-		m_descriptor = &dummy_plugin_descriptor;
+		m_descriptor = &dummyPluginDescriptor;
 	}
 }
 
@@ -89,28 +91,28 @@ AutomatableModel * Plugin::childModel( const QString & )
 
 
 
-
-Plugin * Plugin::instantiate( const QString & pluginName, Model * parent,
+#include "PluginFactory.h"
+Plugin * Plugin::instantiate( const QString& pluginName, Model * parent,
 								void * data )
 {
-	QLibrary pluginLibrary( configManager::inst()->pluginDir() + pluginName );
-	if( pluginLibrary.load() == false )
+	const PluginFactory::PluginInfo& pi = pluginFactory->pluginInfo(pluginName.toUtf8());
+	if( pi.isNull() )
 	{
-		if( engine::hasGUI() )
+		if( gui )
 		{
 			QMessageBox::information( NULL,
 				tr( "Plugin not found" ),
 				tr( "The plugin \"%1\" wasn't found or could not be loaded!\nReason: \"%2\"" ).
-						arg( pluginName ).arg( pluginLibrary.errorString() ),
+						arg( pluginName ).arg( pluginFactory->errorString(pluginName) ),
 				QMessageBox::Ok | QMessageBox::Default );
 		}
 		return new DummyPlugin();
 	}
 
-	InstantiationHook instantiationHook = ( InstantiationHook ) pluginLibrary.resolve( "lmms_plugin_main" );
+	InstantiationHook instantiationHook = ( InstantiationHook ) pi.library->resolve( "lmms_plugin_main" );
 	if( instantiationHook == NULL )
 	{
-		if( engine::hasGUI() )
+		if( gui )
 		{
 			QMessageBox::information( NULL,
 				tr( "Error while loading plugin" ),
@@ -127,45 +129,9 @@ Plugin * Plugin::instantiate( const QString & pluginName, Model * parent,
 
 
 
-void Plugin::getDescriptorsOfAvailPlugins( DescriptorList& pluginDescriptors )
+void Plugin::collectErrorForUI( QString errMsg )
 {
-	QDir directory( configManager::inst()->pluginDir() );
-#ifdef LMMS_BUILD_WIN32
-	QFileInfoList list = directory.entryInfoList( QStringList( "*.dll" ) );
-#else
-	QFileInfoList list = directory.entryInfoList( QStringList( "lib*.so" ) );
-#endif
-	foreach( const QFileInfo& f, list )
-	{
-		QLibrary( f.absoluteFilePath() ).load();
-	}
-
-	foreach( const QFileInfo& f, list )
-	{
-		QLibrary pluginLibrary( f.absoluteFilePath() );
-		if( pluginLibrary.load() == false ||
-			pluginLibrary.resolve( "lmms_plugin_main" ) == NULL )
-		{
-			continue;
-		}
-
-		QString descriptorName = f.baseName() + "_plugin_descriptor";
-		if( descriptorName.left( 3 ) == "lib" )
-		{
-			descriptorName = descriptorName.mid( 3 );
-		}
-
-		Descriptor* pluginDescriptor = (Descriptor *) pluginLibrary.resolve( descriptorName.toUtf8().constData() );
-		if( pluginDescriptor == NULL )
-		{
-			qWarning() << tr( "LMMS plugin %1 does not have a plugin descriptor named %2!" ).
-								arg( f.absoluteFilePath() ).arg( descriptorName );
-			continue;
-		}
-
-		pluginDescriptors += *pluginDescriptor;
-	}
-
+	Engine::getSong()->collectError( errMsg );
 }
 
 
@@ -183,13 +149,13 @@ PluginView * Plugin::createView( QWidget * parent )
 
 
 
-Plugin::Descriptor::SubPluginFeatures::Key::Key(
-						const QDomElement & _key ) :
+
+Plugin::Descriptor::SubPluginFeatures::Key::Key( const QDomElement & key ) :
 	desc( NULL ),
-	name( _key.attribute( "key" ) ),
+	name( key.attribute( "key" ) ),
 	attributes()
 {
-	QDomNodeList l = _key.elementsByTagName( "attribute" );
+	QDomNodeList l = key.elementsByTagName( "attribute" );
 	for( int i = 0; !l.item( i ).isNull(); ++i )
 	{
 		QDomElement e = l.item( i ).toElement();
@@ -202,13 +168,13 @@ Plugin::Descriptor::SubPluginFeatures::Key::Key(
 
 
 QDomElement Plugin::Descriptor::SubPluginFeatures::Key::saveXML(
-						QDomDocument & _doc ) const
+						QDomDocument & doc ) const
 {
-	QDomElement e = _doc.createElement( "key" );
-	for( AttributeMap::ConstIterator it = attributes.begin();
-									it != attributes.end(); ++it )
+	QDomElement e = doc.createElement( "key" );
+	for( AttributeMap::ConstIterator it = attributes.begin(); 
+		it != attributes.end(); ++it )
 	{
-		QDomElement a = _doc.createElement( "attribute" );
+		QDomElement a = doc.createElement( "attribute" );
 		a.setAttribute( "name", it.key() );
 		a.setAttribute( "value", it.value() );
 		e.appendChild( a );
@@ -216,4 +182,5 @@ QDomElement Plugin::Descriptor::SubPluginFeatures::Key::saveXML(
 	return e;
 }
 
-#include "moc_Plugin.cxx"
+
+

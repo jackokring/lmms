@@ -22,13 +22,13 @@
  *
  */
 
-#include <QtGui/QIcon>
+#include <QIcon>
 
 #include "InstrumentView.h"
 #include "embed.h"
 #include "Instrument.h"
 #include "InstrumentTrack.h"
-#include "string_pair_drag.h"
+#include "StringPairDrag.h"
 
 
 InstrumentView::InstrumentView( Instrument * _Instrument, QWidget * _parent ) :
@@ -36,7 +36,7 @@ InstrumentView::InstrumentView( Instrument * _Instrument, QWidget * _parent ) :
 {
 	setModel( _Instrument );
 	setFixedSize( 250, 250 );
-	setAttribute( Qt::WA_DeleteOnClose, TRUE );
+	setAttribute( Qt::WA_DeleteOnClose, true );
 }
 
 

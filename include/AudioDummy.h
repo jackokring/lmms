@@ -22,10 +22,11 @@
  *
  */
 
-#ifndef _AUDIO_DUMMY_H
-#define _AUDIO_DUMMY_H
+#ifndef AUDIO_DUMMY_H
+#define AUDIO_DUMMY_H
 
 #include "AudioDevice.h"
+#include "AudioDeviceSetupWidget.h"
 #include "MicroTimer.h"
 
 
@@ -49,11 +50,11 @@ public:
 	}
 
 
-	class setupWidget : public AudioDevice::setupWidget
+	class setupWidget : public AudioDeviceSetupWidget
 	{
 	public:
 		setupWidget( QWidget * _parent ) :
-			AudioDevice::setupWidget( AudioDummy::name(), _parent )
+			AudioDeviceSetupWidget( AudioDummy::name(), _parent )
 		{
 		}
 

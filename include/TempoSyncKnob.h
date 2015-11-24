@@ -23,18 +23,18 @@
  *
  */
 
-#ifndef _TEMPO_SYNC_KNOB_H
-#define _TEMPO_SYNC_KNOB_H
+#ifndef TEMPO_SYNC_KNOB_H
+#define TEMPO_SYNC_KNOB_H
 
-#include <QtGui/QPixmap>
+#include <QPixmap>
 #include <QtCore/QPointer>
 
-#include "knob.h"
+#include "Knob.h"
 #include "TempoSyncKnobModel.h"
 
 class MeterDialog;
 
-class EXPORT TempoSyncKnob : public knob
+class EXPORT TempoSyncKnob : public Knob
 {
 	Q_OBJECT
 public:

@@ -24,7 +24,7 @@
 
 
 
-#include <QtGui/QLayout>
+#include <QLayout>
 
 #include "stereoenhancer_control_dialog.h"
 #include "stereoenhancer_controls.h"
@@ -37,14 +37,13 @@ stereoEnhancerControlDialog::stereoEnhancerControlDialog(
 {
 	QHBoxLayout * l = new QHBoxLayout( this );
 
-	knob * widthKnob = new knob( knobBright_26, this );
+	Knob * widthKnob = new Knob( knobBright_26, this );
 	widthKnob->setModel( &_controls->m_widthModel );
 	widthKnob->setLabel( tr( "WIDE" ) );
-	widthKnob->setHintText( tr( "Width:" ) + " ", "samples" );
+	widthKnob->setHintText( tr( "Width:" ) , "samples" );
 
 	l->addWidget( widthKnob );
 
 	this->setLayout(l);
 }
 
-#include "moc_stereoenhancer_control_dialog.cxx"

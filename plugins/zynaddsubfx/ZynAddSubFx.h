@@ -25,8 +25,8 @@
 #ifndef ZYNADDSUBFX_H
 #define ZYNADDSUBFX_H
 
-#include <QtCore/QMap>
-#include <QtCore/QMutex>
+#include <QMap>
+#include <QMutex>
 
 #include "AutomatableModel.h"
 #include "Instrument.h"
@@ -40,8 +40,8 @@ class QPushButton;
 class LocalZynAddSubFx;
 class ZynAddSubFxView;
 class NotePlayHandle;
-class knob;
-class ledCheckBox;
+class Knob;
+class LedCheckBox;
 
 
 class ZynAddSubFxRemotePlugin : public QObject, public RemotePlugin
@@ -149,14 +149,14 @@ private:
 	void modelChanged();
 
 	QPushButton * m_toggleUIButton;
-	knob * m_portamento;
-	knob * m_filterFreq;
-	knob * m_filterQ;
-	knob * m_bandwidth;
-	knob * m_fmGain;
-	knob * m_resCenterFreq;
-	knob * m_resBandwidth;
-	ledCheckBox * m_forwardMidiCC;
+	Knob * m_portamento;
+	Knob * m_filterFreq;
+	Knob * m_filterQ;
+	Knob * m_bandwidth;
+	Knob * m_fmGain;
+	Knob * m_resCenterFreq;
+	Knob * m_resBandwidth;
+	LedCheckBox * m_forwardMidiCC;
 
 
 private slots:

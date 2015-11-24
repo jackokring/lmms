@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef _AUDIO_PORTAUDIO_H
-#define _AUDIO_PORTAUDIO_H
+#ifndef AUDIO_PORTAUDIO_H
+#define AUDIO_PORTAUDIO_H
 
 #include <QtCore/QObject>
 
@@ -36,7 +36,7 @@ class AudioPortAudioSetupUtil : public QObject
 public slots:
 	void updateDevices();
 	void updateChannels();
-		
+
 public:
 	ComboBoxModel m_backendModel;
 	ComboBoxModel m_deviceModel;
@@ -45,9 +45,14 @@ public:
 
 #ifdef LMMS_HAVE_PORTAUDIO
 
+#if defined(__FreeBSD__)
+#include <portaudio2/portaudio.h>
+#else
 #include <portaudio.h>
+#endif
 
 #include "AudioDevice.h"
+#include "AudioDeviceSetupWidget.h"
 
 #if defined paNeverDropInput || defined paNonInterleaved
 #	define PORTAUDIO_V19
@@ -56,7 +61,7 @@ public:
 #endif
 
 
-class comboBox;
+class ComboBox;
 class LcdSpinBox;
 
 
@@ -77,7 +82,7 @@ public:
 		unsigned long _framesPerBuffer );
 
 
-	class setupWidget : public AudioDevice::setupWidget
+	class setupWidget : public AudioDeviceSetupWidget
 	{
 	public:
 		setupWidget( QWidget * _parent );
@@ -86,8 +91,8 @@ public:
 		virtual void saveSettings();
 
 	private:
-		comboBox * m_backend;
-		comboBox * m_device;
+		ComboBox * m_backend;
+		ComboBox * m_device;
 		AudioPortAudioSetupUtil m_setupUtil;
 
 	} ;
@@ -119,7 +124,7 @@ private:
 
 	typedef double PaTime;
 	typedef PaDeviceID PaDeviceIndex;
-	
+
 	typedef struct PaStreamParameters
 	{
 		PaDeviceIndex device;
@@ -136,7 +141,7 @@ private:
 	PaStreamParameters m_inputParameters;
 
 	bool m_wasPAInitError;
- 
+
 	surroundSampleFrame * m_outBuf;
 	int m_outBufPos;
 	int m_outBufSize;

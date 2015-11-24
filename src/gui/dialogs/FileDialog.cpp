@@ -22,12 +22,12 @@
  *
  */
 
-#include <QtCore/QList>
-#include <QtCore/QUrl>
-#include <QtGui/QDesktopServices>
-#include <QtGui/QListView>
+#include <QList>
+#include <QUrl>
+#include <QDesktopServices>
+#include <QListView>
 
-#include "config_mgr.h"
+#include "ConfigManager.h"
 #include "FileDialog.h"
 
 
@@ -35,22 +35,36 @@ FileDialog::FileDialog( QWidget *parent, const QString &caption,
 					   const QString &directory, const QString &filter ) :
 	QFileDialog( parent, caption, directory, filter )
 {
-#if QT_VERSION >= 0x040806
+#if (QT_VERSION >= 0x040806 && QT_VERSION < 0x050000) || QT_VERSION > 0x050200
 	setOption( QFileDialog::DontUseCustomDirectoryIcons );
 #endif
 
+	setOption( QFileDialog::DontUseNativeDialog );
+
 	// Add additional locations to the sidebar
 	QList<QUrl> urls = sidebarUrls();
+#if QT_VERSION >= 0x050000
+	urls << QUrl::fromLocalFile( QStandardPaths::writableLocation( QStandardPaths::DesktopLocation ) );
+#else
 	urls << QUrl::fromLocalFile( QDesktopServices::storageLocation( QDesktopServices::DesktopLocation ) );
+#endif
 	// Find downloads directory
 	QDir downloadDir( QDir::homePath() + "/Downloads" );
 	if ( ! downloadDir.exists() )
+#if QT_VERSION >= 0x050000
+		downloadDir = QStandardPaths::writableLocation( QStandardPaths::DownloadLocation );
+#else
 		downloadDir = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) + "/Downloads";
+#endif
 	if ( downloadDir.exists() )
 		urls << QUrl::fromLocalFile( downloadDir.absolutePath() );
 
+#if QT_VERSION >= 0x050000
+	urls << QUrl::fromLocalFile( QStandardPaths::writableLocation( QStandardPaths::MusicLocation ) );
+#else
 	urls << QUrl::fromLocalFile( QDesktopServices::storageLocation( QDesktopServices::MusicLocation ) );
-	urls << QUrl::fromLocalFile( configManager::inst()->workingDir() );
+#endif
+	urls << QUrl::fromLocalFile( ConfigManager::inst()->workingDir() );
 
 	// Add `/Volumes` directory on OS X systems, this allows the user to browse
 	// external disk drives.
@@ -73,4 +87,4 @@ void FileDialog::clearSelection()
 }
 
 
-#include "moc_FileDialog.cxx"
+

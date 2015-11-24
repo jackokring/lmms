@@ -23,13 +23,15 @@
  *
  */
 
-#include <QtXml/QDomElement>
+#include <QDomElement>
 
 #include "Effect.h"
-#include "engine.h"
+#include "Engine.h"
 #include "EffectChain.h"
 #include "EffectControls.h"
 #include "EffectView.h"
+
+#include "ConfigManager.h"
 
 
 Effect::Effect( const Plugin::Descriptor * _desc,
@@ -46,10 +48,16 @@ Effect::Effect( const Plugin::Descriptor * _desc,
 	m_enabledModel( true, this, tr( "Effect enabled" ) ),
 	m_wetDryModel( 1.0f, -1.0f, 1.0f, 0.01f, this, tr( "Wet/Dry mix" ) ),
 	m_gateModel( 0.0f, 0.0f, 1.0f, 0.01f, this, tr( "Gate" ) ),
-	m_autoQuitModel( 1.0f, 1.0f, 8000.0f, 100.0f, 1.0f, this, tr( "Decay" ) )
+	m_autoQuitModel( 1.0f, 1.0f, 8000.0f, 100.0f, 1.0f, this, tr( "Decay" ) ),
+	m_autoQuitDisabled( false )
 {
 	m_srcState[0] = m_srcState[1] = NULL;
 	reinitSRC();
+	
+	if( ConfigManager::inst()->value( "ui", "disableautoquit").toInt() )
+	{
+		m_autoQuitDisabled = true;
+	}
 }
 
 
@@ -131,6 +139,11 @@ Effect * Effect::instantiate( const QString& pluginName,
 
 void Effect::checkGate( double _out_sum )
 {
+	if( m_autoQuitDisabled )
+	{
+		return;
+	}
+
 	// Check whether we need to continue processing input.  Restart the
 	// counter if the threshold has been exceeded.
 	if( _out_sum - gate() <= typeInfo<float>::minEps() )
@@ -169,7 +182,7 @@ void Effect::reinitSRC()
 		}
 		int error;
 		if( ( m_srcState[i] = src_new(
-			engine::mixer()->currentQualitySettings().
+			Engine::mixer()->currentQualitySettings().
 							libsrcInterpolation(),
 					DEFAULT_CHANNELS, &error ) ) == NULL )
 		{
@@ -191,7 +204,7 @@ void Effect::resample( int _i, const sampleFrame * _src_buf,
 		return;
 	}
 	m_srcData[_i].input_frames = _frames;
-	m_srcData[_i].output_frames = engine::mixer()->framesPerPeriod();
+	m_srcData[_i].output_frames = Engine::mixer()->framesPerPeriod();
 	m_srcData[_i].data_in = (float *) _src_buf[0];
 	m_srcData[_i].data_out = _dst_buf[0];
 	m_srcData[_i].src_ratio = (double) _dst_sr / _src_sr;
@@ -204,4 +217,3 @@ void Effect::resample( int _i, const sampleFrame * _src_buf,
 	}
 }
 
-#include "moc_Effect.cxx"

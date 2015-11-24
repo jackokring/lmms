@@ -22,12 +22,12 @@
  *
  */
 
-#ifndef _SIDE_BAR_WIDGET_H
-#define _SIDE_BAR_WIDGET_H
+#ifndef SIDE_BAR_WIDGET_H
+#define SIDE_BAR_WIDGET_H
 
-#include <QtGui/QPixmap>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QPixmap>
+#include <QVBoxLayout>
+#include <QWidget>
 
 
 class SideBarWidget : public QWidget

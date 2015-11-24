@@ -23,10 +23,10 @@
  *
  */
 
-#ifndef _EFFECT_CONTROL_DIALOG_H
-#define _EFFECT_CONTROL_DIALOG_H
+#ifndef EFFECT_CONTROL_DIALOG_H
+#define EFFECT_CONTROL_DIALOG_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "ModelView.h"
 

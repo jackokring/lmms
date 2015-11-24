@@ -28,7 +28,7 @@
 
 #include "EffectControls.h"
 #include "peak_controller_effect_control_dialog.h"
-#include "knob.h"
+#include "Knob.h"
 
 class PeakControllerEffect;
 
@@ -65,6 +65,7 @@ private:
 	FloatModel m_amountModel;
 	FloatModel m_attackModel;
 	FloatModel m_decayModel;
+	FloatModel m_tresholdModel;
 	BoolModel m_muteModel;
 	BoolModel m_absModel;
 	FloatModel m_amountMultModel;

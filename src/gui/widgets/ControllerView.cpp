@@ -24,48 +24,62 @@
  */
 
 
-#include <QtGui/QLabel>
-#include <QtGui/QPushButton>
-#include <QtGui/QMdiArea>
-#include <QtGui/QMdiSubWindow>
-#include <QtGui/QPainter>
-#include <QtGui/QInputDialog>
-#include <QtGui/QWhatsThis>
+#include <QLabel>
+#include <QPushButton>
+#include <QMdiArea>
+#include <QMdiSubWindow>
+#include <QPainter>
+#include <QInputDialog>
+#include <QWhatsThis>
+#include <QLayout>
 
 #include "ControllerView.h"
 
-#include "caption_menu.h"
+#include "CaptionMenu.h"
 #include "ControllerDialog.h"
 #include "gui_templates.h"
 #include "embed.h"
-#include "engine.h"
-#include "led_checkbox.h"
+#include "Engine.h"
+#include "GuiApplication.h"
+#include "LedCheckbox.h"
 #include "MainWindow.h"
-#include "tooltip.h"
+#include "ToolTip.h"
 
 
 ControllerView::ControllerView( Controller * _model, QWidget * _parent ) :
-	QWidget( _parent ),
+	QFrame( _parent ),
 	ModelView( _model, this ),
-	m_bg( embed::getIconPixmap( "controller_bg" ) ),
 	m_subWindow( NULL ),
 	m_controllerDlg( NULL ),
 	m_show( true )
 {
-	setFixedSize( 210, 32 );
+	this->setFrameStyle( QFrame::StyledPanel );
+	this->setFrameShadow( QFrame::Raised );
 
-	QPushButton * ctls_btn = new QPushButton( tr( "Controls" ), this );
-	
-	QFont f = ctls_btn->font();
-	ctls_btn->setFont( pointSize<8>( f ) );
-	ctls_btn->setGeometry( 140, 2, 50, 14 );
-	connect( ctls_btn, SIGNAL( clicked() ), 
-				this, SLOT( editControls() ) );
+	QVBoxLayout *vBoxLayout = new QVBoxLayout(this);
 
-	m_controllerDlg = getController()->createDialog( engine::mainWindow()->workspace() );
+	QHBoxLayout *hBox = new QHBoxLayout();
+	vBoxLayout->addLayout(hBox);
 
-	m_subWindow = engine::mainWindow()->workspace()->addSubWindow( 
-                m_controllerDlg );
+	QLabel *label = new QLabel( "<b>" + _model->displayName() + "</b>", this);
+	QSizePolicy sizePolicy = label->sizePolicy();
+	sizePolicy.setHorizontalStretch(1);
+	label->setSizePolicy(sizePolicy);
+
+	hBox->addWidget(label);
+
+	QPushButton * controlsButton = new QPushButton( tr( "Controls" ), this );
+	connect( controlsButton, SIGNAL( clicked() ), SLOT( editControls() ) );
+
+	hBox->addWidget(controlsButton);
+
+	m_nameLabel = new QLabel(_model->name(), this);
+	vBoxLayout->addWidget(m_nameLabel);
+
+
+	m_controllerDlg = getController()->createDialog( gui->mainWindow()->workspace() );
+
+	m_subWindow = gui->mainWindow()->addWindowedWidget( m_controllerDlg );
 	
 	Qt::WindowFlags flags = m_subWindow->windowFlags();
 	flags &= ~Qt::WindowMaximizeButtonHint;
@@ -90,7 +104,6 @@ ControllerView::ControllerView( Controller * _model, QWidget * _parent ) :
 
 ControllerView::~ControllerView()
 {
-	delete m_subWindow;
 }
 
 
@@ -128,28 +141,6 @@ void ControllerView::deleteController()
 
 
 
-void ControllerView::paintEvent( QPaintEvent * )
-{
-	QPainter p( this );
-	p.drawPixmap( 0, 0, m_bg );
-
-	QFont f = pointSizeF( font(), 7.5f );
-	f.setBold( true );
-	p.setFont( f );
-
-	Controller * c = castModel<Controller>();
-
-	p.setPen( QColor( 64, 64, 64 ) );
-	p.drawText( 7, 13, c->displayName() );
-	p.setPen( Qt::white );
-	p.drawText( 6, 12, c->displayName() );
-
-	f.setBold( false );
-	p.setFont( f );
-	p.drawText( 8, 26, c->name() );
-}
-
-
 
 void ControllerView::mouseDoubleClickEvent( QMouseEvent * event )
 {
@@ -162,7 +153,7 @@ void ControllerView::mouseDoubleClickEvent( QMouseEvent * event )
 	if( ok && !new_name.isEmpty() )
 	{
 		c->setName( new_name );
-		update();
+		m_nameLabel->setText( new_name );
 	}
 }
 
@@ -176,7 +167,7 @@ void ControllerView::modelChanged()
 
 void ControllerView::contextMenuEvent( QContextMenuEvent * )
 {
-	QPointer<captionMenu> contextMenu = new captionMenu( model()->displayName(), this );
+	QPointer<CaptionMenu> contextMenu = new CaptionMenu( model()->displayName(), this );
 	contextMenu->addAction( embed::getIconPixmap( "cancel" ),
 						tr( "&Remove this plugin" ),
 						this, SLOT( deleteController() ) );
@@ -196,5 +187,5 @@ void ControllerView::displayHelp()
 
 
 
-#include "moc_ControllerView.cxx"
+
 

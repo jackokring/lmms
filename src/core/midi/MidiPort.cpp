@@ -23,11 +23,11 @@
  *
  */
 
-#include <QtXml/QDomElement>
+#include <QDomElement>
 
 #include "MidiPort.h"
 #include "MidiClient.h"
-#include "song.h"
+#include "Song.h"
 
 
 
@@ -340,7 +340,7 @@ void MidiPort::updateMidiPortMode()
 	emit writablePortsChanged();
 	emit modeChanged();
 
-	engine::getSong()->setModified();
+	Engine::getSong()->setModified();
 }
 
 
@@ -405,5 +405,5 @@ void MidiPort::updateOutputProgram()
 
 
 
-#include "moc_MidiPort.cxx"
+
 

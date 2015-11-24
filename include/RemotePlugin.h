@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef _REMOTE_PLUGIN_H
-#define _REMOTE_PLUGIN_H
+#ifndef REMOTE_PLUGIN_H
+#define REMOTE_PLUGIN_H
 
 #include "export.h"
 #include "MidiEvent.h"
@@ -36,67 +36,38 @@
 #include <string>
 #include <cassert>
 
-#ifdef LMMS_BUILD_WIN32
+
+#if defined(LMMS_HAVE_SYS_IPC_H) && defined(LMMS_HAVE_SEMAPHORE_H)
+#include <sys/ipc.h>
+#include <semaphore.h>
+#else
 #define USE_QT_SEMAPHORES
-#define USE_QT_SHMEM
-#endif
-
-#ifdef LMMS_BUILD_APPLE
-#define USE_QT_SEMAPHORES
-#endif
-
-
-#ifdef USE_QT_SEMAPHORES
 
 #ifdef LMMS_HAVE_PROCESS_H
 #include <process.h>
 #endif
 
 #include <QtCore/QtGlobal>
-
-#if QT_VERSION >= 0x040400
 #include <QtCore/QSystemSemaphore>
-#else
-#error building LMMS on this platform requires at least Qt 4.4.0
 #endif
 
-#else /* USE_QT_SEMAPHORES */
-
-#ifdef LMMS_HAVE_SYS_IPC_H
-#include <sys/ipc.h>
-#endif
-
-#ifdef LMMS_HAVE_SEMAPHORE_H
-#include <semaphore.h>
-#endif
-
-#endif
-
-
-#ifdef USE_QT_SHMEM
-
-#include <QtCore/QtGlobal>
-
-#if QT_VERSION >= 0x040400
-#include <QtCore/QSharedMemory>
-#else
-#error building LMMS on this platform requires at least Qt 4.4.0
-#endif
-
-typedef int32_t key_t;
-
-#else /* USE_QT_SHMEM */
 
 #ifdef LMMS_HAVE_SYS_SHM_H
 #include <sys/shm.h>
-#endif
 
 #ifdef LMMS_HAVE_UNISTD_H
 #include <unistd.h>
 #endif
+#else
+#define USE_QT_SHMEM
 
+#include <QtCore/QtGlobal>
+#include <QtCore/QSharedMemory>
+
+#if !defined(LMMS_HAVE_SYS_TYPES_H) || defined(LMMS_BUILD_WIN32)
+typedef int32_t key_t;
 #endif
-
+#endif
 
 
 #ifdef LMMS_HAVE_LOCALE_H

@@ -26,23 +26,25 @@
 #ifndef INSTRUMENT_H
 #define INSTRUMENT_H
 
-#include <QtGui/QWidget>
-
+#include <QString>
+#include <QtGlobal>
+#include "export.h"
+#include "lmms_basics.h"
+#include "MemoryManager.h"
+#include "MidiTime.h"
 #include "Plugin.h"
-#include "Mixer.h"
 
 
 // forward-declarations
 class InstrumentTrack;
-class InstrumentView;
 class MidiEvent;
-class MidiTime;
 class NotePlayHandle;
-class track;
+class Track;
 
 
 class EXPORT Instrument : public Plugin
 {
+	MM_OPERATORS
 public:
 	enum Flag
 	{
@@ -117,7 +119,7 @@ public:
 	static Instrument * instantiate( const QString & _plugin_name,
 									InstrumentTrack * _instrument_track );
 
-	virtual bool isFromTrack( const track * _track ) const;
+	virtual bool isFromTrack( const Track * _track ) const;
 
 	inline InstrumentTrack * instrumentTrack() const
 	{

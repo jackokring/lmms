@@ -1,5 +1,5 @@
 /*
- * effect_rack_view.h - view for effectChain-model
+ * EffectRackView.h - view for effectChain-model
  *
  * Copyright (c) 2006-2007 Danny McRae <khjklujn@netscape.net>
  * Copyright (c) 2008-2014 Tobias Doerffel <tobydox/at/users.sourceforge.net>
@@ -23,10 +23,10 @@
  *
  */
 
-#ifndef _EFFECT_RACK_VIEW_H
-#define _EFFECT_RACK_VIEW_H
+#ifndef EFFECT_RACK_VIEW_H
+#define EFFECT_RACK_VIEW_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "EffectChain.h"
 #include "ModelView.h"
@@ -36,7 +36,7 @@ class QScrollArea;
 class QVBoxLayout;
 
 class EffectView;
-class groupBox;
+class GroupBox;
 
 
 class EffectRackView : public QWidget, public ModelView
@@ -75,7 +75,7 @@ private:
 
 	QVector<EffectView *> m_effectViews;
 
-	groupBox* m_effectsGroupBox;
+	GroupBox* m_effectsGroupBox;
 	QScrollArea* m_scrollArea;
 
 	int m_lastY;

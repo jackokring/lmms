@@ -23,11 +23,11 @@
  */
 
 
-#include <QtCore/QFile>
+#include <QFile>
 
 #include "ProjectRenderer.h"
-#include "song.h"
-#include "engine.h"
+#include "Song.h"
+#include "Engine.h"
 
 #include "AudioFileWave.h"
 #include "AudioFileOgg.h"
@@ -37,7 +37,7 @@
 #endif
 #include <QMutexLocker>
 
-FileEncodeDevice __fileEncodeDevices[] =
+const ProjectRenderer::FileEncodeDevice ProjectRenderer::fileEncodeDevices[] =
 {
 
 	{ ProjectRenderer::WaveFile,
@@ -66,25 +66,25 @@ ProjectRenderer::ProjectRenderer( const Mixer::qualitySettings & _qs,
 					const OutputSettings & _os,
 					ExportFileFormats _file_format,
 					const QString & _out_file ) :
-	QThread( engine::mixer() ),
+	QThread( Engine::mixer() ),
 	m_fileDev( NULL ),
 	m_qualitySettings( _qs ),
-	m_oldQualitySettings( engine::mixer()->currentQualitySettings() ),
+	m_oldQualitySettings( Engine::mixer()->currentQualitySettings() ),
 	m_progress( 0 ),
 	m_abort( false )
 {
-	if( __fileEncodeDevices[_file_format].m_getDevInst == NULL )
+	if( fileEncodeDevices[_file_format].m_getDevInst == NULL )
 	{
 		return;
 	}
 
 	bool success_ful = false;
-	m_fileDev = __fileEncodeDevices[_file_format].m_getDevInst(
+	m_fileDev = fileEncodeDevices[_file_format].m_getDevInst(
 				_os.samplerate, DEFAULT_CHANNELS, success_ful,
 				_out_file, _os.vbr,
 				_os.bitrate, _os.bitrate - 64, _os.bitrate + 64,
 				_os.depth == Depth_32Bit ? 32 : 16,
-							engine::mixer() );
+							Engine::mixer() );
 	if( success_ful == false )
 	{
 		delete m_fileDev;
@@ -109,16 +109,25 @@ ProjectRenderer::ExportFileFormats ProjectRenderer::getFileFormatFromExtension(
 							const QString & _ext )
 {
 	int idx = 0;
-	while( __fileEncodeDevices[idx].m_fileFormat != NumFileFormats )
+	while( fileEncodeDevices[idx].m_fileFormat != NumFileFormats )
 	{
-		if( QString( __fileEncodeDevices[idx].m_extension ) == _ext )
+		if( QString( fileEncodeDevices[idx].m_extension ) == _ext )
 		{
-			return( __fileEncodeDevices[idx].m_fileFormat );
+			return( fileEncodeDevices[idx].m_fileFormat );
 		}
 		++idx;
 	}
 
 	return( WaveFile );	// default
+}
+
+
+
+
+QString ProjectRenderer::getFileExtensionFromFormat(
+		ExportFileFormats fmt )
+{
+	return fileEncodeDevices[fmt].m_extension;
 }
 
 
@@ -132,7 +141,7 @@ void ProjectRenderer::startProcessing()
 		// have to do mixer stuff with GUI-thread-affinity in order to
 		// make slots connected to sampleRateChanged()-signals being
 		// called immediately
-		engine::mixer()->setAudioDevice( m_fileDev,
+		Engine::mixer()->setAudioDevice( m_fileDev,
 						m_qualitySettings, false );
 
 		start(
@@ -159,19 +168,24 @@ void ProjectRenderer::run()
 #endif
 
 
-	engine::getSong()->startExport();
+	Engine::getSong()->startExport();
+    //skip first empty buffer
+    Engine::mixer()->nextBuffer();
 
-	song::playPos & pp = engine::getSong()->getPlayPos(
-							song::Mode_PlaySong );
+	const Song::PlayPos & exportPos = Engine::getSong()->getPlayPos(
+							Song::Mode_PlaySong );
 	m_progress = 0;
-	const int sl = ( engine::getSong()->length() + 1 ) * 192;
+	std::pair<MidiTime, MidiTime> exportEndpoints = Engine::getSong()->getExportEndpoints();
+	tick_t startTick = exportEndpoints.first.getTicks();
+	tick_t lengthTicks = exportEndpoints.second.getTicks() - startTick;
 
-	while( engine::getSong()->isExportDone() == false &&
-				engine::getSong()->isExporting() == true
+	// Continually track and emit progress percentage to listeners
+	while( Engine::getSong()->isExportDone() == false &&
+				Engine::getSong()->isExporting() == true
 							&& !m_abort )
 	{
 		m_fileDev->processNextBuffer();
-		const int nprog = pp * 100 / sl;
+		const int nprog = lengthTicks == 0 ? 100 : (exportPos.getTicks()-startTick) * 100 / lengthTicks;
 		if( m_progress != nprog )
 		{
 			m_progress = nprog;
@@ -179,12 +193,12 @@ void ProjectRenderer::run()
 		}
 	}
 
-	engine::getSong()->stopExport();
+	Engine::getSong()->stopExport();
 
 	const QString f = m_fileDev->outputFile();
 
-	engine::mixer()->restoreAudioDevice();  // also deletes audio-dev
-	engine::mixer()->changeQuality( m_oldQualitySettings );
+	Engine::mixer()->restoreAudioDevice();  // also deletes audio-dev
+	Engine::mixer()->changeQuality( m_oldQualitySettings );
 
 	// if the user aborted export-process, the file has to be deleted
 	if( m_abort )
@@ -227,6 +241,4 @@ void ProjectRenderer::updateConsoleProgress()
 }
 
 
-
-#include "moc_ProjectRenderer.cxx"
 

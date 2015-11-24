@@ -28,7 +28,7 @@
 
 #include <QtCore/QDir>
 #include <QtCore/QMutex>
-#include <QtGui/QTreeWidget>
+#include <QTreeWidget>
 
 
 #include "SideBarWidget.h"
@@ -50,17 +50,16 @@ class FileBrowser : public SideBarWidget
 public:
 	FileBrowser( const QString & directories, const QString & filter,
 			const QString & title, const QPixmap & pm,
-			QWidget * parent, bool dirs_as_items = false );
+			QWidget * parent, bool dirs_as_items = false, bool recurse = false );
 	virtual ~FileBrowser();
 
-
-public slots:
-	void filterItems( const QString & filter );
+private slots:
 	void reloadTree( void );
-
+	// call with item=NULL to filter the entire tree
+	bool filterItems( const QString & filter, QTreeWidgetItem * item=NULL );
+	void giveFocusToFilter();
 
 private:
-	bool filterItems( QTreeWidgetItem * item, const QString & filter );
 	virtual void keyPressEvent( QKeyEvent * ke );
 
 	void addItems( const QString & path );
@@ -73,6 +72,7 @@ private:
 	QString m_filter;
 
 	bool m_dirsAsItems;
+	bool m_recurse;
 
 } ;
 
@@ -161,6 +161,8 @@ private:
 	QStringList m_directories;
 	QString m_filter;
 
+	int m_dirCount;
+
 } ;
 
 
@@ -197,10 +199,9 @@ public:
 							const QString & path );
 	FileItem( const QString & name, const QString & path );
 
-	inline QString fullName( void ) const
+	QString fullName() const
 	{
-		return( QDir::cleanPath( m_path ) + QDir::separator() +
-								text( 0 ) );
+		return QFileInfo(m_path, text(0)).absoluteFilePath();
 	}
 
 	inline FileTypes type( void ) const

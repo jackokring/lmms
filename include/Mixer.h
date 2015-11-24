@@ -22,16 +22,10 @@
  *
  */
 
-#ifndef _MIXER_H
-#define _MIXER_H
+#ifndef MIXER_H
+#define MIXER_H
 
-// denormals stripping
-#ifdef __SSE__
-#include <xmmintrin.h>
-#endif
-#ifdef __SSE3__
-#include <pmmintrin.h>
-#endif
+#include "denormals.h"
 
 #include "lmmsconfig.h"
 
@@ -53,7 +47,7 @@
 
 
 #include "lmms_basics.h"
-#include "note.h"
+#include "Note.h"
 #include "fifo_buffer.h"
 #include "MixerProfiler.h"
 
@@ -63,6 +57,7 @@ class MidiClient;
 class AudioPort;
 
 
+const fpp_t MINIMUM_BUFFER_SIZE = 32;
 const fpp_t DEFAULT_BUFFER_SIZE = 256;
 
 const int BYTES_PER_SAMPLE = sizeof( sample_t );
@@ -103,7 +98,7 @@ public:
 			Interpolation_SincFastest,
 			Interpolation_SincMedium,
 			Interpolation_SincBest
-		} ; 
+		} ;
 
 		enum Oversampling
 		{
@@ -180,6 +175,10 @@ public:
 	{
 		return m_audioDevName;
 	}
+	inline bool audioDevStartFailed() const
+	{
+		return m_audioDevStartFailed;
+	}
 
 	void setAudioDevice( AudioDevice * _dev );
 	void setAudioDevice( AudioDevice * _dev,
@@ -216,20 +215,7 @@ public:
 
 
 	// play-handle stuff
-	bool addPlayHandle( PlayHandle* handle )
-	{
-		if( criticalXRuns() == false )
-		{
-			lock();
-			m_playHandles.push_back( handle );
-			unlock();
-			return true;
-		}
-
-		delete handle;
-
-		return false;
-	}
+	bool addPlayHandle( PlayHandle* handle );
 
 	void removePlayHandle( PlayHandle* handle );
 
@@ -238,7 +224,7 @@ public:
 		return m_playHandles;
 	}
 
-	void removePlayHandles( track * _track, bool removeIPHs = true );
+	void removePlayHandles( Track * _track, bool removeIPHs = true );
 
 	bool hasNotePlayHandles();
 
@@ -247,11 +233,6 @@ public:
 	inline fpp_t framesPerPeriod() const
 	{
 		return m_framesPerPeriod;
-	}
-
-	inline const surroundSampleFrame * currentReadBuffer() const
-	{
-		return m_readBuf;
 	}
 
 
@@ -323,21 +304,15 @@ public:
 		m_inputFramesMutex.unlock();
 	}
 
-	// audio-buffer-mgm
-	void bufferToPort( const sampleFrame * _buf,
-					const fpp_t _frames,
-					const f_cnt_t _offset,
-					stereoVolumeVector _volume_vector,
-					AudioPort * _port );
+	void lockPlayHandleRemoval()
+	{
+		m_playHandleRemovalMutex.lock();
+	}
 
-	static void clearAudioBuffer( sampleFrame * _ab,
-						const f_cnt_t _frames,
-						const f_cnt_t _offset = 0 );
-#ifndef LMMS_DISABLE_SURROUND
-	static void clearAudioBuffer( surroundSampleFrame * _ab,
-						const f_cnt_t _frames,
-						const f_cnt_t _offset = 0 );
-#endif
+	void unlockPlayHandleRemoval()
+	{
+		m_playHandleRemovalMutex.unlock();
+	}
 
 	static float peakValueLeft( sampleFrame * _ab, const f_cnt_t _frames );
 	static float peakValueRight( sampleFrame * _ab, const f_cnt_t _frames );
@@ -351,7 +326,7 @@ public:
 	}
 
 	void pushInputFrames( sampleFrame * _ab, const f_cnt_t _frames );
-	
+
 	inline const sampleFrame * inputBuffer()
 	{
 		return m_inputBuffer[ m_inputBufferRead ];
@@ -369,11 +344,14 @@ public:
 
 	void changeQuality( const struct qualitySettings & _qs );
 
+	inline bool isMetronomeActive() const { return m_metronomeActive; }
+	inline void setMetronomeActive(bool value = true) { m_metronomeActive = value; }
+
 
 signals:
 	void qualitySettingsChanged();
 	void sampleRateChanged();
-	void nextAudioBuffer();
+	void nextAudioBuffer( const surroundSampleFrame * buffer );
 
 
 private:
@@ -397,7 +375,7 @@ private:
 	} ;
 
 
-	Mixer();
+	Mixer( bool renderOnly );
 	virtual ~Mixer();
 
 	void startProcessing( bool _needs_fifo = true );
@@ -416,59 +394,58 @@ private:
 
 	fpp_t m_framesPerPeriod;
 
-	sampleFrame * m_workingBuf;
-
 	sampleFrame * m_inputBuffer[2];
 	f_cnt_t m_inputBufferFrames[2];
 	f_cnt_t m_inputBufferSize[2];
 	int m_inputBufferRead;
 	int m_inputBufferWrite;
-	
+
 	surroundSampleFrame * m_readBuf;
 	surroundSampleFrame * m_writeBuf;
-	
+
 	QVector<surroundSampleFrame *> m_bufferPool;
 	int m_readBuffer;
 	int m_writeBuffer;
 	int m_poolDepth;
 
-	surroundSampleFrame m_maxClip;
-	surroundSampleFrame m_previousSample;
-	fpp_t m_halfStart[SURROUND_CHANNELS];
-	bool m_oldBuffer[SURROUND_CHANNELS];
-	bool m_newBuffer[SURROUND_CHANNELS];
-	
+	// worker thread stuff
 	QVector<MixerWorkerThread *> m_workers;
 	int m_numWorkers;
-	QWaitCondition m_queueReadyWaitCond;
 
-
+	// playhandle stuff
 	PlayHandleList m_playHandles;
+	PlayHandleList m_newPlayHandles;	// place where new playhandles are added temporarily
 	ConstPlayHandleList m_playHandlesToRemove;
+
 
 	struct qualitySettings m_qualitySettings;
 	float m_masterGain;
 
-
+	// audio device stuff
 	AudioDevice * m_audioDev;
 	AudioDevice * m_oldAudioDev;
 	QString m_audioDevName;
+	bool m_audioDevStartFailed;
 
-
+	// MIDI device stuff
 	MidiClient * m_midiClient;
 	QString m_midiClientName;
 
-
+	// mutexes
 	QMutex m_globalMutex;
 	QMutex m_inputFramesMutex;
+	QMutex m_playHandleMutex;			// mutex used only for adding playhandles
+	QMutex m_playHandleRemovalMutex;
 
-
+	// FIFO stuff
 	fifo * m_fifo;
 	fifoWriter * m_fifoWriter;
 
 	MixerProfiler m_profiler;
 
-	friend class engine;
+	bool m_metronomeActive;
+
+	friend class Engine;
 	friend class MixerWorkerThread;
 
 } ;

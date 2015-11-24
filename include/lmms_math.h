@@ -34,7 +34,7 @@
 #include <cmath>
 using namespace std;
 
-#if defined (LMMS_BUILD_WIN32) || defined (LMMS_BUILD_APPLE) 
+#if defined (LMMS_BUILD_WIN32) || defined (LMMS_BUILD_APPLE) || defined(LMMS_BUILD_HAIKU)  || defined (__FreeBSD__)
 #ifndef isnanf
 #define isnanf(x)	isnan(x)
 #endif
@@ -48,10 +48,10 @@ using namespace std;
 #define _isinff(x) isinf(x)
 #endif
 #ifndef exp10
-#define exp10(x) pow( 10, x )
+#define exp10(x) pow( 10.0, x )
 #endif
 #ifndef exp10f
-#define exp10f(x) powf( 10, x )
+#define exp10f(x) powf( 10.0f, x )
 #endif
 #endif
 
@@ -130,8 +130,21 @@ static inline int fast_rand()
 	return( (unsigned)( next / 65536 ) % 32768 );
 }
 
+static inline double fastRand( double range )
+{
+	static const double fast_rand_ratio = 1.0 / FAST_RAND_MAX;
+	return fast_rand() * range * fast_rand_ratio;
+}
+
+static inline float fastRandf( float range )
+{
+	static const float fast_rand_ratio = 1.0f / FAST_RAND_MAX;
+	return fast_rand() * range * fast_rand_ratio;
+}
+
 //! @brief Takes advantage of fmal() function if present in hardware
-static inline long double fastFmal( long double a, long double b, long double c ) {
+static inline long double fastFmal( long double a, long double b, long double c ) 
+{
 #ifdef FP_FAST_FMAL
 	#ifdef __clang__
 		return fma( a, b, c );
@@ -144,7 +157,8 @@ static inline long double fastFmal( long double a, long double b, long double c 
 }
 
 //! @brief Takes advantage of fmaf() function if present in hardware
-static inline float fastFmaf( float a, float b, float c ) {
+static inline float fastFmaf( float a, float b, float c ) 
+{
 #ifdef FP_FAST_FMAF
 	#ifdef __clang__
 		return fma( a, b, c );
@@ -157,7 +171,8 @@ static inline float fastFmaf( float a, float b, float c ) {
 }
 
 //! @brief Takes advantage of fma() function if present in hardware
-static inline double fastFma( double a, double b, double c ) {
+static inline double fastFma( double a, double b, double c ) 
+{
 #ifdef FP_FAST_FMA
 	return fma( a, b, c );
 #else
@@ -202,9 +217,11 @@ static inline float logToLinearScale( float min, float max, float value )
 	{
 		const float mmax = qMax( qAbs( min ), qAbs( max ) );
 		const float val = value * ( max - min ) + min;
-		return signedPowf( val / mmax, F_E ) * mmax;
+		float result = signedPowf( val / mmax, F_E ) * mmax;
+		return isnan( result ) ? 0 : result;
 	}
-	return powf( value, F_E ) * ( max - min ) + min;
+	float result = powf( value, F_E ) * ( max - min ) + min;
+	return isnan( result ) ? 0 : result;
 }
 
 
@@ -216,18 +233,20 @@ static inline float linearToLogScale( float min, float max, float value )
 	if( min < 0 )
 	{
 		const float mmax = qMax( qAbs( min ), qAbs( max ) );
-		return signedPowf( value / mmax, EXP ) * mmax;
+		float result = signedPowf( value / mmax, EXP ) * mmax;
+		return isnan( result ) ? 0 : result;
 	}
-	return powf( val, EXP ) * ( max - min ) + min;
+	float result = powf( val, EXP ) * ( max - min ) + min;
+	return isnan( result ) ? 0 : result;
 }
 
 
 
 
-//! @brief Converts linear amplitude (0-1.0) to dBV scale. 
+//! @brief Converts linear amplitude (0-1.0) to dBV scale. Handles zeroes as -inf.
 //! @param amp Linear amplitude, where 1.0 = 0dBV. 
 //! @return Amplitude in dBV. -inf for 0 amplitude.
-static inline float ampToDbv( float amp )
+static inline float safeAmpToDbv( float amp )
 {
 	return amp == 0.0f
 		? -INFINITY
@@ -235,15 +254,75 @@ static inline float ampToDbv( float amp )
 }
 
 
-//! @brief Converts dBV-scale to linear amplitude with 0dBV = 1.0
+//! @brief Converts dBV-scale to linear amplitude with 0dBV = 1.0. Handles infinity as zero.
 //! @param dbv The dBV value to convert: all infinites are treated as -inf and result in 0
 //! @return Linear amplitude
-static inline float dbvToAmp( float dbv )
+static inline float safeDbvToAmp( float dbv )
 {
 	return isinff( dbv )
 		? 0.0f
 		: exp10f( dbv * 0.05f );
 }
 
+
+//! @brief Converts linear amplitude (>0-1.0) to dBV scale. 
+//! @param amp Linear amplitude, where 1.0 = 0dBV. ** Must be larger than zero! **
+//! @return Amplitude in dBV. 
+static inline float ampToDbv( float amp )
+{
+	return log10f( amp ) * 20.0f;
+}
+
+
+//! @brief Converts dBV-scale to linear amplitude with 0dBV = 1.0
+//! @param dbv The dBV value to convert. ** Must be a real number - not inf/nan! **
+//! @return Linear amplitude
+static inline float dbvToAmp( float dbv )
+{
+	return exp10f( dbv * 0.05f );
+}
+
+
+
+//! returns 1.0f if val >= 0.0f, -1.0 else
+static inline float sign( float val ) 
+{ 
+	return val >= 0.0f ? 1.0f : -1.0f; 
+}
+
+
+//! if val >= 0.0f, returns sqrtf(val), else: -sqrtf(-val)
+static inline float sqrt_neg( float val ) 
+{
+	return sqrtf( fabs( val ) ) * sign( val );
+}
+
+
+// fast approximation of square root
+static inline float fastSqrt( float n )
+{
+	union 
+	{
+		int32_t i;
+		float f;
+	} u;
+	u.f = n;
+	u.i = ( u.i + ( 127 << 23 ) ) >> 1;
+	return u.f;
+}
+
+//! returns value furthest from zero
+template<class T>
+static inline T absMax( T a, T b )
+{
+	return qAbs<T>(a) > qAbs<T>(b) ? a : b;
+}
+
+//! returns value nearest to zero
+template<class T>
+static inline T absMin( T a, T b )
+{
+	return qAbs<T>(a) < qAbs<T>(b) ? a : b;
+}
 
 #endif

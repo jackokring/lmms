@@ -23,16 +23,16 @@
  *
  */
 
-#include <QtGui/QApplication>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QVBoxLayout>
+#include <QApplication>
+#include <QLayout>
+#include <QPushButton>
+#include <QScrollArea>
+#include <QVBoxLayout>
 
 #include "EffectRackView.h"
 #include "EffectSelectDialog.h"
 #include "EffectView.h"
-#include "group_box.h"
+#include "GroupBox.h"
 
 
 EffectRackView::EffectRackView( EffectChain* model, QWidget* parent ) :
@@ -42,7 +42,7 @@ EffectRackView::EffectRackView( EffectChain* model, QWidget* parent ) :
 	QVBoxLayout* mainLayout = new QVBoxLayout( this );
 	mainLayout->setMargin( 5 );
 
-	m_effectsGroupBox = new groupBox( tr( "EFFECTS CHAIN" ) );
+	m_effectsGroupBox = new GroupBox( tr( "EFFECTS CHAIN" ) );
 	mainLayout->addWidget( m_effectsGroupBox );
 
 	QVBoxLayout* effectsLayout = new QVBoxLayout( m_effectsGroupBox );
@@ -264,5 +264,5 @@ void EffectRackView::modelChanged()
 
 
 
-#include "moc_EffectRackView.cxx"
+
 

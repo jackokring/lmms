@@ -28,6 +28,9 @@
 
 #include "gui_templates.h"
 #include "embed.h"
+#include "PluginFactory.h"
+
+#include <QLabel>
 
 
 EffectSelectDialog::EffectSelectDialog( QWidget * _parent ) :
@@ -42,31 +45,25 @@ EffectSelectDialog::EffectSelectDialog( QWidget * _parent ) :
 	setWindowIcon( embed::getIconPixmap( "setup_audio" ) );
 
 	// query effects
-	Plugin::getDescriptorsOfAvailPlugins( m_pluginDescriptors );
 
 	EffectKeyList subPluginEffectKeys;
 
-	for( Plugin::DescriptorList::ConstIterator it = m_pluginDescriptors.begin();
-										it != m_pluginDescriptors.end(); ++it )
+	for (const Plugin::Descriptor* desc: pluginFactory->descriptors(Plugin::Effect))
 	{
-		if( it->type != Plugin::Effect )
+		if( desc->subPluginFeatures )
 		{
-			continue;
-		}
-		if( it->subPluginFeatures )
-		{
-			it->subPluginFeatures->listSubPluginKeys(
+			desc->subPluginFeatures->listSubPluginKeys(
 				// as iterators are always stated to be not
 				// equal with pointers, we dereference the
 				// iterator and take the address of the item,
 				// so we're on the safe side and the compiler
 				// likely will reduce that to just "it"
-							&( *it ),
+							desc,
 							subPluginEffectKeys );
 		}
 		else
 		{
-			m_effectKeys << EffectKey( &( *it ), it->name );
+			m_effectKeys << EffectKey( desc, desc->name );
 
 		}
 	}
@@ -173,25 +170,64 @@ void EffectSelectDialog::rowChanged( const QModelIndex & _idx,
 	{
 		m_currentSelection = m_effectKeys[m_model.mapToSource( _idx ).row()];
 	}
-	if( m_currentSelection.desc && m_currentSelection.desc->subPluginFeatures )
+    if( m_currentSelection.desc )
 	{
 		m_descriptionWidget = new QWidget;
-		QVBoxLayout * l = new QVBoxLayout( m_descriptionWidget );
-		l->setMargin( 4 );
-		l->setSpacing( 0 );
 
-		ui->scrollArea->setWidget( m_descriptionWidget );
+        QHBoxLayout *hbox = new QHBoxLayout( m_descriptionWidget );
 
-		m_currentSelection.desc->subPluginFeatures->
-			fillDescriptionWidget( m_descriptionWidget, &m_currentSelection );
-		foreach( QWidget * w, m_descriptionWidget->findChildren<QWidget *>() )
-		{
-			if( w->parent() == m_descriptionWidget )
-			{
-				l->addWidget( w );
-			}
-		}
-		l->setSizeConstraint( QLayout::SetFixedSize );
+        Plugin::Descriptor const & descriptor = *( m_currentSelection.desc );
+
+        if ( descriptor.logo )
+        {
+            QLabel *logoLabel = new QLabel( m_descriptionWidget );
+            logoLabel->setPixmap( descriptor.logo->pixmap() );
+            logoLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+
+            hbox->addWidget( logoLabel );
+            hbox->setAlignment( logoLabel, Qt::AlignTop);
+        }
+
+        QWidget *textualInfoWidget = new QWidget( m_descriptionWidget );
+
+        hbox->addWidget(textualInfoWidget);
+
+        QVBoxLayout * textWidgetLayout = new QVBoxLayout( textualInfoWidget);
+        textWidgetLayout->setMargin( 4 );
+        textWidgetLayout->setSpacing( 0 );
+
+        std::string stdName(descriptor.name);
+        if ( stdName != "ladspaeffect" )
+        {
+            QLabel *label = new QLabel(m_descriptionWidget);
+            QString labelText = "<p><b>" + tr("Name") + ":</b> " + QString::fromUtf8(descriptor.displayName) + "</p>";
+            labelText += "<p><b>" + tr("Description") + ":</b> " + qApp->translate( "pluginBrowser", descriptor.description ) + "</p>";
+            labelText += "<p><b>" + tr("Author") + ":</b> " + QString::fromUtf8(descriptor.author) + "</p>";
+
+            label->setText(labelText);
+            textWidgetLayout->addWidget(label);
+        }
+
+        if ( m_currentSelection.desc->subPluginFeatures )
+        {
+            QWidget *subWidget = new QWidget(textualInfoWidget);
+            QVBoxLayout * subLayout = new QVBoxLayout( subWidget );
+            subLayout->setMargin( 4 );
+            subLayout->setSpacing( 0 );
+            m_currentSelection.desc->subPluginFeatures->
+                fillDescriptionWidget( subWidget, &m_currentSelection );
+            foreach( QWidget * w, subWidget->findChildren<QWidget *>() )
+            {
+                if( w->parent() == subWidget )
+                {
+                    subLayout->addWidget( w );
+                }
+            }
+
+            textWidgetLayout->addWidget(subWidget);
+        }
+
+        ui->scrollArea->setWidget( m_descriptionWidget );
 		m_descriptionWidget->show();
 	}
 }
@@ -213,5 +249,5 @@ void EffectSelectDialog::updateSelection()
 
 
 
-#include "moc_EffectSelectDialog.cxx"
+
 

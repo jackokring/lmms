@@ -24,12 +24,12 @@
  */
 
 
-#include <QtXml/QDomElement>
+#include <QDomElement>
 
 #include "AmplifierControls.h"
 #include "Amplifier.h"
-#include "engine.h"
-#include "song.h"
+#include "Engine.h"
+#include "Song.h"
 
 
 AmplifierControls::AmplifierControls( AmplifierEffect* effect ) :
@@ -78,5 +78,5 @@ void AmplifierControls::saveSettings( QDomDocument& doc, QDomElement& _this )
 
 
 
-#include "moc_AmplifierControls.cxx"
+
 

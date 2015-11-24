@@ -28,16 +28,12 @@
 #include "PlayHandle.h"
 #include "Instrument.h"
 #include "NotePlayHandle.h"
+#include "export.h"
 
-
-class InstrumentPlayHandle : public PlayHandle
+class EXPORT InstrumentPlayHandle : public PlayHandle
 {
 public:
-	InstrumentPlayHandle( Instrument* instrument ) :
-		PlayHandle( TypeInstrumentPlayHandle ),
-		m_instrument( instrument )
-	{
-	}
+	InstrumentPlayHandle( Instrument * instrument, InstrumentTrack* instrumentTrack );
 
 	virtual ~InstrumentPlayHandle()
 	{
@@ -80,7 +76,7 @@ public:
 		return false;
 	}
 
-	virtual bool isFromTrack( const track* _track ) const
+	virtual bool isFromTrack( const Track* _track ) const
 	{
 		return m_instrument->isFromTrack( _track );
 	}

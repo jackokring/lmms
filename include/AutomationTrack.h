@@ -27,10 +27,10 @@
 #ifndef AUTOMATION_TRACK_H
 #define AUTOMATION_TRACK_H
 
-#include "track.h"
+#include "Track.h"
 
 
-class AutomationTrack : public track
+class AutomationTrack : public Track
 {
 	Q_OBJECT
 public:
@@ -45,8 +45,8 @@ public:
 		return "automationtrack";
 	}
 
-	virtual trackView * createView( TrackContainerView* );
-	virtual trackContentObject * createTCO( const MidiTime & _pos );
+	virtual TrackView * createView( TrackContainerView* );
+	virtual TrackContentObject * createTCO( const MidiTime & _pos );
 
 	virtual void saveTrackSpecificSettings( QDomDocument & _doc,
 							QDomElement & _parent );
@@ -59,7 +59,7 @@ private:
 
 
 
-class AutomationTrackView : public trackView
+class AutomationTrackView : public TrackView
 {
 public:
 	AutomationTrackView( AutomationTrack* at, TrackContainerView* tcv );

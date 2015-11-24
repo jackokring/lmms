@@ -5,19 +5,19 @@
     <name>AboutDialog</name>
     <message>
         <source>About LMMS</source>
-        <translation>LMMS について</translation>
+        <translation>LMMSについて</translation>
     </message>
     <message>
         <source>Version %1 (%2/%3, Qt %4, %5)</source>
-        <translation type="unfinished"></translation>
+        <translation>バージョン %1 (%2/%3, Qt %4, %5)</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>LMMS について</translation>
+        <translation>LMMSについて</translation>
     </message>
     <message>
         <source>LMMS - easy music production for everyone</source>
-        <translation type="unfinished"></translation>
+        <translation>LMMS - 全ての人のための簡単な音楽制作</translation>
     </message>
     <message>
         <source>Authors</source>
@@ -31,9 +31,9 @@
         <source>Current language not translated (or native English).
 
 If you&apos;re interested in translating LMMS in another language or want to improve existing translations, you&apos;re welcome to help us! Simply contact the maintainer!</source>
-        <translation>現在、この言語では翻訳されていません（もしくは英語のままです）。
+        <translation>現在、この言語では完全に翻訳されていません。
 
-もし、あなたがLMMSを他の言語に翻訳することや既に存在する翻訳を改善することに興味があるならば、ぜひとも私たちを助けてください! ただ Maintainer にコンタクトを取るだけです!</translation>
+もしLMMSを他の言語に翻訳することや既に存在する翻訳を改善することに興味があるならぜひとも翻訳してください!メンテナーに連絡を取るだけです!</translation>
     </message>
     <message>
         <source>License</source>
@@ -41,87 +41,95 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Copyright (c) 2004-2014, LMMS developers</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) 2004-2014, LMMS開発者</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://lmms.io&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://lmms.io&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://lmms.io&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://lmms.io&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>LMMS</source>
-        <translation type="unfinished"></translation>
+        <translation>LMMS</translation>
+    </message>
+    <message>
+        <source>Involved</source>
+        <translation>関係者</translation>
+    </message>
+    <message>
+        <source>Contributors ordered by number of commits:</source>
+        <translation>コミット数順のコントリビュータ一覧:</translation>
     </message>
 </context>
 <context>
     <name>AmplifierControlDialog</name>
     <message>
         <source>VOL</source>
-        <translation type="unfinished"></translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished">音量:</translation>
+        <translation>音量:</translation>
     </message>
     <message>
         <source>PAN</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング</translation>
     </message>
     <message>
         <source>Panning:</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング:</translation>
     </message>
     <message>
         <source>LEFT</source>
-        <translation type="unfinished"></translation>
+        <translation>左</translation>
     </message>
     <message>
         <source>Left gain:</source>
-        <translation type="unfinished"></translation>
+        <translation>左ゲイン:</translation>
     </message>
     <message>
         <source>RIGHT</source>
-        <translation type="unfinished"></translation>
+        <translation>右</translation>
     </message>
     <message>
         <source>Right gain:</source>
-        <translation type="unfinished"></translation>
+        <translation>右ゲイン:</translation>
     </message>
 </context>
 <context>
     <name>AmplifierControls</name>
     <message>
         <source>Volume</source>
-        <translation type="unfinished">音量</translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Panning</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング</translation>
     </message>
     <message>
         <source>Left gain</source>
-        <translation type="unfinished"></translation>
+        <translation>左ゲイン</translation>
     </message>
     <message>
         <source>Right gain</source>
-        <translation type="unfinished"></translation>
+        <translation>右ゲイン</translation>
     </message>
 </context>
 <context>
     <name>AudioAlsa::setupWidget</name>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished">デバイス</translation>
+        <translation>デバイス</translation>
     </message>
     <message>
         <source>CHANNELS</source>
-        <translation type="unfinished">チャンネル</translation>
+        <translation>チャンネル</translation>
     </message>
 </context>
 <context>
     <name>AudioFileProcessorView</name>
     <message>
         <source>Open other sample</source>
-        <translation type="unfinished">他のサンプルを開く</translation>
+        <translation>他のサンプルを開く</translation>
     </message>
     <message>
         <source>Click here, if you want to open another audio-file. A dialog will appear where you can select your file. Settings like looping-mode, start and end-points, amplify-value, and so on are not reset. So, it may not sound like the original sample.</source>
@@ -161,7 +169,7 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Disable loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ループを無効にする</translation>
     </message>
     <message>
         <source>This button disables looping. The sample plays only once from start to end. </source>
@@ -169,7 +177,7 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Enable loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ループを有効にする</translation>
     </message>
     <message>
         <source>This button enables forwards-looping. The sample loops between the end point and the loop point.</source>
@@ -200,14 +208,14 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     <name>AudioFileProcessorWaveView</name>
     <message>
         <source>Sample length:</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプルの長さ:</translation>
     </message>
 </context>
 <context>
     <name>AudioJack</name>
     <message>
         <source>JACK client restarted</source>
-        <translation type="unfinished"></translation>
+        <translation>JACKクライアントを再起動しました</translation>
     </message>
     <message>
         <source>LMMS was kicked by JACK for some reason. Therefore the JACK backend of LMMS has been restarted. You will have to make manual connections again.</source>
@@ -221,71 +229,68 @@ If you&apos;re interested in translating LMMS in another language or want to imp
         <source>The JACK server seems to have been shutdown and starting a new instance failed. Therefore LMMS is unable to proceed. You should save your project and restart JACK and LMMS.</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>AudioJack::setupWidget</name>
     <message>
         <source>CLIENT-NAME</source>
-        <translation type="unfinished"></translation>
+        <translation>クライアント名</translation>
     </message>
     <message>
         <source>CHANNELS</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル</translation>
     </message>
 </context>
 <context>
     <name>AudioOss::setupWidget</name>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイス</translation>
     </message>
     <message>
         <source>CHANNELS</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル</translation>
     </message>
 </context>
 <context>
     <name>AudioPortAudio::setupWidget</name>
     <message>
         <source>BACKEND</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">バックエンド</translation>
     </message>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイス</translation>
     </message>
 </context>
 <context>
     <name>AudioPulseAudio::setupWidget</name>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイス</translation>
     </message>
     <message>
         <source>CHANNELS</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル</translation>
     </message>
 </context>
 <context>
     <name>AudioSdl::setupWidget</name>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイス</translation>
     </message>
 </context>
 <context>
     <name>AutomatableModel</name>
     <message>
         <source>&amp;Reset (%1%2)</source>
-        <translation type="unfinished">リセット(&amp;R) (%1%2)</translation>
+        <translation>リセット(&amp;R) (%1%2)</translation>
     </message>
     <message>
         <source>&amp;Copy value (%1%2)</source>
-        <translation type="unfinished">値をコピー(&amp;C) (%1%2)</translation>
+        <translation>値をコピー(&amp;C) (%1%2)</translation>
     </message>
     <message>
         <source>&amp;Paste value (%1%2)</source>
-        <translation type="unfinished">値を貼り付け(&amp;P) (%1%2)</translation>
+        <translation>値を貼り付け(&amp;P) (%1%2)</translation>
     </message>
     <message>
         <source>Edit song-global automation</source>
@@ -293,46 +298,61 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished">%1 に接続済</translation>
+        <translation>%1 に接続済み</translation>
     </message>
     <message>
         <source>Connected to controller</source>
-        <translation type="unfinished">コントローラーに接続済</translation>
+        <translation>コントローラーに接続済み</translation>
     </message>
     <message>
         <source>Edit connection...</source>
-        <translation type="unfinished">接続を編集...</translation>
+        <translation>接続を編集...</translation>
     </message>
     <message>
         <source>Remove connection</source>
-        <translation type="unfinished">接続を削除</translation>
+        <translation>接続を削除</translation>
     </message>
     <message>
         <source>Connect to controller...</source>
-        <translation type="unfinished">コントローラーに接続...</translation>
+        <translation>コントローラーに接続...</translation>
     </message>
     <message>
         <source>Remove song-global automation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">曲全体のオートメーションを削除</translation>
     </message>
     <message>
         <source>Remove all linked controls</source>
-        <translation type="unfinished"></translation>
+        <translation>リンクされたコントロールを全て削除</translation>
     </message>
 </context>
 <context>
     <name>AutomationEditor</name>
     <message>
-        <source>Play/pause current pattern (Space)</source>
-        <translation type="unfinished">現在のパターンの再生/一時停止 (Space)</translation>
+        <source>Please open an automation pattern with the context menu of a control!</source>
+        <translation>コントロールのコンテキストメニューでオートメーションパターンを開いてください!</translation>
     </message>
     <message>
-        <source>Stop playing of current pattern (Space)</source>
-        <translation type="unfinished">現在のパターンの演奏停止 (Space)</translation>
+        <source>Values copied</source>
+        <translation>値をコピーしました</translation>
+    </message>
+    <message>
+        <source>All selected values were copied to the clipboard.</source>
+        <translation>選択された値はすべてクリップボードにコピーされました。</translation>
+    </message>
+</context>
+<context>
+    <name>AutomationEditorWindow</name>
+    <message>
+        <source>Play/pause current pattern (Space)</source>
+        <translation>現在のパターンの再生/一時停止 (Space)</translation>
     </message>
     <message>
         <source>Click here if you want to play the current pattern. This is useful while editing it.  The pattern is automatically looped when the end is reached.</source>
         <translation type="unfinished">クリックすると現在のパターンを演奏します。パターン編集中の演奏に便利です。終了位置にくるとパターンは自動的にループされます。</translation>
+    </message>
+    <message>
+        <source>Stop playing of current pattern (Space)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Click here if you want to stop playing of the current pattern.</source>
@@ -340,63 +360,35 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Draw mode (Shift+D)</source>
-        <translation type="unfinished">ドローモード (shift+D)</translation>
+        <translation>描画モード (shift+D)</translation>
     </message>
     <message>
         <source>Erase mode (Shift+E)</source>
-        <translation type="unfinished">消去モード (shift+E)</translation>
+        <translation>消去モード (shift+E)</translation>
+    </message>
+    <message>
+        <source>Flip vertically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flip horizontally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here and the pattern will be inverted.The points are flipped in the y direction. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here and the pattern will be reversed. The points are flipped in the x direction.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Click here and draw-mode will be activated. In this mode you can add and move single values.  This is the default mode which is used most of the time.  You can also press &apos;Shift+D&apos; on your keyboard to activate this mode.</source>
-        <translation type="unfinished">クリックするとドローモードをONにします。ドローモードではひとつの値を追加したり移動したりします。このモードがデフォルトで普段つかいます。 &apos;Shift+D&apos; をおしてもドローモードをONにできます。</translation>
+        <translation type="unfinished">クリックすると描画モードをONにします。描画モードではひとつの値を追加したり移動したりします。このモードがデフォルトで普段つかいます。 &apos;Shift+D&apos; をおしても描画モードをONにできます。</translation>
     </message>
     <message>
         <source>Click here and erase-mode will be activated. In this mode you can erase single values. You can also press &apos;Shift+E&apos; on your keyboard to activate this mode.</source>
         <translation type="unfinished">クリックすると消去モードをONにします。消去モードではひとつの値を消去できます。 &apos;Shift+E&apos; をおしても消去モードをONにできます。</translation>
-    </message>
-    <message>
-        <source>Cut selected values (Ctrl+X)</source>
-        <translation type="unfinished">選択した値を切り取り (Shift+M)</translation>
-    </message>
-    <message>
-        <source>Copy selected values (Ctrl+C)</source>
-        <translation type="unfinished">選択した値をコピー  (Ctrl+C)</translation>
-    </message>
-    <message>
-        <source>Paste values from clipboard (Ctrl+V)</source>
-        <translation type="unfinished">クリップボードから値を貼り付け (Ctrl+V)</translation>
-    </message>
-    <message>
-        <source>Click here and selected values will be cut into the clipboard.  You can paste them anywhere in any pattern by clicking on the paste button.</source>
-        <translation type="unfinished">クリックすると選択した値をクリップボードにカットします。その値はペーストボタンを押すと任意のパタンの任意の場所にペーストできます。</translation>
-    </message>
-    <message>
-        <source>Click here and selected values will be copied into the clipboard.  You can paste them anywhere in any pattern by clicking on the paste button.</source>
-        <translation type="unfinished">クリックすると選択した値をクリップボードにコピーします。その値はペーストボタンを押すと任意のパタンの任意の場所にペーストできます。</translation>
-    </message>
-    <message>
-        <source>Click here and the values from the clipboard will be pasted at the first visible measure.</source>
-        <translation type="unfinished">クリックするとクリップボードから値が最初の可視状態の小節にペーストされます。</translation>
-    </message>
-    <message>
-        <source>Automation Editor - no pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Automation Editor - %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please open an automation pattern with the context menu of a control!</source>
-        <translation type="unfinished">コントロールのコンテキストメニューでオートメーションパターンを選択してください!</translation>
-    </message>
-    <message>
-        <source>Values copied</source>
-        <translation type="unfinished">値をコピーしました</translation>
-    </message>
-    <message>
-        <source>All selected values were copied to the clipboard.</source>
-        <translation type="unfinished">選択された値はすべてクリップボードにコピーされました。</translation>
     </message>
     <message>
         <source>Discrete progression</source>
@@ -411,7 +403,11 @@ If you&apos;re interested in translating LMMS in another language or want to imp
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tension: </source>
+        <source>Tension value for spline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A higher tension value may make a smoother curve but overshoot some values. A low tension value will cause the slope of the curve to level off at each control point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -427,11 +423,39 @@ If you&apos;re interested in translating LMMS in another language or want to imp
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tension value for spline</source>
+        <source>Cut selected values (Ctrl+X)</source>
+        <translation>選択した値を切り取り (Shift+M)</translation>
+    </message>
+    <message>
+        <source>Copy selected values (Ctrl+C)</source>
+        <translation>選択した値をコピー  (Ctrl+C)</translation>
+    </message>
+    <message>
+        <source>Paste values from clipboard Ctrl+V)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A higher tension value may make a smoother curve but overshoot some values.  A low tension value will cause the slope of the curve to level off at each control point.</source>
+        <source>Click here and selected values will be cut into the clipboard.  You can paste them anywhere in any pattern by clicking on the paste button.</source>
+        <translation type="unfinished">クリックすると選択した値をクリップボードにカットします。その値はペーストボタンを押すと任意のパタンの任意の場所にペーストできます。</translation>
+    </message>
+    <message>
+        <source>Click here and selected values will be copied into the clipboard.  You can paste them anywhere in any pattern by clicking on the paste button.</source>
+        <translation type="unfinished">クリックすると選択した値をクリップボードにコピーします。その値はペーストボタンを押すと任意のパタンの任意の場所にペーストできます。</translation>
+    </message>
+    <message>
+        <source>Click here and the values from the clipboard will be pasted at the first visible measure.</source>
+        <translation type="unfinished">クリックするとクリップボードから値が最初の可視状態の小節にペーストされます。</translation>
+    </message>
+    <message>
+        <source>Tension: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automation Editor - no pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automation Editor - %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -439,18 +463,18 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     <name>AutomationPattern</name>
     <message>
         <source>Drag a control while pressing &lt;Ctrl&gt;</source>
-        <translation type="unfinished">&lt;Ctrl&gt;を押しながらコントロールをドラッグしてください</translation>
+        <translation>&lt;Ctrl&gt;を押しながらコントロールをドラッグしてください</translation>
     </message>
     <message>
         <source>Model is already connected to this pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">モデルはこのパターンに既に接続されています。</translation>
     </message>
 </context>
 <context>
     <name>AutomationPatternView</name>
     <message>
         <source>double-click to open this pattern in automation editor</source>
-        <translation type="unfinished">ダブルクリックすると、このパターンをAutomation Editorで開きます</translation>
+        <translation type="unfinished">ダブルクリックしてこのパターンをAutomation Editorで開く</translation>
     </message>
     <message>
         <source>Open in Automation editor</source>
@@ -458,57 +482,138 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">クリア</translation>
+        <translation>クリア</translation>
     </message>
     <message>
         <source>Reset name</source>
-        <translation type="unfinished">名前をリセット</translation>
+        <translation>名前をリセット</translation>
     </message>
     <message>
         <source>Change name</source>
-        <translation type="unfinished">名前を変更</translation>
+        <translation>名前を変更</translation>
     </message>
     <message>
         <source>%1 Connections</source>
-        <translation type="unfinished">%1 個の接続</translation>
+        <translation>%1 個の接続</translation>
     </message>
     <message>
         <source>Disconnect &quot;%1&quot;</source>
-        <translation type="unfinished">&quot;%1&quot; を切断</translation>
+        <translation>&quot;%1&quot; を切断</translation>
     </message>
     <message>
         <source>Set/clear record</source>
         <translation type="unfinished">録音をセット/クリア</translation>
+    </message>
+    <message>
+        <source>Flip Vertically (Visible)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flip Horizontally (Visible)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AutomationTrack</name>
     <message>
         <source>Automation track</source>
-        <translation type="unfinished">Automation track</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BBEditor</name>
+    <message>
+        <source>Beat+Bassline Editor</source>
+        <translation type="unfinished">ビート＋ベースラインエディタ</translation>
+    </message>
+    <message>
+        <source>Play/pause current beat/bassline (Space)</source>
+        <translation type="unfinished">現在のビート＋ベースラインを 再生/一時停止 (Space)</translation>
+    </message>
+    <message>
+        <source>Stop playback of current beat/bassline (Space)</source>
+        <translation type="unfinished">ビート/ベースラインの再生を停止 (Space)</translation>
+    </message>
+    <message>
+        <source>Click here to play the current beat/bassline.  The beat/bassline is automatically looped when its end is reached.</source>
+        <translation type="unfinished">クリックすると現在のビート/ベースラインを演奏します。ビート/ベースラインは終了位置にくると自動的にループされます。</translation>
+    </message>
+    <message>
+        <source>Click here to stop playing of current beat/bassline.</source>
+        <translation type="unfinished">クリックすると現在のビート/ベースラインの演奏を停止します。</translation>
+    </message>
+    <message>
+        <source>Add beat/bassline</source>
+        <translation type="unfinished">ビート/ベースラインを追加</translation>
+    </message>
+    <message>
+        <source>Add automation-track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove steps</source>
+        <translation type="unfinished">ステップ除去</translation>
+    </message>
+    <message>
+        <source>Add steps</source>
+        <translation type="unfinished">ステップ追加</translation>
+    </message>
+</context>
+<context>
+    <name>BBTCOView</name>
+    <message>
+        <source>Open in Beat+Bassline-Editor</source>
+        <translation>ビート＋ベースラインエディタで開く</translation>
+    </message>
+    <message>
+        <source>Reset name</source>
+        <translation>名前をリセット</translation>
+    </message>
+    <message>
+        <source>Change name</source>
+        <translation>名前を変更</translation>
+    </message>
+    <message>
+        <source>Change color</source>
+        <translation>色を変更</translation>
+    </message>
+    <message>
+        <source>Reset color to default</source>
+        <translation>色をデフォルトにリセット</translation>
+    </message>
+</context>
+<context>
+    <name>BBTrack</name>
+    <message>
+        <source>Beat/Bassline %1</source>
+        <translation>ビート/ベースライン %1</translation>
+    </message>
+    <message>
+        <source>Clone of %1</source>
+        <translation>%1の複製</translation>
     </message>
 </context>
 <context>
     <name>BassBoosterControlDialog</name>
     <message>
         <source>FREQ</source>
-        <translation type="unfinished"></translation>
+        <translation>周波数</translation>
     </message>
     <message>
         <source>Frequency:</source>
-        <translation type="unfinished">周波数:</translation>
+        <translation>周波数:</translation>
     </message>
     <message>
         <source>GAIN</source>
-        <translation type="unfinished"></translation>
+        <translation>ゲイン</translation>
     </message>
     <message>
         <source>Gain:</source>
-        <translation type="unfinished">ゲイン:</translation>
+        <translation>ゲイン:</translation>
     </message>
     <message>
         <source>RATIO</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">比率</translation>
     </message>
     <message>
         <source>Ratio:</source>
@@ -519,11 +624,11 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     <name>BassBoosterControls</name>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished">周波数</translation>
+        <translation>周波数</translation>
     </message>
     <message>
         <source>Gain</source>
-        <translation type="unfinished">ゲイン</translation>
+        <translation>ゲイン</translation>
     </message>
     <message>
         <source>Ratio</source>
@@ -531,52 +636,146 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
 </context>
 <context>
-    <name>CarlaInstrumentView</name>
+    <name>BitcrushControlDialog</name>
     <message>
-        <source>Show GUI</source>
+        <source>IN</source>
+        <translation type="unfinished">入力</translation>
+    </message>
+    <message>
+        <source>OUT</source>
+        <translation type="unfinished">出力</translation>
+    </message>
+    <message>
+        <source>GAIN</source>
+        <translation>ゲイン</translation>
+    </message>
+    <message>
+        <source>Input Gain:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to show or hide the graphical user interface (GUI) of Carla.</source>
+        <source>NOIS</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Input Noise:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output Gain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CLIP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output Clip:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rate Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable samplerate-crushing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depth Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable bitdepth-crushing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>STD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo difference:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Levels:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CaptionMenu</name>
+    <message>
+        <source>&amp;Help</source>
+        <translation>ヘルプ(&amp;H)</translation>
+    </message>
+    <message>
+        <source>Help (not available)</source>
+        <translation>ヘルプはありません</translation>
+    </message>
+</context>
+<context>
+    <name>CarlaInstrumentView</name>
+    <message>
+        <source>Show GUI</source>
+        <translation>GUI を表示</translation>
+    </message>
+    <message>
+        <source>Click here to show or hide the graphical user interface (GUI) of Carla.</source>
+        <translation>CarlaのGUIを表示/非表示するにはここをクリックしてください。</translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
         <source>Controller %1</source>
-        <translation type="unfinished">Controller %1</translation>
+        <translation>コントローラ %1</translation>
     </message>
 </context>
 <context>
     <name>ControllerConnectionDialog</name>
     <message>
         <source>Connection Settings</source>
-        <translation type="unfinished">接続設定</translation>
+        <translation>接続設定</translation>
     </message>
     <message>
         <source>MIDI CONTROLLER</source>
-        <translation type="unfinished">MIDI コントローラー</translation>
+        <translation type="unfinished">MIDIコントローラ</translation>
     </message>
     <message>
         <source>Input channel</source>
-        <translation type="unfinished">入力チャンネル</translation>
+        <translation>入力チャンネル</translation>
     </message>
     <message>
         <source>CHANNEL</source>
-        <translation type="unfinished">チャンネル</translation>
+        <translation>チャンネル</translation>
     </message>
     <message>
         <source>Input controller</source>
-        <translation type="unfinished">入力コントローラー</translation>
+        <translation>入力コントローラ</translation>
     </message>
     <message>
         <source>CONTROLLER</source>
-        <translation type="unfinished">コントローラー</translation>
+        <translation>コントローラー</translation>
     </message>
     <message>
         <source>Auto Detect</source>
-        <translation type="unfinished">自動検出</translation>
+        <translation>自動検出</translation>
     </message>
     <message>
         <source>MIDI-devices to receive MIDI-events from</source>
@@ -584,11 +783,11 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>USER CONTROLLER</source>
-        <translation type="unfinished">ユーザー コントローラー</translation>
+        <translation type="unfinished">ユーザーコントローラ</translation>
     </message>
     <message>
         <source>MAPPING FUNCTION</source>
-        <translation type="unfinished">マッピング関数</translation>
+        <translation type="unfinished">マッピング機能</translation>
     </message>
     <message>
         <source>OK</source>
@@ -604,7 +803,7 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Cycle Detected.</source>
-        <translation type="unfinished">サイクルが検出されました。</translation>
+        <translation>循環が検出されました。</translation>
     </message>
 </context>
 <context>
@@ -619,7 +818,7 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Confirm Delete</source>
-        <translation type="unfinished">削除の確認</translation>
+        <translation>削除の確認</translation>
     </message>
     <message>
         <source>Confirm delete? There are existing connection(s) associted with this controller. There is no way to undo.</source>
@@ -630,46 +829,162 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     <name>ControllerView</name>
     <message>
         <source>Controls</source>
-        <translation type="unfinished">コントロール</translation>
+        <translation>コントロール</translation>
     </message>
     <message>
         <source>Controllers are able to automate the value of a knob, slider, and other controls.</source>
-        <translation type="unfinished">コントローラーでは、つまみやスライダー、その他のコントロールの値を自動化することができます。</translation>
+        <translation>コントローラーでは、つまみやスライダー、その他のコントロールの値を自動化することができます。</translation>
     </message>
     <message>
         <source>Rename controller</source>
-        <translation type="unfinished">コントローラー名の変更</translation>
+        <translation>コントローラー名の変更</translation>
     </message>
     <message>
         <source>Enter the new name for this controller</source>
-        <translation type="unfinished">コントローラーの新しい名前を入力してください</translation>
+        <translation>コントローラーの新しい名前を入力してください</translation>
     </message>
     <message>
         <source>&amp;Remove this plugin</source>
-        <translation type="unfinished">このプラグインを削除(&amp;R)</translation>
+        <translation>このプラグインを削除(&amp;R)</translation>
+    </message>
+</context>
+<context>
+    <name>CrossoverEQControlDialog</name>
+    <message>
+        <source>Band 1/2 Crossover:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation type="unfinished">ヘルプ(&amp;H)</translation>
+        <source>Band 2/3 Crossover:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 3/4 Crossover:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 1 Gain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 2 Gain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 3 Gain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 4 Gain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 1 Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute Band 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 2 Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute Band 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 3 Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute Band 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Band 4 Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mute Band 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DelayControls</name>
+    <message>
+        <source>Delay Samples</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feedback</source>
+        <translation>フィードバック</translation>
+    </message>
+    <message>
+        <source>Lfo Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lfo Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DelayControlsDialog</name>
+    <message>
+        <source>Delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feedback Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lfo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lfo Amt</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DetuningHelper</name>
+    <message>
+        <source>Note detuning</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DualFilterControlDialog</name>
     <message>
         <source>Filter 1 enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>フィルタ1は有効</translation>
     </message>
     <message>
         <source>Filter 2 enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>フィルタ2は有効</translation>
     </message>
     <message>
         <source>Click to enable/disable Filter 1</source>
-        <translation type="unfinished"></translation>
+        <translation>クリックでフィルタ1を有効/無効</translation>
     </message>
     <message>
         <source>Click to enable/disable Filter 2</source>
-        <translation type="unfinished"></translation>
+        <translation>クリックでフィルタ2を有効/無効</translation>
     </message>
 </context>
 <context>
@@ -778,12 +1093,66 @@ If you&apos;re interested in translating LMMS in another language or want to imp
         <source>Vocal Formant Filter</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>2x Moog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV LowPass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV BandPass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV HighPass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV Notch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fast Formant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tripole</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DummyEffect</name>
+    <message>
+        <source>NOT FOUND</source>
+        <translation>見つかりません</translation>
+    </message>
+</context>
+<context>
+    <name>Editor</name>
+    <message>
+        <source>Play (Space)</source>
+        <translation>再生 (Space)</translation>
+    </message>
+    <message>
+        <source>Stop (Space)</source>
+        <translation>停止 (Space)</translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation>録音</translation>
+    </message>
+    <message>
+        <source>Record while playing</source>
+        <translation>再生しながら録音</translation>
+    </message>
 </context>
 <context>
     <name>Effect</name>
     <message>
         <source>Effect enabled</source>
-        <translation type="unfinished">エフェクト有効</translation>
+        <translation>エフェクト有効</translation>
     </message>
     <message>
         <source>Wet/Dry mix</source>
@@ -802,40 +1171,40 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     <name>EffectChain</name>
     <message>
         <source>Effects enabled</source>
-        <translation type="unfinished">エフェクト有効</translation>
+        <translation>エフェクト有効</translation>
     </message>
 </context>
 <context>
     <name>EffectRackView</name>
     <message>
         <source>EFFECTS CHAIN</source>
-        <translation type="unfinished">エフェクトチェイン</translation>
+        <translation>エフェクトチェイン</translation>
     </message>
     <message>
         <source>Add effect</source>
-        <translation type="unfinished">エフェクトを追加</translation>
+        <translation>エフェクトを追加</translation>
     </message>
 </context>
 <context>
     <name>EffectSelectDialog</name>
     <message>
         <source>Add effect</source>
-        <translation type="unfinished">エフェクトを追加</translation>
+        <translation>エフェクトを追加</translation>
     </message>
     <message>
         <source>Plugin description</source>
-        <translation type="unfinished">プラグインの説明</translation>
+        <translation>プラグインの説明</translation>
     </message>
 </context>
 <context>
     <name>EffectView</name>
     <message>
         <source>Toggles the effect on or off.</source>
-        <translation type="unfinished">エフェクトの有効/無効を切り替えます。</translation>
+        <translation>エフェクトのオン/オフを切り替えます。</translation>
     </message>
     <message>
         <source>On/Off</source>
-        <translation type="unfinished"></translation>
+        <translation>オン/オフ</translation>
     </message>
     <message>
         <source>W/D</source>
@@ -855,7 +1224,7 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Time:</source>
-        <translation type="unfinished">時間:</translation>
+        <translation>時間:</translation>
     </message>
     <message>
         <source>The Decay knob controls how many buffers of silence must pass before the plugin stops processing.  Smaller values will reduce the CPU overhead but run the risk of clipping the tail on delay and reverb effects.</source>
@@ -875,7 +1244,7 @@ If you&apos;re interested in translating LMMS in another language or want to imp
     </message>
     <message>
         <source>Controls</source>
-        <translation type="unfinished">コントロール</translation>
+        <translation>コントロール</translation>
     </message>
     <message>
         <source>Effect plugins function as a chained series of effects where the signal will be processed from top to bottom.
@@ -895,7 +1264,7 @@ Right clicking will bring up a context menu where you can change the order in wh
 
 On/Off スイッチでいつでも指定したプラグインをバイパスすることができます。
 
-Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエフェクトシグナルのバランスをコントロールします。ステージの入力とは一つ前のステージからの出力です。そのため連鎖の下の方のエフェクトの 'dry'シグナルはそれまでのエフェクトをすべて含んでいます。
+Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエフェクトシグナルのバランスをコントロールします。ステージの入力とは一つ前のステージからの出力です。そのため連鎖の下の方のエフェクトの &apos;dry&apos;シグナルはそれまでのエフェクトをすべて含んでいます。
 
 ディケイつまみでは、ノートのリリース後に処理されるシグナルの長さをコントロールします。与えられた時間内に与えられた閾値以下に音量が落ちたときにエフェクトは処理を停止します。このつまみで”与えられた時間”を設定します。この時間を長くするほどCPUを必要とするので、多くのエフェクトでは小さい値を指定するべきでしょう。ディレイのような長時間の沈黙が発生するエフェクトの場合は値を増やす必要があります。
 
@@ -908,19 +1277,15 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
     </message>
     <message>
         <source>Move &amp;up</source>
-        <translation type="unfinished">一つ上へ(&amp;u)</translation>
+        <translation>一つ上へ(&amp;u)</translation>
     </message>
     <message>
         <source>Move &amp;down</source>
-        <translation type="unfinished">一つ下へ(&amp;d)</translation>
+        <translation>一つ下へ(&amp;d)</translation>
     </message>
     <message>
         <source>&amp;Remove this plugin</source>
-        <translation type="unfinished">このプラグインを削除(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>ヘルプ(&amp;H)</translation>
+        <translation>このプラグインを削除(&amp;R)</translation>
     </message>
 </context>
 <context>
@@ -1090,7 +1455,7 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
     </message>
     <message>
         <source>LFO speed:</source>
-        <translation type="unfinished">LFO の速度:</translation>
+        <translation type="unfinished">LFOの速さ:</translation>
     </message>
     <message>
         <source>Use this knob for setting speed of the current LFO. The bigger this value the faster the LFO oscillates and the faster will be your effect.</source>
@@ -1102,19 +1467,19 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
     </message>
     <message>
         <source>Click here for a sine-wave.</source>
-        <translation type="unfinished">ここをクリックするとサイン波形にします。</translation>
+        <translation type="unfinished">クリックでサイン波。</translation>
     </message>
     <message>
         <source>Click here for a triangle-wave.</source>
-        <translation type="unfinished">ここをクリックすると三角波形にします。</translation>
+        <translation type="unfinished">クリックで三角波。</translation>
     </message>
     <message>
         <source>Click here for a saw-wave for current.</source>
-        <translation type="unfinished">ここをクリックするとのこぎり波形にします。</translation>
+        <translation type="unfinished">クリックでのこぎり波。</translation>
     </message>
     <message>
         <source>Click here for a square-wave.</source>
-        <translation type="unfinished">ここをクリックすると方形波形にします。</translation>
+        <translation type="unfinished">クリックで矩形波。</translation>
     </message>
     <message>
         <source>Click here for a user-defined wave. Afterwards, drag an according sample-file onto the LFO graph.</source>
@@ -1162,70 +1527,319 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
     </message>
 </context>
 <context>
+    <name>EqControls</name>
+    <message>
+        <source>Input gain</source>
+        <translation type="unfinished">入力ゲイン</translation>
+    </message>
+    <message>
+        <source>Output gain</source>
+        <translation type="unfinished">出力ゲイン</translation>
+    </message>
+    <message>
+        <source>Low shelf gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 1 gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 2 gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 3 gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 4 gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Shelf gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HP res</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low Shelf res</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 1 BW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 2 BW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 3 BW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 4 BW</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Shelf res</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LP res</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HP freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low Shelf freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 1 freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 2 freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 3 freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 4 freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High shelf freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LP freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HP active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low shelf active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 1 active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 2 active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 3 active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 4 active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High shelf active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LP active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LP 12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LP 24</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LP 48</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HP 12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HP 24</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HP 48</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>low pass type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>high pass type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EqControlsDialog</name>
+    <message>
+        <source>HP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low Shelf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peak 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Shelf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In Gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gain</source>
+        <translation type="unfinished">ゲイン</translation>
+    </message>
+    <message>
+        <source>Out Gain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bandwidth: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resonance : </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frequency:</source>
+        <translation type="unfinished">周波数:</translation>
+    </message>
+    <message>
+        <source>12dB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>24dB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>48dB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lp grp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hp grp</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EqParameterWidget</name>
+    <message>
+        <source>Hz </source>
+        <translation>Hz</translation>
+    </message>
+</context>
+<context>
     <name>ExportProjectDialog</name>
     <message>
         <source>Export project</source>
-        <translation type="unfinished">プロジェクトのエクスポート</translation>
+        <translation>プロジェクトをエクスポート</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished">出力</translation>
+        <translation>出力</translation>
     </message>
     <message>
         <source>File format:</source>
-        <translation type="unfinished">ファイル フォーマット:</translation>
+        <translation>ファイルの形式:</translation>
     </message>
     <message>
         <source>Samplerate:</source>
-        <translation type="unfinished">サンプルレート:</translation>
+        <translation>サンプルレート:</translation>
     </message>
     <message>
         <source>44100 Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>44100 Hz</translation>
     </message>
     <message>
         <source>48000 Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>48000 Hz</translation>
     </message>
     <message>
         <source>88200 Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>88200 Hz</translation>
     </message>
     <message>
         <source>96000 Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>96000 Hz</translation>
     </message>
     <message>
         <source>192000 Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>192000 Hz</translation>
     </message>
     <message>
         <source>Bitrate:</source>
-        <translation type="unfinished">ビットレート:</translation>
+        <translation>ビットレート:</translation>
     </message>
     <message>
         <source>64 KBit/s</source>
-        <translation type="unfinished"></translation>
+        <translation>64 KBit/s</translation>
     </message>
     <message>
         <source>128 KBit/s</source>
-        <translation type="unfinished"></translation>
+        <translation>128 KBit/s</translation>
     </message>
     <message>
         <source>160 KBit/s</source>
-        <translation type="unfinished"></translation>
+        <translation>160 KBit/s</translation>
     </message>
     <message>
         <source>192 KBit/s</source>
-        <translation type="unfinished"></translation>
+        <translation>192 KBit/s</translation>
     </message>
     <message>
         <source>256 KBit/s</source>
-        <translation type="unfinished"></translation>
+        <translation>256 KBit/s</translation>
     </message>
     <message>
         <source>320 KBit/s</source>
-        <translation type="unfinished"></translation>
+        <translation>320 KBit/s</translation>
     </message>
     <message>
         <source>Depth:</source>
@@ -1289,7 +1903,7 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">開始</translation>
+        <translation>開始</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1299,12 +1913,49 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
         <source>Export as loop (remove end silence)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export between loop markers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open file</source>
+        <translation>ファイルを開けません</translation>
+    </message>
+    <message>
+        <source>Could not open file %1 for writing.
+Please make sure you have write-permission to the file and the directory containing the file and try again!</source>
+        <translation>ファイル %1 を書き込み用に開けません。
+このファイルとファイルのディレクトリの書き込み権限があるかを確認して再度書き込んでください！</translation>
+    </message>
+    <message>
+        <source>Export project to %1</source>
+        <translation type="unfinished">プロジェクトを %1 にエクスポート</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>エラー</translation>
+    </message>
+    <message>
+        <source>Error while determining file-encoder device. Please try to choose a different output format.</source>
+        <translation type="unfinished">ファイルエンコーダデバイスを決定する際のエラー。異なる出力フォーマットを選んでください。</translation>
+    </message>
+    <message>
+        <source>Rendering: %1%</source>
+        <translation type="unfinished">レンダリング: %1%</translation>
+    </message>
+</context>
+<context>
+    <name>Fader</name>
+    <message>
+        <source>Please enter a new value between %1 and %2:</source>
+        <translation>%1 と %2 の間の新しい値を入力してください:</translation>
+    </message>
 </context>
 <context>
     <name>FileBrowser</name>
     <message>
         <source>Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>ブラウザ</translation>
     </message>
 </context>
 <context>
@@ -1323,7 +1974,7 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
     </message>
     <message>
         <source>Loading sample</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプルを読み込み中</translation>
     </message>
     <message>
         <source>Please wait, loading sample for preview...</source>
@@ -1331,6 +1982,76 @@ Wet/Dry つまみでは、エフェクトの出力中の入力シグナルとエ
     </message>
     <message>
         <source>--- Factory files ---</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FlangerControls</name>
+    <message>
+        <source>Delay Samples</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lfo Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Noise</source>
+        <translation>ノイズ</translation>
+    </message>
+    <message>
+        <source>Invert</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FlangerControlsDialog</name>
+    <message>
+        <source>Delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lfo Hz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lfo:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feedback Amount:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Noise</source>
+        <translation>ノイズ</translation>
+    </message>
+    <message>
+        <source>White Noise Amount:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1352,23 +2073,23 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Move &amp;left</source>
-        <translation type="unfinished"></translation>
+        <translation>一つ左へ (&amp;l)</translation>
     </message>
     <message>
         <source>Move &amp;right</source>
-        <translation type="unfinished"></translation>
+        <translation>一つ右へ (&amp;r)</translation>
     </message>
     <message>
         <source>Rename &amp;channel</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル名を変更 (&amp;c)</translation>
     </message>
     <message>
         <source>R&amp;emove channel</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネルを削除 (&amp;e)</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>ヘルプ(&amp;H)</translation>
+        <source>Remove &amp;unused channels</source>
+        <translation>使用していないチャンネルを削除 (&amp;u)</translation>
     </message>
 </context>
 <context>
@@ -1394,22 +2115,27 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>FX-Mixer</source>
-        <translation type="unfinished"></translation>
+        <translation>エフェクトミキサー</translation>
     </message>
-</context>
-<context>
-    <name>FxMixerView::FxChannelView</name>
     <message>
         <source>FX Fader %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation type="unfinished">ミュート</translation>
+        <translation>ミュート</translation>
     </message>
     <message>
         <source>Mute this FX channel</source>
         <translation type="unfinished">このFXチャンネルをミュート</translation>
+    </message>
+    <message>
+        <source>Solo</source>
+        <translation>ソロ</translation>
+    </message>
+    <message>
+        <source>Solo FX channel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1417,6 +2143,68 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     <message>
         <source>Amount to send from channel %1 to channel %2</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GigInstrument</name>
+    <message>
+        <source>Bank</source>
+        <translation type="unfinished">バンク</translation>
+    </message>
+    <message>
+        <source>Patch</source>
+        <translation type="unfinished">パッチ</translation>
+    </message>
+    <message>
+        <source>Gain</source>
+        <translation>ゲイン</translation>
+    </message>
+</context>
+<context>
+    <name>GigInstrumentView</name>
+    <message>
+        <source>Open other GIG file</source>
+        <translation>他のGIGファイルを開く</translation>
+    </message>
+    <message>
+        <source>Click here to open another GIG file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the patch</source>
+        <translation>パッチを選択</translation>
+    </message>
+    <message>
+        <source>Click here to change which patch of the GIG file to use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change which instrument of the GIG file is being played</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Which GIG file is currently being used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Which patch of the GIG file is currently being used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gain</source>
+        <translation>ゲイン</translation>
+    </message>
+    <message>
+        <source>Factor to multiply samples by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open GIG file</source>
+        <translation>GIGファイルを開く</translation>
+    </message>
+    <message>
+        <source>GIG Files (*.gig)</source>
+        <translation>GIGファイル (*.gig)</translation>
     </message>
 </context>
 <context>
@@ -1463,7 +2251,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Random</source>
-        <translation type="unfinished"></translation>
+        <translation>ランダム</translation>
     </message>
     <message>
         <source>Free</source>
@@ -1471,11 +2259,11 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>ソート</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>同期</translation>
     </message>
     <message>
         <source>Down and up</source>
@@ -1557,271 +2345,271 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     <name>InstrumentFunctionNoteStacking</name>
     <message>
         <source>octave</source>
-        <translation type="unfinished"></translation>
+        <translation>オクターブ</translation>
     </message>
     <message>
         <source>Major</source>
-        <translation type="unfinished"></translation>
+        <translation>Major</translation>
     </message>
     <message>
         <source>Majb5</source>
-        <translation type="unfinished"></translation>
+        <translation>Majb5</translation>
     </message>
     <message>
         <source>minor</source>
-        <translation type="unfinished"></translation>
+        <translation>minor</translation>
     </message>
     <message>
         <source>minb5</source>
-        <translation type="unfinished"></translation>
+        <translation>minb5</translation>
     </message>
     <message>
         <source>sus2</source>
-        <translation type="unfinished"></translation>
+        <translation>sus2</translation>
     </message>
     <message>
         <source>sus4</source>
-        <translation type="unfinished"></translation>
+        <translation>sus4</translation>
     </message>
     <message>
         <source>aug</source>
-        <translation type="unfinished"></translation>
+        <translation>aug</translation>
     </message>
     <message>
         <source>augsus4</source>
-        <translation type="unfinished"></translation>
+        <translation>augsus4</translation>
     </message>
     <message>
         <source>tri</source>
-        <translation type="unfinished"></translation>
+        <translation>tri</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>6sus4</source>
-        <translation type="unfinished"></translation>
+        <translation>6sus4</translation>
     </message>
     <message>
         <source>6add9</source>
-        <translation type="unfinished"></translation>
+        <translation>6add9</translation>
     </message>
     <message>
         <source>m6</source>
-        <translation type="unfinished"></translation>
+        <translation>m6</translation>
     </message>
     <message>
         <source>m6add9</source>
-        <translation type="unfinished"></translation>
+        <translation>m6add9</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>7sus4</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus4</translation>
     </message>
     <message>
         <source>7#5</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5</translation>
     </message>
     <message>
         <source>7b5</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5</translation>
     </message>
     <message>
         <source>7#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7#9</translation>
     </message>
     <message>
         <source>7b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7b9</translation>
     </message>
     <message>
         <source>7#5#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5#9</translation>
     </message>
     <message>
         <source>7#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5b9</translation>
     </message>
     <message>
         <source>7b5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5b9</translation>
     </message>
     <message>
         <source>7add11</source>
-        <translation type="unfinished"></translation>
+        <translation>7add11</translation>
     </message>
     <message>
         <source>7add13</source>
-        <translation type="unfinished"></translation>
+        <translation>7add13</translation>
     </message>
     <message>
         <source>7#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7#11</translation>
     </message>
     <message>
         <source>Maj7</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj7</translation>
     </message>
     <message>
         <source>Maj7b5</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj7b5</translation>
     </message>
     <message>
         <source>Maj7#5</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj7#5</translation>
     </message>
     <message>
         <source>Maj7#11</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj7#11</translation>
     </message>
     <message>
         <source>Maj7add13</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj7add13</translation>
     </message>
     <message>
         <source>m7</source>
-        <translation type="unfinished"></translation>
+        <translation>m7</translation>
     </message>
     <message>
         <source>m7b5</source>
-        <translation type="unfinished"></translation>
+        <translation>m7b5</translation>
     </message>
     <message>
         <source>m7b9</source>
-        <translation type="unfinished"></translation>
+        <translation>m7b9</translation>
     </message>
     <message>
         <source>m7add11</source>
-        <translation type="unfinished"></translation>
+        <translation>m7add11</translation>
     </message>
     <message>
         <source>m7add13</source>
-        <translation type="unfinished"></translation>
+        <translation>m7add13</translation>
     </message>
     <message>
         <source>m-Maj7</source>
-        <translation type="unfinished"></translation>
+        <translation>m-Maj7</translation>
     </message>
     <message>
         <source>m-Maj7add11</source>
-        <translation type="unfinished"></translation>
+        <translation>m-Maj7add11</translation>
     </message>
     <message>
         <source>m-Maj7add13</source>
-        <translation type="unfinished"></translation>
+        <translation>m-Maj7add13</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>9sus4</source>
-        <translation type="unfinished"></translation>
+        <translation>9sus4</translation>
     </message>
     <message>
         <source>add9</source>
-        <translation type="unfinished"></translation>
+        <translation>add9</translation>
     </message>
     <message>
         <source>9#5</source>
-        <translation type="unfinished"></translation>
+        <translation>9#5</translation>
     </message>
     <message>
         <source>9b5</source>
-        <translation type="unfinished"></translation>
+        <translation>9b5</translation>
     </message>
     <message>
         <source>9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>9#11</translation>
     </message>
     <message>
         <source>9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>9b13</translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj9</translation>
     </message>
     <message>
         <source>Maj9sus4</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj9sus4</translation>
     </message>
     <message>
         <source>Maj9#5</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj9#5</translation>
     </message>
     <message>
         <source>Maj9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj9#11</translation>
     </message>
     <message>
         <source>m9</source>
-        <translation type="unfinished"></translation>
+        <translation>m9</translation>
     </message>
     <message>
         <source>madd9</source>
-        <translation type="unfinished"></translation>
+        <translation>madd9</translation>
     </message>
     <message>
         <source>m9b5</source>
-        <translation type="unfinished"></translation>
+        <translation>m9b5</translation>
     </message>
     <message>
         <source>m9-Maj7</source>
-        <translation type="unfinished"></translation>
+        <translation>m9-Maj7</translation>
     </message>
     <message>
         <source>11</source>
-        <translation type="unfinished"></translation>
+        <translation>11</translation>
     </message>
     <message>
         <source>11b9</source>
-        <translation type="unfinished"></translation>
+        <translation>11b9</translation>
     </message>
     <message>
         <source>Maj11</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj11</translation>
     </message>
     <message>
         <source>m11</source>
-        <translation type="unfinished"></translation>
+        <translation>m11</translation>
     </message>
     <message>
         <source>m-Maj11</source>
-        <translation type="unfinished"></translation>
+        <translation>m-Maj11</translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished"></translation>
+        <translation>13</translation>
     </message>
     <message>
         <source>13#9</source>
-        <translation type="unfinished"></translation>
+        <translation>13#9</translation>
     </message>
     <message>
         <source>13b9</source>
-        <translation type="unfinished"></translation>
+        <translation>13b9</translation>
     </message>
     <message>
         <source>13b5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>13b5b9</translation>
     </message>
     <message>
         <source>Maj13</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj13</translation>
     </message>
     <message>
         <source>m13</source>
-        <translation type="unfinished"></translation>
+        <translation>m13</translation>
     </message>
     <message>
         <source>m-Maj13</source>
-        <translation type="unfinished"></translation>
+        <translation>m-Maj13</translation>
     </message>
     <message>
         <source>Harmonic minor</source>
@@ -1921,7 +2709,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Minor</translation>
     </message>
     <message>
         <source>Chromatic</source>
@@ -1933,7 +2721,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
 </context>
 <context>
@@ -1948,7 +2736,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>octave(s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">オクターブ</translation>
     </message>
     <message>
         <source>Use this knob for setting the chord range in octaves. The selected chord will be played within specified number of octaves.</source>
@@ -1967,23 +2755,23 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     <name>InstrumentMidiIOView</name>
     <message>
         <source>ENABLE MIDI INPUT</source>
-        <translation type="unfinished">MIDIインプット有効化</translation>
+        <translation>MIDI入力を有効にする</translation>
     </message>
     <message>
         <source>CHANNEL</source>
-        <translation type="unfinished">チャンネル</translation>
+        <translation>チャンネル</translation>
     </message>
     <message>
         <source>VELOCITY</source>
-        <translation type="unfinished">ベロシティ</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <source>ENABLE MIDI OUTPUT</source>
-        <translation type="unfinished">MIDIアウトプット有効</translation>
+        <translation>MIDI出力を有効にする</translation>
     </message>
     <message>
         <source>PROGRAM</source>
-        <translation type="unfinished">プログラム</translation>
+        <translation>プログラム</translation>
     </message>
     <message>
         <source>MIDI devices to receive MIDI events from</source>
@@ -2011,14 +2799,25 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
 </context>
 <context>
+    <name>InstrumentMiscView</name>
+    <message>
+        <source>MASTER PITCH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enables the use of Master Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>InstrumentSoundShaping</name>
     <message>
         <source>VOLUME</source>
-        <translation type="unfinished">ボリウム</translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished">ボリウム</translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>CUTOFF</source>
@@ -2042,7 +2841,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Filter type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">フィルターの種類</translation>
     </message>
     <message>
         <source>Q/Resonance</source>
@@ -2108,12 +2907,40 @@ You can remove and move FX channels in the context menu, which is accessed by ri
         <source>Vocal Formant Filter</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>2x Moog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV LowPass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV BandPass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV HighPass</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SV Notch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fast Formant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tripole</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InstrumentSoundShapingView</name>
     <message>
         <source>TARGET</source>
-        <translation type="unfinished"></translation>
+        <translation>対象</translation>
     </message>
     <message>
         <source>These tabs contain envelopes. They&apos;re very important for modifying a sound, in that they are almost always necessary for substractive synthesis. For example if you have a volume envelope, you can set when the sound should have a specific volume. If you want to create some soft strings then your sound has to fade in and out very softly. This can be done by setting large attack and release times. It&apos;s the same for other envelope targets like panning, cutoff frequency for the used filter and so on. Just monkey around with it! You can really make cool sounds out of a saw-wave with just some envelopes...!</source>
@@ -2121,7 +2948,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>FILTER</source>
-        <translation type="unfinished"></translation>
+        <translation>フィルタ</translation>
     </message>
     <message>
         <source>Here you can select the built-in filter you want to use for this instrument-track. Filters are very important for changing the characteristics of a sound.</source>
@@ -2129,19 +2956,19 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <source>Use this knob for setting the cutoff frequency for the selected filter. The cutoff frequency specifies the frequency for cutting the signal by a filter. For example a lowpass-filter cuts all frequencies above the cutoff frequency. A highpass-filter cuts all frequencies below cutoff frequency, and so on...</source>
-        <translation type="unfinished">このノブで選択したフィルターのカットオフ周波数をセットします。カットオフ周波数はフィルターがシグナルをカットする周波数をきめます。たとえばローパスフィルターはカットオフ周波数以上のすべての周波数をカットします。ハイパスフィルターはカットオフ周波数以下のすべての周波数をカットします。たのフィルターでも同様です。</translation>
+        <translation type="unfinished">このノブで選択したフィルターのカットオフ周波数をセットします。カットオフ周波数はフィルターがシグナルをカットする周波数をきめます。たとえばローパスフィルターはカットオフ周波数以上のすべての周波数をカットします。ハイパスフィルターはカットオフ周波数以下のすべての周波数をカットします。他のフィルターでも同様です。</translation>
     </message>
     <message>
         <source>RESO</source>
-        <translation type="unfinished"></translation>
+        <translation>レゾナンス</translation>
     </message>
     <message>
         <source>Resonance:</source>
-        <translation type="unfinished"></translation>
+        <translation>レゾナンス:</translation>
     </message>
     <message>
         <source>Use this knob for setting Q/Resonance for the selected filter. Q/Resonance tells the filter how much it should amplify frequencies near Cutoff-frequency.</source>
@@ -2149,7 +2976,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>FREQ</source>
-        <translation type="unfinished"></translation>
+        <translation>周波数</translation>
     </message>
     <message>
         <source>cutoff frequency:</source>
@@ -2168,7 +2995,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished">ボリウム</translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Panning</source>
@@ -2198,83 +3025,87 @@ You can remove and move FX channels in the context menu, which is accessed by ri
         <source>Pitch range</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Master Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InstrumentTrackView</name>
     <message>
         <source>Volume</source>
-        <translation type="unfinished">ボリウム</translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>音量:</translation>
     </message>
     <message>
         <source>VOL</source>
-        <translation type="unfinished"></translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Panning</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング</translation>
     </message>
     <message>
         <source>Panning:</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング:</translation>
     </message>
     <message>
         <source>PAN</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング</translation>
     </message>
     <message>
         <source>MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>入力</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>出力</translation>
     </message>
 </context>
 <context>
     <name>InstrumentTrackWindow</name>
     <message>
         <source>GENERAL SETTINGS</source>
-        <translation type="unfinished"></translation>
+        <translation>一般設定</translation>
     </message>
     <message>
         <source>Instrument volume</source>
-        <translation type="unfinished"></translation>
+        <translation>楽器の音量</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>音量:</translation>
     </message>
     <message>
         <source>VOL</source>
-        <translation type="unfinished"></translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Panning</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング</translation>
     </message>
     <message>
         <source>Panning:</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング:</translation>
     </message>
     <message>
         <source>PAN</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>ピッチ</translation>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation type="unfinished"></translation>
+        <translation>ピッチ:</translation>
     </message>
     <message>
         <source>cents</source>
@@ -2282,7 +3113,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>PITCH</source>
-        <translation type="unfinished"></translation>
+        <translation>ピッチ</translation>
     </message>
     <message>
         <source>FX channel</source>
@@ -2302,19 +3133,19 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI</translation>
     </message>
     <message>
         <source>Save preset</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセットを保存</translation>
     </message>
     <message>
         <source>XML preset file (*.xpf)</source>
-        <translation type="unfinished"></translation>
+        <translation>XMLプリセットファイル (*.xpf)</translation>
     </message>
     <message>
         <source>PLUGIN</source>
-        <translation type="unfinished"></translation>
+        <translation>プラグイン</translation>
     </message>
     <message>
         <source>Pitch range (semitones)</source>
@@ -2332,6 +3163,29 @@ You can remove and move FX channels in the context menu, which is accessed by ri
         <source>Click here, if you want to save current instrument track settings in a preset file. Later you can load this preset by double-clicking it in the preset-browser.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MISC</source>
+        <translation>その他</translation>
+    </message>
+</context>
+<context>
+    <name>Knob</name>
+    <message>
+        <source>Set linear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set logarithmic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a new value between -96.0 dBV and 6.0 dBV:</source>
+        <translation>-96.0dBVと6.0dBVの間の新しい値を入力してください:</translation>
+    </message>
+    <message>
+        <source>Please enter a new value between %1 and %2:</source>
+        <translation>%1 と %2 の間の新しい値を入力してください:</translation>
+    </message>
 </context>
 <context>
     <name>LadspaControl</name>
@@ -2348,7 +3202,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Channel </source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル</translation>
     </message>
 </context>
 <context>
@@ -2363,25 +3217,21 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Sorry, no help available.</source>
-        <translation type="unfinished"></translation>
+        <translation>申し訳ありませんがヘルプはありません。</translation>
     </message>
 </context>
 <context>
     <name>LadspaEffect</name>
     <message>
-        <source>Effect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unknown LADSPA plugin %1 requested.</source>
-        <translation type="unfinished">不明なLADSPA プラグイン %1 </translation>
+        <translation>不明なLADSPAプラグイン %1 が要求されました。</translation>
     </message>
 </context>
 <context>
     <name>LcdSpinBox</name>
     <message>
         <source>Please enter a new value between %1 and %2:</source>
-        <translation type="unfinished">%1 と %2 の間の新しい値を入力してください:</translation>
+        <translation>%1 と %2 の間の新しい値を入力してください:</translation>
     </message>
 </context>
 <context>
@@ -2455,7 +3305,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Modulation amount:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">モジュレーション量:</translation>
     </message>
     <message>
         <source>Use this knob for setting modulation amount of the LFO. The bigger this value, the more the connected control (e.g. volume or cutoff-frequency) will be influenced by the LFO.</source>
@@ -2479,7 +3329,7 @@ You can remove and move FX channels in the context menu, which is accessed by ri
     </message>
     <message>
         <source>Click here for a sine-wave.</source>
-        <translation type="unfinished">クリックでサイン波</translation>
+        <translation type="unfinished">クリックでサイン波。</translation>
     </message>
     <message>
         <source>Click here for a triangle-wave.</source>
@@ -2494,12 +3344,8 @@ You can remove and move FX channels in the context menu, which is accessed by ri
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here for a a moog saw-wave.</source>
-        <translation type="unfinished">クリックで　moog のこぎり波</translation>
-    </message>
-    <message>
         <source>Click here for an exponential wave.</source>
-        <translation type="unfinished">クリックで指数波形</translation>
+        <translation type="unfinished">クリックで指数波形。</translation>
     </message>
     <message>
         <source>Click here for white-noise.</source>
@@ -2510,277 +3356,280 @@ You can remove and move FX channels in the context menu, which is accessed by ri
 Double click to pick a file.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click here for a moog saw-wave.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Working directory</source>
-        <translation type="unfinished">作業ディレクトリ</translation>
+        <translation>作業ディレクトリ</translation>
     </message>
     <message>
         <source>The LMMS working directory %1 does not exist. Create it now? You can change the directory later via Edit -&gt; Settings.</source>
-        <translation type="unfinished">LMMSの作業ディレクトリ %1 は存在しません。　今作成しますか？　編集-&gt;セッティング でこのディレクトリを変更できます</translation>
+        <translation>LMMSの作業ディレクトリ %1 は存在しません。作成しますか？編集-&gt;セッティング でこのディレクトリを変更できます。</translation>
     </message>
     <message>
         <source>Could not save config-file</source>
-        <translation type="unfinished">設定ファイルをセーブできません</translation>
+        <translation>設定ファイルを保存できません</translation>
     </message>
     <message>
         <source>Could not save configuration file %1. You&apos;re probably not permitted to write to this file.
 Please make sure you have write-access to the file and try again.</source>
-        <translation type="unfinished">設定ファイル %1 をセーブできません。　多分　ファイルへの書き込み許可がありません。
-このファイルの書き込み許可ががあることを確認して再度書き込んでください。</translation>
-    </message>
-    <message>
-        <source>&amp;Project</source>
-        <translation type="unfinished">プロジェクト(&amp;P)</translation>
+        <translation>設定ファイル %1 をセーブできません。おそらくファイルへの書き込み許可がありません。
+このファイルの書き込み許可があることを確認して再度書き込んでください。</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">新規(&amp;N)</translation>
+        <translation>新規(&amp;N)</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation type="unfinished">開く(&amp;O)</translation>
-    </message>
-    <message>
-        <source>Recently opened projects</source>
-        <translation type="unfinished">最近開いたプロジェクト</translation>
+        <translation>開く(&amp;O)...</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">セーブ(&amp;S)</translation>
+        <translation>保存(&amp;S)</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation type="unfinished">別名セーブ(&amp;A)</translation>
+        <translation>名前をつけて保存(&amp;A)...</translation>
     </message>
     <message>
         <source>Import...</source>
-        <translation type="unfinished">インポート</translation>
+        <translation>インポート....</translation>
     </message>
     <message>
         <source>E&amp;xport...</source>
-        <translation type="unfinished">エクスポート(&amp;x)</translation>
+        <translation>エクスポート(&amp;x)...</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished">終了(&amp;Q)</translation>
+        <translation>終了(&amp;Q)</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished">編集(&amp;E)</translation>
+        <translation>編集(&amp;E)</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">セッティング</translation>
+        <translation>設定</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation type="unfinished">ツール(&amp;T)</translation>
+        <translation>ツール(&amp;T)</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">ヘルプ(&amp;H)</translation>
-    </message>
-    <message>
-        <source>Online help</source>
-        <translation type="unfinished">オンラインヘルプ</translation>
+        <translation>ヘルプ(&amp;H)</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished">ヘルプ</translation>
+        <translation>ヘルプ</translation>
     </message>
     <message>
         <source>What&apos;s this?</source>
-        <translation type="unfinished">これは何？</translation>
+        <translation>これは何？</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>LMMSについて</translation>
     </message>
     <message>
         <source>Create new project</source>
-        <translation type="unfinished">新規プロジェクト作成</translation>
+        <translation>新規プロジェクト作成</translation>
     </message>
     <message>
         <source>Create new project from template</source>
-        <translation type="unfinished">テンプレートから新規プロジェクト作成</translation>
+        <translation>テンプレートから新規プロジェクト作成</translation>
     </message>
     <message>
         <source>Open existing project</source>
-        <translation type="unfinished">既存プロジェクトを開く</translation>
+        <translation>既存プロジェクトを開く</translation>
     </message>
     <message>
-        <source>Recently opened project</source>
-        <translation type="unfinished">最近開いたプロジェクト</translation>
+        <source>Recently opened projects</source>
+        <translation>最近開いたプロジェクト</translation>
     </message>
     <message>
         <source>Save current project</source>
-        <translation type="unfinished">現在のプロジェクトをセーブ</translation>
+        <translation>現在のプロジェクトを保存</translation>
     </message>
     <message>
         <source>Export current project</source>
-        <translation type="unfinished">現在のプロジェクトをエクスポート</translation>
+        <translation>現在のプロジェクトをエクスポート</translation>
     </message>
     <message>
-        <source>Show/hide Song-Editor</source>
-        <translation type="unfinished">ソングエディタ 表示/非表示</translation>
+        <source>Song Editor</source>
+        <translation>ソングエディタ</translation>
     </message>
     <message>
         <source>By pressing this button, you can show or hide the Song-Editor. With the help of the Song-Editor you can edit song-playlist and specify when which track should be played. You can also insert and move samples (e.g. rap samples) directly into the playlist.</source>
-        <translation type="unfinished">このボタンを押すと。ソングエディタ表示/非表示にできます。ソングエディタの利用によってプレイリストの編集とどのトラックをいつ演奏するかを編集できます。プレイリストの中で直接サンプルを挿入したり移動（rap samples)したりすることもできます。</translation>
+        <translation>このボタンを押すとソングエディタの表示/非表示を切り替えます。ソングエディタの利用によってプレイリストとどのトラックをいつ演奏するかを編集することができます。プレイリストの中で直接サンプルを挿入したり移動（例：ラップサンプル)したりすることもできます。</translation>
     </message>
     <message>
-        <source>Show/hide Beat+Bassline Editor</source>
-        <translation type="unfinished">ビート+
-ベースラインエディタ　表示/非表示</translation>
+        <source>Beat+Bassline Editor</source>
+        <translation>パターンエディタ</translation>
     </message>
     <message>
         <source>By pressing this button, you can show or hide the Beat+Bassline Editor. The Beat+Bassline Editor is needed for creating beats, and for opening, adding, and removing channels, and for cutting, copying and pasting beat and bassline-patterns, and for other things like that.</source>
-        <translation type="unfinished">このボタンで、ビート＋ベースラインエディタの表示/非表示を切り替えます。ビート＋ベースラインエディタで、ビートをつくったり、チャンネルを開いたり足したり除去したり、ベースラインパターンをカット・コピー・ペーストしたり、いろいろできます。</translation>
+        <translation>このボタンでを押すとビート＋ベースラインエディタの表示/非表示を切り替えます。ビート＋ベースラインエディタで、ビートをつくったり、チャンネルを開いたり追加したり削除したり、ベースラインパターンを切り取り・コピー・貼り付けたり色々できます。</translation>
     </message>
     <message>
-        <source>Show/hide Piano-Roll</source>
-        <translation type="unfinished">ピアノロール 表示/非表示</translation>
+        <source>Piano Roll</source>
+        <translation>ピアノロール</translation>
     </message>
     <message>
         <source>Click here to show or hide the Piano-Roll. With the help of the Piano-Roll you can edit melodies in an easy way.</source>
-        <translation type="unfinished">ここをクリックして　ピアノロールの表示/非表示を切り替えます。　ピアノロールを使うとメロディを簡単に編集できます。</translation>
+        <translation>ここをクリックしてピアノロールの表示/非表示を切り替えます。ピアノロールを使うとメロディを簡単に編集できます。</translation>
     </message>
     <message>
-        <source>Show/hide Automation Editor</source>
-        <translation type="unfinished">オートメーションエディタ　表示/非表示</translation>
+        <source>Automation Editor</source>
+        <translation>オートメーションエディタ</translation>
     </message>
     <message>
         <source>Click here to show or hide the Automation Editor. With the help of the Automation Editor you can edit dynamic values in an easy way.</source>
-        <translation type="unfinished">ここをクリックして　オートメーションエディタの表示/非表示を切り替えます。オートメーションエディタでダイナミックな値を簡単に編集できます。</translation>
+        <translation>ここをクリックしてオートメーションエディタの表示/非表示を切り替えます。オートメーションエディタで動的な値を簡単に編集できます。</translation>
     </message>
     <message>
-        <source>Show/hide FX Mixer</source>
-        <translation type="unfinished">エフェクトミキサー　表示/非表示</translation>
+        <source>FX Mixer</source>
+        <translation>エフェクトミキサー</translation>
     </message>
     <message>
         <source>Click here to show or hide the FX Mixer. The FX Mixer is a very powerful tool for managing effects for your song. You can insert effects into different effect-channels.</source>
-        <translation type="unfinished">ここをクリックして　エフェクトミキサーの表示/非表示を切り替えます。エフェクトミキサーは曲のエフェクトを管理するパワフルなツールです。エフェクトを異なったエフェクトチャンネルに挿入することができます。</translation>
+        <translation>ここをクリックしてエフェクトミキサーの表示/非表示を切り替えます。エフェクトミキサーは曲のエフェクトを管理する強力なツールです。エフェクトを異なったエフェクトチャンネルに挿入することができます。</translation>
     </message>
     <message>
-        <source>Show/hide project notes</source>
-        <translation type="unfinished">プロジェクトノート　表示/非表示</translation>
+        <source>Project Notes</source>
+        <translation>プロジェクトノート</translation>
     </message>
     <message>
         <source>Click here to show or hide the project notes window. In this window you can put down your project notes.</source>
-        <translation type="unfinished">ここをクリックして　ノートウインドウの表示非表示を切り替えます。ノートウインドウにプロジェクトノートを記入します。</translation>
+        <translation>ここをクリックしてノートウインドウの表示/非表示を切り替えます。ノートウインドウにプロジェクトノートを記入します。</translation>
     </message>
     <message>
-        <source>Show/hide controller rack</source>
-        <translation type="unfinished">コントローラトラック　表示/非表示</translation>
+        <source>Controller Rack</source>
+        <translation>コントローラトラック</translation>
     </message>
     <message>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>無題</translation>
     </message>
     <message>
         <source>LMMS %1</source>
-        <translation type="unfinished"></translation>
+        <translation>LMMS %1</translation>
     </message>
     <message>
         <source>Project not saved</source>
-        <translation type="unfinished">プロジェクトは未セーブです</translation>
+        <translation>プロジェクトは保存されていません</translation>
     </message>
     <message>
         <source>The current project was modified since last saving. Do you want to save it now?</source>
-        <translation type="unfinished">現在のプロジェクトは最後セーブしてから変更されています。今セーブしますか？</translation>
-    </message>
-    <message>
-        <source>Open project</source>
-        <translation type="unfinished">プロジェクトを開く</translation>
-    </message>
-    <message>
-        <source>Save project</source>
-        <translation type="unfinished">プロジェクトを保存</translation>
+        <translation>現在のプロジェクトは最後に保存してから変更されています。保存しますか？</translation>
     </message>
     <message>
         <source>Help not available</source>
-        <translation type="unfinished">ヘルプはありません</translation>
+        <translation>ヘルプはありません</translation>
     </message>
     <message>
         <source>Currently there&apos;s no help available in LMMS.
 Please visit http://lmms.sf.net/wiki for documentation on LMMS.</source>
-        <translation type="unfinished">今のところ LMMSの中にヘルプはありません。
- http://lmms.sf.net/wiki に　LMMSのドキュメントがあります。</translation>
-    </message>
-    <message>
-        <source>My projects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My samples</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My presets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My computer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Root directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save as new &amp;version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>E&amp;xport tracks...</source>
-        <translation type="unfinished"></translation>
+        <translation>今のところ LMMSののヘルプはありません。
+ http://lmms.sf.net/wiki にLMMSのドキュメントがあります。</translation>
     </message>
     <message>
         <source>LMMS (*.mmp *.mmpz)</source>
-        <translation type="unfinished"></translation>
+        <translation>LMMS (*.mmp *.mmpz)</translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Project recovery</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>It looks like the last session did not end properly. Do you want to recover the project of this session?</source>
-        <translation type="unfinished"></translation>
+        <translation>バージョン %1</translation>
     </message>
     <message>
         <source>Configuration file</source>
-        <translation type="unfinished"></translation>
+        <translation>設定ファイル</translation>
     </message>
     <message>
         <source>Error while parsing configuration file at line %1:%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>設定ファイルの%1行目%2列目でパースエラー: %3</translation>
     </message>
     <message>
         <source>Volumes</source>
-        <translation type="unfinished"></translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>元に戻す</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>やり直し</translation>
     </message>
     <message>
-        <source>LMMS Project (*.mmpz *.mmp);;LMMS Project Template (*.mpt)</source>
-        <translation type="unfinished"></translation>
+        <source>LMMS Project </source>
+        <translation>LMMSプロジェクト</translation>
+    </message>
+    <message>
+        <source>LMMS Project Template </source>
+        <translation>LMMSプロジェクトテンプレート</translation>
+    </message>
+    <message>
+        <source>My Projects</source>
+        <translation>マイプロジェクト</translation>
+    </message>
+    <message>
+        <source>My Samples</source>
+        <translation>マイサンプル</translation>
+    </message>
+    <message>
+        <source>My Presets</source>
+        <translation>マイプリセット</translation>
+    </message>
+    <message>
+        <source>My Home</source>
+        <translation>マイホーム</translation>
+    </message>
+    <message>
+        <source>My Computer</source>
+        <translation>マイコンピュータ</translation>
+    </message>
+    <message>
+        <source>Root Directory</source>
+        <translation>ルートディレクトリ</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>ファイル (&amp;F)</translation>
+    </message>
+    <message>
+        <source>&amp;Recently Opened Projects</source>
+        <translation>最近開いたプロジェクト (&amp;R)</translation>
+    </message>
+    <message>
+        <source>Save as New &amp;Version</source>
+        <translation>新規保存 (&amp;V)</translation>
+    </message>
+    <message>
+        <source>E&amp;xport Tracks...</source>
+        <translation>トラックをエクスポート (&amp;x)...</translation>
+    </message>
+    <message>
+        <source>Online Help</source>
+        <translation>オンラインヘルプ</translation>
+    </message>
+    <message>
+        <source>What&apos;s This?</source>
+        <translation>これは何？</translation>
+    </message>
+    <message>
+        <source>Open Project</source>
+        <translation>プロジェクトを開く</translation>
+    </message>
+    <message>
+        <source>Save Project</source>
+        <translation>プロジェクトを保存</translation>
     </message>
 </context>
 <context>
@@ -2795,7 +3644,7 @@ Please visit http://lmms.sf.net/wiki for documentation on LMMS.</source>
     </message>
     <message>
         <source>TIME SIG</source>
-        <translation type="unfinished"></translation>
+        <translation>拍子</translation>
     </message>
 </context>
 <context>
@@ -2813,36 +3662,36 @@ Please visit http://lmms.sf.net/wiki for documentation on LMMS.</source>
     <name>MidiAlsaRaw::setupWidget</name>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished">デバイス</translation>
+        <translation>デバイス</translation>
     </message>
 </context>
 <context>
-    <name>MidiAlsaSeq::setupWidget</name>
+    <name>MidiAlsaSeq</name>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished">デバイス</translation>
+        <translation>デバイス</translation>
     </message>
 </context>
 <context>
     <name>MidiController</name>
     <message>
         <source>MIDI Controller</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDIコントローラ</translation>
     </message>
     <message>
         <source>unnamed_midi_controller</source>
-        <translation type="unfinished">名称未設定_MIDI_コントローラー</translation>
+        <translation>名称未設定_MIDI_コントローラ</translation>
     </message>
 </context>
 <context>
     <name>MidiImport</name>
     <message>
         <source>Setup incomplete</source>
-        <translation type="unfinished">セットアップの未完了</translation>
+        <translation>セットアップの未完了</translation>
     </message>
     <message>
         <source>You do not have set up a default soundfont in the settings dialog (Edit-&gt;Settings). Therefore no sound will be played back after importing this MIDI file. You should download a General MIDI soundfont, specify it in settings dialog and try again.</source>
-        <translation type="unfinished">設定ダイアログ （編集->設定）でデフォルトのサウンドフォントを設定していません。そのため、MIDIファイルをインポート後に音声が再生されません。一般的なMIDI サウンドフォントダウンロードして設定ダイアログにて設定を行い、その後で再試行してください。</translation>
+        <translation>設定ダイアログ （編集-&gt;設定) でデフォルトのサウンドフォントを設定していません。そのため、MIDIファイルをインポート後に音声が再生されません。一般的なMIDIサウンドフォントをダウンロードして設定ダイアログにて指定し、その後で再試行してください。</translation>
     </message>
     <message>
         <source>You did not compile LMMS with support for SoundFont2 player, which is used to add default sound to imported MIDI files. Therefore no sound will be played back after importing this MIDI file.</source>
@@ -2853,46 +3702,46 @@ Please visit http://lmms.sf.net/wiki for documentation on LMMS.</source>
     <name>MidiOss::setupWidget</name>
     <message>
         <source>DEVICE</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイス</translation>
     </message>
 </context>
 <context>
     <name>MidiPort</name>
     <message>
         <source>Input channel</source>
-        <translation type="unfinished">入力チャンネル</translation>
+        <translation>入力チャンネル</translation>
     </message>
     <message>
         <source>Output channel</source>
-        <translation type="unfinished">出力チャンネル</translation>
+        <translation>出力チャンネル</translation>
     </message>
     <message>
         <source>Input controller</source>
-        <translation type="unfinished">入力コントローラー</translation>
+        <translation>入力コントローラ</translation>
     </message>
     <message>
         <source>Output controller</source>
-        <translation type="unfinished">出力コントローラー</translation>
+        <translation>出力コントローラ</translation>
     </message>
     <message>
         <source>Fixed input velocity</source>
-        <translation type="unfinished">固定入力ベロシティ</translation>
+        <translation>固定入力速度</translation>
     </message>
     <message>
         <source>Fixed output velocity</source>
-        <translation type="unfinished">固定出力ベロシティ</translation>
+        <translation>固定出力速度</translation>
     </message>
     <message>
         <source>Output MIDI program</source>
-        <translation type="unfinished">出力 MIDI プログラム</translation>
+        <translation>出力MIDIプログラム</translation>
     </message>
     <message>
         <source>Receive MIDI-events</source>
-        <translation type="unfinished">MIDI イベントを受信</translation>
+        <translation>MIDIイベントを受信</translation>
     </message>
     <message>
         <source>Send MIDI-events</source>
-        <translation type="unfinished">MIDI イベントを送信</translation>
+        <translation>MIDIイベントを送信</translation>
     </message>
     <message>
         <source>Fixed output note</source>
@@ -2900,7 +3749,7 @@ Please visit http://lmms.sf.net/wiki for documentation on LMMS.</source>
     </message>
     <message>
         <source>Base velocity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">基本速度</translation>
     </message>
 </context>
 <context>
@@ -3285,6 +4134,98 @@ Please visit http://lmms.sf.net/wiki for documentation on LMMS.</source>
         <source>Sub3-LFO2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sine wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bandlimited Triangle wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bandlimited Saw wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bandlimited Ramp wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bandlimited Square wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bandlimited Moog saw wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soft square wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Absolute sine wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exponential wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>White noise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Digital Triangle wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Digital Saw wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Digital Ramp wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Digital Square wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Digital Moog saw wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Triangle wave</source>
+        <translation>三角波</translation>
+    </message>
+    <message>
+        <source>Saw wave</source>
+        <translation>のこぎり波</translation>
+    </message>
+    <message>
+        <source>Ramp wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Square wave</source>
+        <translation>矩形波</translation>
+    </message>
+    <message>
+        <source>Moog saw wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abs. sine wave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Random</source>
+        <translation>ランダム</translation>
+    </message>
+    <message>
+        <source>Random smooth</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MonstroView</name>
@@ -3458,6 +4399,41 @@ PM means phase modulation: Oscillator 3&apos;s phase is modulated by oscillator 
     </message>
 </context>
 <context>
+    <name>MultitapEchoControlDialog</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Step length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dry Gain:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lowpass stages:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap inputs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Swap left and right input channel for reflections</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NesInstrument</name>
     <message>
         <source>Channel 1 Coarse detune</source>
@@ -3533,7 +4509,7 @@ PM means phase modulation: Oscillator 3&apos;s phase is modulated by oscillator 
     </message>
     <message>
         <source>Master volume</source>
-        <translation type="unfinished">マスターボリウム</translation>
+        <translation>主音量</translation>
     </message>
     <message>
         <source>Vibrato</source>
@@ -3591,7 +4567,7 @@ PM means phase modulation: Oscillator 3&apos;s phase is modulated by oscillator 
     <name>PatmanView</name>
     <message>
         <source>Open other patch</source>
-        <translation type="unfinished">ほかのパッチを開く</translation>
+        <translation>他のパッチを開く</translation>
     </message>
     <message>
         <source>Click here to open another patch-file. Loop and Tune settings are not reset.</source>
@@ -3623,15 +4599,15 @@ PM means phase modulation: Oscillator 3&apos;s phase is modulated by oscillator 
     </message>
     <message>
         <source>No file selected</source>
-        <translation type="unfinished">ファイルが選択されてません</translation>
+        <translation>ファイルが選択されてません</translation>
     </message>
     <message>
         <source>Open patch file</source>
-        <translation type="unfinished">パッチファイルを開く</translation>
+        <translation>パッチファイルを開く</translation>
     </message>
     <message>
         <source>Patch-Files (*.pat)</source>
-        <translation type="unfinished">パッチファイル (*.pat)</translation>
+        <translation>パッチファイル (*.pat)</translation>
     </message>
 </context>
 <context>
@@ -3639,32 +4615,32 @@ PM means phase modulation: Oscillator 3&apos;s phase is modulated by oscillator 
     <message>
         <source>double-click to open this pattern in piano-roll
 use mouse wheel to set volume of a step</source>
-        <translation type="unfinished">ダプルクリックでこのパターンをピアノロールに開きます。
-マウスホイールでステップの音量をセットします。</translation>
+        <translation>ダプルクリックでこのパターンをピアノロールで開きます
+マウスホイールでステップの音量をセットします</translation>
     </message>
     <message>
         <source>Open in piano-roll</source>
-        <translation type="unfinished">ピアノロールを開く</translation>
+        <translation>ピアノロールを開く</translation>
     </message>
     <message>
         <source>Clear all notes</source>
-        <translation type="unfinished">すべてのノートをクリア</translation>
+        <translation>すべてのノートをクリア</translation>
     </message>
     <message>
         <source>Reset name</source>
-        <translation type="unfinished">名前をリセット</translation>
+        <translation>名前をリセット</translation>
     </message>
     <message>
         <source>Change name</source>
-        <translation type="unfinished">名前変更</translation>
+        <translation>名前を変更</translation>
     </message>
     <message>
         <source>Add steps</source>
-        <translation type="unfinished">ステップ追加</translation>
+        <translation>ステップを追加</translation>
     </message>
     <message>
         <source>Remove steps</source>
-        <translation type="unfinished">ステップ除去</translation>
+        <translation>ステップを削除</translation>
     </message>
 </context>
 <context>
@@ -3690,7 +4666,7 @@ use mouse wheel to set volume of a step</source>
     </message>
     <message>
         <source>LFO Controller</source>
-        <translation type="unfinished"></translation>
+        <translation>LFOコントローラ</translation>
     </message>
 </context>
 <context>
@@ -3705,15 +4681,15 @@ use mouse wheel to set volume of a step</source>
     </message>
     <message>
         <source>Modulation amount:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">モジュレーション量:</translation>
     </message>
     <message>
         <source>Attack:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">アタック:</translation>
     </message>
     <message>
         <source>Release:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">リリース:</translation>
     </message>
     <message>
         <source>AMNT</source>
@@ -3735,6 +4711,14 @@ use mouse wheel to set volume of a step</source>
         <source>DCAY</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>TRES</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Treshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PeakControllerEffectControls</name>
@@ -3752,11 +4736,11 @@ use mouse wheel to set volume of a step</source>
     </message>
     <message>
         <source>Attack</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">アタック</translation>
     </message>
     <message>
         <source>Release</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">リリース</translation>
     </message>
     <message>
         <source>Abs Value</source>
@@ -3766,92 +4750,28 @@ use mouse wheel to set volume of a step</source>
         <source>Amount Multiplicator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Treshold</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PianoRoll</name>
     <message>
-        <source>Play/pause current pattern (Space)</source>
-        <translation>現在のパターンの再生/一時停止 (Space)</translation>
-    </message>
-    <message>
-        <source>Stop playing of current pattern (Space)</source>
-        <translation>現在のパターンの再生を停止 (Space)</translation>
-    </message>
-    <message>
-        <source>Cut selected notes (Ctrl+X)</source>
-        <translation>選択したノートの切り取り (Ctrl+X)</translation>
-    </message>
-    <message>
-        <source>Copy selected notes (Ctrl+C)</source>
-        <translation>選択したノートのコピー (Ctrl+C)</translation>
-    </message>
-    <message>
-        <source>Paste notes from clipboard (Ctrl+V)</source>
-        <translation>クリップボードからノートを貼り付け (Ctrl+V)</translation>
-    </message>
-    <message>
         <source>Piano-Roll - no pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>ピアノロール - パターン無し</translation>
     </message>
     <message>
         <source>Piano-Roll - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ピアノロール - %1</translation>
     </message>
     <message>
         <source>Please open a pattern by double-clicking on it!</source>
         <translation>パターン上でダブルクリックして、パターンを開いてください!</translation>
     </message>
     <message>
-        <source>Record notes from MIDI-device/channel-piano</source>
-        <translation type="unfinished">MIDI-デバイス/チャンネル-ピアノからノートを録音</translation>
-    </message>
-    <message>
-        <source>Record notes from MIDI-device/channel-piano while playing song or BB track</source>
-        <translation type="unfinished">曲やBBトラックを再生中に MIDI-デバイス/チャンネル-ピアノからノートを録音</translation>
-    </message>
-    <message>
-        <source>Draw mode (Shift+D)</source>
-        <translation>ドローモード (shift+D)</translation>
-    </message>
-    <message>
-        <source>Erase mode (Shift+E)</source>
-        <translation>消去モード (shift+E)</translation>
-    </message>
-    <message>
-        <source>Select mode (Shift+S)</source>
-        <translation>選択モード (Shift+S)</translation>
-    </message>
-    <message>
         <source>Last note</source>
         <translation>最後に使用したノート</translation>
-    </message>
-    <message>
-        <source>Click here to play the current pattern. This is useful while editing it. The pattern is automatically looped when its end is reached.</source>
-        <translation type="unfinished">ここをクリックすると現在のパターンを再生します。これはパターン編集する際に便利です。パターンの最後で自動的にループします。</translation>
-    </message>
-    <message>
-        <source>Click here to record notes from a MIDI-device or the virtual test-piano of the according channel-window to the current pattern. When recording all notes you play will be written to this pattern and you can play and edit them afterwards.</source>
-        <translation type="unfinished">ここをクリックすると、MIDIデバイスまたは対応するチャンネルウィンドウのバーチャルテストピアノからノートを現在のパターンに録音します。録音の際、再生したすべてのノートは現在のパターンに書き込まれます。書き込まれたノートは後から再生/編集できます。</translation>
-    </message>
-    <message>
-        <source>Click here to record notes from a MIDI-device or the virtual test-piano of the according channel-window to the current pattern. When recording all notes you play will be written to this pattern and you will hear the song or BB track in the background.</source>
-        <translation type="unfinished">ここをクリックすると　MIDIデバイスまたは対応するチャンネルウィンドウのバーチャルテストピアノから、ノートを現在のパターンに録音します。録音の際、再生したすべてのノートは現在のパターンに書き込まれます。曲またはBBトラックがバックグラウンドで演奏されます。</translation>
-    </message>
-    <message>
-        <source>Click here to stop playback of current pattern.</source>
-        <translation type="unfinished">ここをクリックすると現在のパターンの録音再生を停止します。</translation>
-    </message>
-    <message>
-        <source>Click here and the selected notes will be cut into the clipboard. You can paste them anywhere in any pattern by clicking on the paste button.</source>
-        <translation type="unfinished">ここをクリックすると選択しているノートをクリップボードへ切り取ります。貼り付けボタンを押すと任意のパターンの任意の場所に切り取ったノートを貼り付けることができます。</translation>
-    </message>
-    <message>
-        <source>Click here and the selected notes will be copied into the clipboard. You can paste them anywhere in any pattern by clicking on the paste button.</source>
-        <translation type="unfinished">ここをクリックすると選択しているノートをクリップボードへコピーします。貼り付けボタンを押すと任意のパターンの任意の場所にコピーしたノートを貼り付けることができます。</translation>
-    </message>
-    <message>
-        <source>Click here and the notes from the clipboard will be pasted at the first visible measure.</source>
-        <translation type="unfinished">ここをクリックするとクリップボード内のノートが最初に表示されている小節に貼り付けられます。</translation>
     </message>
     <message>
         <source>Note lock</source>
@@ -3864,26 +4784,6 @@ use mouse wheel to set volume of a step</source>
     <message>
         <source>Note Panning</source>
         <translation type="unfinished">ノートのパンニング</translation>
-    </message>
-    <message>
-        <source>Detune mode (Shift+T)</source>
-        <translation type="unfinished">ディチューン モード (Shift+T)</translation>
-    </message>
-    <message>
-        <source>Click here and draw mode will be activated. In this mode you can add, resize and move notes. This is the default mode which is used most of the time. You can also press &apos;Shift+D&apos; on your keyboard to activate this mode. In this mode, hold Ctrl to temporarily go into select mode.</source>
-        <translation type="unfinished">ここをクリックするとドローモードになります。ドローモードでは個々のノートを追加・リサイズ・移動することができます。普段このモードをデフォルトで使用します。'Shift+D' を押してもこのモードになります。このモードではCtrlを長押しすることで一時的に選択モードにすることができます。</translation>
-    </message>
-    <message>
-        <source>Click here and erase mode will be activated. In this mode you can erase notes. You can also press &apos;Shift+E&apos; on your keyboard to activate this mode.</source>
-        <translation type="unfinished">ここをクリックすると消去モードになります。消去モードでは個々のノートを消去することができます。'Shift+E' を押してもこのモードにすることができます。</translation>
-    </message>
-    <message>
-        <source>Click here and select mode will be activated. In this mode you can select notes. Alternatively, you can hold Ctrl in draw mode to temporarily use select mode.</source>
-        <translation type="unfinished">ここをクリックすると選択モードになります。選択モードでは個々のノートを選択することができます。また、ドローモード中にCtrlを長押しすることで一時的に選択モードを使用することができます。</translation>
-    </message>
-    <message>
-        <source>Click here and detune mode will be activated. In this mode you can click a note to open its automation detuning. You can utilize this to slide notes from one to another. You can also press &apos;Shift+T&apos; on your keyboard to activate this mode.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mark/unmark current semitone</source>
@@ -3910,6 +4810,117 @@ use mouse wheel to set volume of a step</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Volume: %1%</source>
+        <translation>音量: %1%</translation>
+    </message>
+    <message>
+        <source>Panning: %1% left</source>
+        <translation>パニング: %1%左</translation>
+    </message>
+    <message>
+        <source>Panning: %1% right</source>
+        <translation>パニング: %1%右</translation>
+    </message>
+    <message>
+        <source>Panning: center</source>
+        <translation>パニング: 中央</translation>
+    </message>
+    <message>
+        <source>Please enter a new value between %1 and %2:</source>
+        <translation>%1 と %2 の間の新しい値を入力してください:</translation>
+    </message>
+</context>
+<context>
+    <name>PianoRollWindow</name>
+    <message>
+        <source>Play/pause current pattern (Space)</source>
+        <translation type="unfinished">現在のパターンの再生/一時停止 (Space)</translation>
+    </message>
+    <message>
+        <source>Record notes from MIDI-device/channel-piano</source>
+        <translation type="unfinished">MIDI-デバイス/チャンネル-ピアノからノートを録音</translation>
+    </message>
+    <message>
+        <source>Record notes from MIDI-device/channel-piano while playing song or BB track</source>
+        <translation type="unfinished">曲やBBトラックを再生中に MIDI-デバイス/チャンネル-ピアノからノートを録音</translation>
+    </message>
+    <message>
+        <source>Stop playing of current pattern (Space)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to play the current pattern. This is useful while editing it. The pattern is automatically looped when its end is reached.</source>
+        <translation type="unfinished">ここをクリックすると現在のパターンを再生します。これはパターン編集する際に便利です。パターンの最後で自動的にループします。</translation>
+    </message>
+    <message>
+        <source>Click here to record notes from a MIDI-device or the virtual test-piano of the according channel-window to the current pattern. When recording all notes you play will be written to this pattern and you can play and edit them afterwards.</source>
+        <translation type="unfinished">ここをクリックすると、MIDIデバイスまたは対応するチャンネルウィンドウのバーチャルテストピアノからノートを現在のパターンに録音します。録音の際、再生したすべてのノートは現在のパターンに書き込まれます。書き込まれたノートは後から再生/編集できます。</translation>
+    </message>
+    <message>
+        <source>Click here to record notes from a MIDI-device or the virtual test-piano of the according channel-window to the current pattern. When recording all notes you play will be written to this pattern and you will hear the song or BB track in the background.</source>
+        <translation type="unfinished">ここをクリックすると　MIDIデバイスまたは対応するチャンネルウィンドウのバーチャルテストピアノから、ノートを現在のパターンに録音します。録音の際、再生したすべてのノートは現在のパターンに書き込まれます。曲またはBBトラックがバックグラウンドで演奏されます。</translation>
+    </message>
+    <message>
+        <source>Click here to stop playback of current pattern.</source>
+        <translation type="unfinished">ここをクリックすると現在のパターンの録音再生を停止します。</translation>
+    </message>
+    <message>
+        <source>Draw mode (Shift+D)</source>
+        <translation>描画モード (shift+D)</translation>
+    </message>
+    <message>
+        <source>Erase mode (Shift+E)</source>
+        <translation>消去モード (shift+E)</translation>
+    </message>
+    <message>
+        <source>Select mode (Shift+S)</source>
+        <translation>選択モード (Shift+S)</translation>
+    </message>
+    <message>
+        <source>Detune mode (Shift+T)</source>
+        <translation type="unfinished">ディチューン モード (Shift+T)</translation>
+    </message>
+    <message>
+        <source>Click here and draw mode will be activated. In this mode you can add, resize and move notes. This is the default mode which is used most of the time. You can also press &apos;Shift+D&apos; on your keyboard to activate this mode. In this mode, hold Ctrl to temporarily go into select mode.</source>
+        <translation type="unfinished">ここをクリックすると描画モードになります。描画モードでは個々のノートを追加・リサイズ・移動することができます。普段このモードをデフォルトで使用します。&apos;Shift+D&apos; を押してもこのモードになります。このモードではCtrlを長押しすることで一時的に選択モードにすることができます。</translation>
+    </message>
+    <message>
+        <source>Click here and erase mode will be activated. In this mode you can erase notes. You can also press &apos;Shift+E&apos; on your keyboard to activate this mode.</source>
+        <translation type="unfinished">ここをクリックすると消去モードになります。消去モードでは個々のノートを消去することができます。&apos;Shift+E&apos; を押してもこのモードにすることができます。</translation>
+    </message>
+    <message>
+        <source>Click here and select mode will be activated. In this mode you can select notes. Alternatively, you can hold Ctrl in draw mode to temporarily use select mode.</source>
+        <translation type="unfinished">ここをクリックすると選択モードになります。選択モードでは個々のノートを選択することができます。また、描画モード中にCtrlを長押しすることで一時的に選択モードを使用することができます。</translation>
+    </message>
+    <message>
+        <source>Click here and detune mode will be activated. In this mode you can click a note to open its automation detuning. You can utilize this to slide notes from one to another. You can also press &apos;Shift+T&apos; on your keyboard to activate this mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut selected notes (Ctrl+X)</source>
+        <translation type="unfinished">選択したノートの切り取り (Ctrl+X)</translation>
+    </message>
+    <message>
+        <source>Copy selected notes (Ctrl+C)</source>
+        <translation type="unfinished">選択したノートのコピー (Ctrl+C)</translation>
+    </message>
+    <message>
+        <source>Paste notes from clipboard (Ctrl+V)</source>
+        <translation type="unfinished">クリップボードからノートを貼り付け (Ctrl+V)</translation>
+    </message>
+    <message>
+        <source>Click here and the selected notes will be cut into the clipboard. You can paste them anywhere in any pattern by clicking on the paste button.</source>
+        <translation type="unfinished">ここをクリックすると選択しているノートをクリップボードへ切り取ります。貼り付けボタンを押すと任意のパターンの任意の場所に切り取ったノートを貼り付けることができます。</translation>
+    </message>
+    <message>
+        <source>Click here and the selected notes will be copied into the clipboard. You can paste them anywhere in any pattern by clicking on the paste button.</source>
+        <translation type="unfinished">ここをクリックすると選択しているノートをクリップボードへコピーします。貼り付けボタンを押すと任意のパターンの任意の場所にコピーしたノートを貼り付けることができます。</translation>
+    </message>
+    <message>
+        <source>Click here and the notes from the clipboard will be pasted at the first visible measure.</source>
+        <translation type="unfinished">ここをクリックするとクリップボード内のノートが最初に表示されている小節に貼り付けられます。</translation>
+    </message>
+    <message>
         <source>This controls the magnification of an axis. It can be helpful to choose magnification for a specific task. For ordinary editing, the magnification should be fitted to your smallest notes. </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3929,53 +4940,33 @@ use mouse wheel to set volume of a step</source>
         <source>Let you select a chord which LMMS then can draw or highlight.You can find the most common chords in this drop-down menu. After you have selected a chord, click anywhere to place the chord, and right click on the virtual keyboard to open context menu and highlight the chord. To return to single note placement, you need to choose &apos;No chord&apos; in this drop-down menu.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Volume: %1%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Panning: %1% left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Panning: %1% right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Panning: center</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please enter a new value between %1 and %2:</source>
-        <translation type="unfinished">%1 と %2 の間の新しい値を入力してください:</translation>
-    </message>
 </context>
 <context>
     <name>PianoView</name>
     <message>
         <source>Base note</source>
-        <translation type="unfinished">ベース　ノート</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Plugin</name>
     <message>
         <source>Plugin not found</source>
-        <translation type="unfinished">プラグインが見つかりません</translation>
+        <translation>プラグインが見つかりません</translation>
     </message>
     <message>
         <source>The plugin &quot;%1&quot; wasn&apos;t found or could not be loaded!
 Reason: &quot;%2&quot;</source>
-        <translation type="unfinished">プラグイン &quot;%1&quot; は見つからないかロードできません。
-原因は &quot;%2&quot;です。</translation>
+        <translation>プラグイン &quot;%1&quot; は見つからないか読み込みができません！
+原因: &quot;%2&quot;</translation>
     </message>
     <message>
         <source>Error while loading plugin</source>
-        <translation type="unfinished">プラグインロード中のエラー</translation>
+        <translation>プラグイン読み込み中のエラー</translation>
     </message>
     <message>
         <source>Failed to load plugin &quot;%1&quot;!</source>
-        <translation type="unfinished">プラグイン &quot;%1&quot; のロードに失敗！</translation>
+        <translation>プラグイン &quot;%1&quot; の読み込みに失敗しました！</translation>
     </message>
     <message>
         <source>LMMS plugin %1 does not have a plugin descriptor named %2!</source>
@@ -3983,14 +4974,148 @@ Reason: &quot;%2&quot;</source>
     </message>
 </context>
 <context>
+    <name>PluginBrowser</name>
+    <message>
+        <source>Instrument plugins</source>
+        <translation>楽器プラグイン</translation>
+    </message>
+    <message>
+        <source>Instrument browser</source>
+        <translation>楽器ブラウザ</translation>
+    </message>
+    <message>
+        <source>Drag an instrument into either the Song-Editor, the Beat+Bassline Editor or into an existing instrument track.</source>
+        <translation>楽器をソングエディタやビート＋ベースラインエディタまたは存在する楽器トラックにドラッグしてください。</translation>
+    </message>
+</context>
+<context>
+    <name>ProjectNotes</name>
+    <message>
+        <source>Project notes</source>
+        <translation>プロジェクトノート</translation>
+    </message>
+    <message>
+        <source>Put down your project notes here.</source>
+        <translation>ここにプロジェクトに関するメモを記入してください。</translation>
+    </message>
+    <message>
+        <source>Edit Actions</source>
+        <translation>編集機能</translation>
+    </message>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>元に戻す(&amp;U)</translation>
+    </message>
+    <message>
+        <source>Ctrl+Z</source>
+        <translation>Ctrl+Z</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>やり直し(&amp;R)</translation>
+    </message>
+    <message>
+        <source>Ctrl+Y</source>
+        <translation>Ctrl+Y</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>コピー(&amp;C)</translation>
+    </message>
+    <message>
+        <source>Ctrl+C</source>
+        <translation>Ctrl+C</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>切り取り(&amp;t)</translation>
+    </message>
+    <message>
+        <source>Ctrl+X</source>
+        <translation>Ctrl+X</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>貼り付け(&amp;P)</translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
+        <translation>Ctrl+V</translation>
+    </message>
+    <message>
+        <source>Format Actions</source>
+        <translation>フォーマット機能</translation>
+    </message>
+    <message>
+        <source>&amp;Bold</source>
+        <translation>太字(&amp;B)</translation>
+    </message>
+    <message>
+        <source>Ctrl+B</source>
+        <translation>Ctrl+B</translation>
+    </message>
+    <message>
+        <source>&amp;Italic</source>
+        <translation>斜体(&amp;I)</translation>
+    </message>
+    <message>
+        <source>Ctrl+I</source>
+        <translation>Ctrl+I</translation>
+    </message>
+    <message>
+        <source>&amp;Underline</source>
+        <translation>下線(&amp;U)</translation>
+    </message>
+    <message>
+        <source>Ctrl+U</source>
+        <translation>Ctrl+U</translation>
+    </message>
+    <message>
+        <source>&amp;Left</source>
+        <translation>左揃え(&amp;L)</translation>
+    </message>
+    <message>
+        <source>Ctrl+L</source>
+        <translation>Ctrl+L</translation>
+    </message>
+    <message>
+        <source>C&amp;enter</source>
+        <translation>中央揃え(&amp;e)</translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation>Ctrl+E</translation>
+    </message>
+    <message>
+        <source>&amp;Right</source>
+        <translation>右揃え(&amp;R)</translation>
+    </message>
+    <message>
+        <source>Ctrl+R</source>
+        <translation>Ctrl+R</translation>
+    </message>
+    <message>
+        <source>&amp;Justify</source>
+        <translation>両端揃え(&amp;J)</translation>
+    </message>
+    <message>
+        <source>Ctrl+J</source>
+        <translation>Ctrl+J</translation>
+    </message>
+    <message>
+        <source>&amp;Color...</source>
+        <translation>文字色(&amp;C)...</translation>
+    </message>
+</context>
+<context>
     <name>ProjectRenderer</name>
     <message>
         <source>WAV-File (*.wav)</source>
-        <translation type="unfinished">WAV-ファイル (*.wav)</translation>
+        <translation>WAVファイル (*.wav)</translation>
     </message>
     <message>
         <source>Compressed OGG-File (*.ogg)</source>
-        <translation type="unfinished">圧縮 OGG-ファイル (*.ogg)</translation>
+        <translation>圧縮OGGファイル (*.ogg)</translation>
     </message>
 </context>
 <context>
@@ -3998,102 +5123,102 @@ Reason: &quot;%2&quot;</source>
     <message>
         <source>C</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>Db</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Db</translation>
     </message>
     <message>
         <source>C#</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>C#</translation>
     </message>
     <message>
         <source>D</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>Eb</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Eb</translation>
     </message>
     <message>
         <source>D#</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>D#</translation>
     </message>
     <message>
         <source>E</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Fb</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fb</translation>
     </message>
     <message>
         <source>Gb</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gb</translation>
     </message>
     <message>
         <source>F#</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>F#</translation>
     </message>
     <message>
         <source>G</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>Ab</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ab</translation>
     </message>
     <message>
         <source>G#</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>G#</translation>
     </message>
     <message>
         <source>A</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Bb</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bb</translation>
     </message>
     <message>
         <source>A#</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>A#</translation>
     </message>
     <message>
         <source>B</source>
         <comment>Note name</comment>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>Name: </source>
-        <translation type="unfinished">名前</translation>
+        <translation>名前: </translation>
     </message>
     <message>
         <source>Maker: </source>
-        <translation type="unfinished">製造元</translation>
+        <translation>作成者: </translation>
     </message>
     <message>
         <source>Copyright: </source>
-        <translation type="unfinished">コピーライト</translation>
+        <translation type="unfinished">コピーライト: </translation>
     </message>
     <message>
         <source>Requires Real Time: </source>
@@ -4101,11 +5226,11 @@ Reason: &quot;%2&quot;</source>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">はい</translation>
+        <translation>はい</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">いいえ</translation>
+        <translation>いいえ</translation>
     </message>
     <message>
         <source>Real Time Capable: </source>
@@ -4117,93 +5242,100 @@ Reason: &quot;%2&quot;</source>
     </message>
     <message>
         <source>Channels In: </source>
-        <translation type="unfinished">入力チャンネル</translation>
+        <translation>入力チャンネル: </translation>
     </message>
     <message>
         <source>Channels Out: </source>
-        <translation type="unfinished">出力チャンネル</translation>
+        <translation>出力チャンネル: </translation>
     </message>
     <message>
         <source>File: </source>
-        <translation type="unfinished">ファイル:</translation>
+        <translation>ファイル:</translation>
     </message>
     <message>
         <source>File: %1</source>
-        <translation type="unfinished">ファイル: %1</translation>
+        <translation>ファイル: %1</translation>
+    </message>
+</context>
+<context>
+    <name>RenameDialog</name>
+    <message>
+        <source>Rename...</source>
+        <translation>名前の変更...</translation>
     </message>
 </context>
 <context>
     <name>SampleBuffer</name>
     <message>
         <source>Open audio file</source>
-        <translation type="unfinished">オーディオファイルを開く</translation>
+        <translation>オーディオファイルを開く</translation>
     </message>
     <message>
         <source>Wave-Files (*.wav)</source>
-        <translation type="unfinished">WAV ファイル (*.wav)</translation>
+        <translation>WAVファイル (*.wav)</translation>
     </message>
     <message>
         <source>OGG-Files (*.ogg)</source>
-        <translation type="unfinished">OGG ファイル (*.ogg)</translation>
+        <translation>OGGファイル (*.ogg)</translation>
     </message>
     <message>
         <source>DrumSynth-Files (*.ds)</source>
-        <translation type="unfinished">DrumSynth ファイル (*.ds)</translation>
+        <translation>DrumSynthファイル (*.ds)</translation>
     </message>
     <message>
         <source>FLAC-Files (*.flac)</source>
-        <translation type="unfinished">FLAC ファイル (*.flac)</translation>
+        <translation>FLACファイル (*.flac)</translation>
     </message>
     <message>
         <source>SPEEX-Files (*.spx)</source>
-        <translation type="unfinished">SPEEX ファイル (*.spx)</translation>
+        <translation>SPEEXファイル (*.spx)</translation>
     </message>
     <message>
         <source>VOC-Files (*.voc)</source>
-        <translation type="unfinished">VOC ファイル (*.voc)</translation>
+        <translation>VOCファイル (*.voc)</translation>
     </message>
     <message>
         <source>AIFF-Files (*.aif *.aiff)</source>
-        <translation type="unfinished">AIFF ファイル (*.aif *.aiff)</translation>
+        <translation>AIFFファイル (*.aif *.aiff)</translation>
     </message>
     <message>
         <source>AU-Files (*.au)</source>
-        <translation type="unfinished">AU ファイル (*.au)</translation>
+        <translation>AUファイル (*.au)</translation>
     </message>
     <message>
         <source>RAW-Files (*.raw)</source>
-        <translation type="unfinished">RAW ファイル (*.raw)</translation>
+        <translation>RAWファイル (*.raw)</translation>
     </message>
     <message>
         <source>All Audio-Files (*.wav *.ogg *.ds *.flac *.spx *.voc *.aif *.aiff *.au *.raw)</source>
-        <translation type="unfinished">すべてのオーディオファイル (*.wav *.ogg *.ds *.flac *.spx *.voc *.aif *.aiff *.au *.raw *.mp3)</translation>
+        <translation>すべてのオーディオファイル (*.wav *.ogg *.ds *.flac *.spx *.voc *.aif *.aiff *.au *.raw)</translation>
     </message>
 </context>
 <context>
     <name>SampleTCOView</name>
     <message>
         <source>double-click to select sample</source>
-        <translation type="unfinished">ダブルクリックでサンプル選択</translation>
+        <translation>ダブルクリックでサンプル選択</translation>
     </message>
     <message>
         <source>Delete (middle mousebutton)</source>
-        <translation type="unfinished">削除 (マウス中ボタン)</translation>
+        <translation>削除 (マウス中ボタン)</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">切り取り</translation>
+        <translation>切り取り</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished">コピー</translation>
+        <translation>コピー</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished">貼り付け</translation>
+        <translation>貼り付け</translation>
     </message>
     <message>
         <source>Mute/unmute (&lt;Ctrl&gt; + middle click)</source>
-        <translation type="unfinished">ミュート/ミュート解除(&lt;Ctrl&gt; + 中ボタンクリック）</translation>
+        <translation>ミュート/ミュート解除(&lt;Ctrl&gt; + 中ボタンクリック）</translation>
     </message>
     <message>
         <source>Set/clear record</source>
@@ -4214,85 +5346,341 @@ Reason: &quot;%2&quot;</source>
     <name>SampleTrack</name>
     <message>
         <source>Sample track</source>
-        <translation type="unfinished">Sample track</translation>
+        <translation>サンプルトラック</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished">音量</translation>
+        <translation>音量</translation>
+    </message>
+    <message>
+        <source>Panning</source>
+        <translation>パニング</translation>
     </message>
 </context>
 <context>
     <name>SampleTrackView</name>
     <message>
         <source>Track volume</source>
-        <translation type="unfinished">トラック音量</translation>
+        <translation>トラック音量</translation>
     </message>
     <message>
         <source>Channel volume:</source>
-        <translation type="unfinished">チャンネル音量:</translation>
+        <translation>チャンネル音量:</translation>
     </message>
     <message>
         <source>VOL</source>
+        <translation>音量</translation>
+    </message>
+    <message>
+        <source>Panning</source>
+        <translation>パニング</translation>
+    </message>
+    <message>
+        <source>Panning:</source>
+        <translation>パニング:</translation>
+    </message>
+    <message>
+        <source>PAN</source>
+        <translation>パニング</translation>
+    </message>
+</context>
+<context>
+    <name>SetupDialog</name>
+    <message>
+        <source>Setup LMMS</source>
+        <translation>LMMS設定</translation>
+    </message>
+    <message>
+        <source>General settings</source>
+        <translation>一般設定</translation>
+    </message>
+    <message>
+        <source>BUFFER SIZE</source>
+        <translation>バッファ サイズ</translation>
+    </message>
+    <message>
+        <source>Reset to default-value</source>
+        <translation>デフォルト値にリセット</translation>
+    </message>
+    <message>
+        <source>MISC</source>
+        <translation>その他</translation>
+    </message>
+    <message>
+        <source>Enable tooltips</source>
+        <translation>ツールチップを有効にする</translation>
+    </message>
+    <message>
+        <source>Show restart warning after changing settings</source>
+        <translation>設定変更後に再起動の警告を表示する</translation>
+    </message>
+    <message>
+        <source>Display volume as dBV </source>
+        <translation>音量をdBVで表示する</translation>
+    </message>
+    <message>
+        <source>Compress project files per default</source>
+        <translation>プロジェクトファイルの圧縮をデフォルトにする</translation>
+    </message>
+    <message>
+        <source>One instrument track window mode</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HQ-mode for output audio-device</source>
+        <translation type="unfinished">出力オーディオデバイスを高品質モードにする</translation>
+    </message>
+    <message>
+        <source>Compact track buttons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync VST plugins to host playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable note labels in piano roll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable waveform display by default</source>
+        <translation>デフォルトで波形表示を有効にする</translation>
+    </message>
+    <message>
+        <source>Keep effects running even without input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create backup file when saving a project</source>
+        <translation>プロジェクトを保存したときバックアップファイルを作成する</translation>
+    </message>
+    <message>
+        <source>LANGUAGE</source>
+        <translation>言語</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation>パス</translation>
+    </message>
+    <message>
+        <source>LMMS working directory</source>
+        <translation>LMMSの作業ディレクトリ</translation>
+    </message>
+    <message>
+        <source>VST-plugin directory</source>
+        <translation>VSTプラグインのディレクトリ</translation>
+    </message>
+    <message>
+        <source>Artwork directory</source>
+        <translation type="unfinished">アートワークのディレクトリ</translation>
+    </message>
+    <message>
+        <source>Background artwork</source>
+        <translation type="unfinished">背景用アートワーク</translation>
+    </message>
+    <message>
+        <source>FL Studio installation directory</source>
+        <translation>FL Studioのインストール先ディレクトリ</translation>
+    </message>
+    <message>
+        <source>LADSPA plugin paths</source>
+        <translation>LADSPAプラグインのパス</translation>
+    </message>
+    <message>
+        <source>STK rawwave directory</source>
+        <translation>STK rawwaveのディレクトリ</translation>
+    </message>
+    <message>
+        <source>Default Soundfont File</source>
+        <translation>デフォルトのサウンドフォントファイル</translation>
+    </message>
+    <message>
+        <source>Performance settings</source>
+        <translation>パフォーマンス設定</translation>
+    </message>
+    <message>
+        <source>UI effects vs. performance</source>
+        <translation type="unfinished">視覚効果 vs パフォーマンス</translation>
+    </message>
+    <message>
+        <source>Smooth scroll in Song Editor</source>
+        <translation>ソングエディタでスムーススクロールする</translation>
+    </message>
+    <message>
+        <source>Enable auto save feature</source>
+        <translation>自動保存機能を有効にする</translation>
+    </message>
+    <message>
+        <source>Show playback cursor in AudioFileProcessor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio settings</source>
+        <translation>オーディオ設定</translation>
+    </message>
+    <message>
+        <source>AUDIO INTERFACE</source>
+        <translation>オーディオインターフェース</translation>
+    </message>
+    <message>
+        <source>MIDI settings</source>
+        <translation>MIDI設定</translation>
+    </message>
+    <message>
+        <source>MIDI INTERFACE</source>
+        <translation>MIDIインターフェース</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <source>Restart LMMS</source>
+        <translation>LMMSを再起動</translation>
+    </message>
+    <message>
+        <source>Please note that most changes won&apos;t take effect until you restart LMMS!</source>
+        <translation type="unfinished">変更した設定の大部分は、LMMSの再起動後に有効になります!</translation>
+    </message>
+    <message>
+        <source>Frames: %1
+Latency: %2 ms</source>
+        <translation type="unfinished">フレーム: %1
+レイテンシー: %2 ms</translation>
+    </message>
+    <message>
+        <source>Here you can setup the internal buffer-size used by LMMS. Smaller values result in a lower latency but also may cause unusable sound or bad performance, especially on older computers or systems with a non-realtime kernel.</source>
+        <translation type="unfinished">ここではLMMSで使用する内部バッファサイズを指定します。値が小さいとレイテンシーが小さくなるだけでなく、特に古いコンピュータやリアルタイムカーネルではないシステムでは酷い音やパフォーマンスの低下を引き起こします。</translation>
+    </message>
+    <message>
+        <source>Choose LMMS working directory</source>
+        <translation>LMMSの作業ディレクトリを選択してください</translation>
+    </message>
+    <message>
+        <source>Choose your VST-plugin directory</source>
+        <translation>VSTプラグインのディレクトリを選択してください</translation>
+    </message>
+    <message>
+        <source>Choose artwork-theme directory</source>
+        <translation>アートワークテーマのディレクトリを選択してください</translation>
+    </message>
+    <message>
+        <source>Choose FL Studio installation directory</source>
+        <translation>FL Studioのインストール先ディレクトリを選択してください</translation>
+    </message>
+    <message>
+        <source>Choose LADSPA plugin directory</source>
+        <translation>LADSPAプラグインのディレクトリを選択してください</translation>
+    </message>
+    <message>
+        <source>Choose STK rawwave directory</source>
+        <translation>STK rawwaveのディレクトリを選択してください</translation>
+    </message>
+    <message>
+        <source>Choose default SoundFont</source>
+        <translation>デフォルトのサウンドフォントを選択してください</translation>
+    </message>
+    <message>
+        <source>Choose background artwork</source>
+        <translation type="unfinished">背景用アートワークを選択してください</translation>
+    </message>
+    <message>
+        <source>Here you can select your preferred audio-interface. Depending on the configuration of your system during compilation time you can choose between ALSA, JACK, OSS and more. Below you see a box which offers controls to setup the selected audio-interface.</source>
+        <translation type="unfinished">ここでは優先するオーディオインターフェースを選択することができます。コンパイル時のシステム設定によってALSA,JACK, OSS 等を選択することができます。選択したオーディオインターフェースのコントロール設定項目は下部にあります。</translation>
+    </message>
+    <message>
+        <source>Here you can select your preferred MIDI-interface. Depending on the configuration of your system during compilation time you can choose between ALSA, OSS and more. Below you see a box which offers controls to setup the selected MIDI-interface.</source>
+        <translation type="unfinished">ここではMIDI インターフェースを選択することができます。コンパイル時のシステム設定によって、ALSAやOSS等を選択することができます。選択したMIDIインターフェースのコントロール設定項目は下部にあります。</translation>
+    </message>
+</context>
+<context>
+    <name>Song</name>
+    <message>
+        <source>Tempo</source>
+        <translation>テンポ</translation>
+    </message>
+    <message>
+        <source>Master volume</source>
+        <translation>主音量</translation>
+    </message>
+    <message>
+        <source>Master pitch</source>
+        <translation>主ピッチ</translation>
+    </message>
+    <message>
+        <source>Project saved</source>
+        <translation>プロジェクトを保存しました</translation>
+    </message>
+    <message>
+        <source>The project %1 is now saved.</source>
+        <translation>プロジェクト %1 を保存しました。</translation>
+    </message>
+    <message>
+        <source>Project NOT saved.</source>
+        <translation>プロジェクトは保存されていません。</translation>
+    </message>
+    <message>
+        <source>The project %1 was not saved!</source>
+        <translation>プロジェクト %1 は保存されませんでした!</translation>
+    </message>
+    <message>
+        <source>Import file</source>
+        <translation>ファイルをインポート</translation>
+    </message>
+    <message>
+        <source>MIDI sequences</source>
+        <translation>MIDIシーケンス</translation>
+    </message>
+    <message>
+        <source>FL Studio projects</source>
+        <translation>FL Studioプロジェクト</translation>
+    </message>
+    <message>
+        <source>Hydrogen projects</source>
+        <translation>Hydrogenプロジェクト</translation>
+    </message>
+    <message>
+        <source>All file types</source>
+        <translation>すべてのファイル</translation>
+    </message>
+    <message>
+        <source>Empty project</source>
+        <translation>空のプロジェクト</translation>
+    </message>
+    <message>
+        <source>This project is empty so exporting makes no sense. Please put some items into Song Editor first!</source>
+        <translation type="unfinished">プロジェクトが空なのでエクスポートは無効です。ソングエディタにアイテムを置いてからエクスポートしてください!</translation>
+    </message>
+    <message>
+        <source>Select directory for writing exported tracks...</source>
+        <translation>エクスポートされたトラックの書き込み先のディレクトリを選択...</translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation>無題</translation>
+    </message>
+    <message>
+        <source>Select file for project-export...</source>
+        <translation>プロジェクトをエクスポートするファイルを選択してください...</translation>
+    </message>
+    <message>
+        <source>The following errors occured while loading: </source>
+        <translation>読み込み中に以下のエラーが発生しました:</translation>
     </message>
 </context>
 <context>
     <name>SongEditor</name>
     <message>
-        <source>Song-Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play song (Space)</source>
-        <translation type="unfinished">曲を再生 (Space)</translation>
-    </message>
-    <message>
-        <source>Click here, if you want to play your whole song. Playing will be started at the song-position-marker (green). You can also move it while playing.</source>
-        <translation type="unfinished">ここをクリックすると曲全体を再生します。ソングポジションマーカー（緑色）の位置から再生開始します。再生中にマーカーを移動させることもできます。</translation>
-    </message>
-    <message>
-        <source>Stop song (Space)</source>
-        <translation type="unfinished">曲を停止 (Space)</translation>
-    </message>
-    <message>
-        <source>Click here, if you want to stop playing of your song. The song-position-marker will be set to the start of your song.</source>
-        <translation type="unfinished">ここをクリックすると曲の再生を停止します。再生後、ソングポジションマーカーは曲の最初にセットされます。</translation>
-    </message>
-    <message>
-        <source>Add beat/bassline</source>
-        <translation type="unfinished">Beat/Bassline を追加</translation>
-    </message>
-    <message>
-        <source>Add sample-track</source>
-        <translation type="unfinished">Sample-Track を追加</translation>
-    </message>
-    <message>
         <source>Could not open file</source>
-        <translation type="unfinished">ファイルを開くことができませんでした</translation>
+        <translation>ファイルを開くことができませんでした</translation>
     </message>
     <message>
         <source>Could not write file</source>
-        <translation type="unfinished">ファイルに書き込むことができませんでした</translation>
-    </message>
-    <message>
-        <source>Add automation-track</source>
-        <translation type="unfinished">Automation-Track を追加</translation>
-    </message>
-    <message>
-        <source>Draw mode</source>
-        <translation type="unfinished">ドローモード</translation>
-    </message>
-    <message>
-        <source>Edit mode (select and move)</source>
-        <translation type="unfinished">編集モード (選択と移動)</translation>
-    </message>
-    <message>
-        <source>Record samples from Audio-device</source>
-        <translation type="unfinished">オーディオデバイスからサンプルを録音</translation>
-    </message>
-    <message>
-        <source>Record samples from Audio-device while playing song or BB track</source>
-        <translation type="unfinished">曲またはBBトラックを再生中にオーディオデバイスからサンプルを録音</translation>
+        <translation>ファイルに書き込むことができませんでした</translation>
     </message>
     <message>
         <source>Could not open file %1. You probably have no permissions to read this file.
@@ -4310,15 +5698,15 @@ Reason: &quot;%2&quot;</source>
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished">テンポ</translation>
+        <translation>テンポ</translation>
     </message>
     <message>
         <source>TEMPO/BPM</source>
-        <translation type="unfinished">テンポ/BPM</translation>
+        <translation>テンポ/BPM</translation>
     </message>
     <message>
         <source>tempo of song</source>
-        <translation type="unfinished">曲のテンポ</translation>
+        <translation>曲のテンポ</translation>
     </message>
     <message>
         <source>The tempo of a song is specified in beats per minute (BPM). If you want to change the tempo of your song, change this value. Every measure has four beats, so the tempo in BPM specifies, how many measures / 4 should be played within a minute (or how many measures should be played within four minutes).</source>
@@ -4326,23 +5714,23 @@ Reason: &quot;%2&quot;</source>
     </message>
     <message>
         <source>High quality mode</source>
-        <translation type="unfinished">ハイクオリティモード</translation>
+        <translation>高品質モード</translation>
     </message>
     <message>
         <source>Master volume</source>
-        <translation type="unfinished">マスター音量</translation>
+        <translation>主音量</translation>
     </message>
     <message>
         <source>master volume</source>
-        <translation type="unfinished">マスター音量</translation>
+        <translation>主音量</translation>
     </message>
     <message>
         <source>Master pitch</source>
-        <translation type="unfinished">マスターピッチ</translation>
+        <translation>主ピッチ</translation>
     </message>
     <message>
         <source>master pitch</source>
-        <translation type="unfinished">マスター ピッチ</translation>
+        <translation>主 ピッチ</translation>
     </message>
     <message>
         <source>Value: %1%</source>
@@ -4355,6 +5743,57 @@ Reason: &quot;%2&quot;</source>
     <message>
         <source>Could not open %1 for writing. You probably are not permitted to write to this file. Please make sure you have write-access to the file and try again.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SongEditorWindow</name>
+    <message>
+        <source>Song-Editor</source>
+        <translation>ソングエディタ</translation>
+    </message>
+    <message>
+        <source>Play song (Space)</source>
+        <translation>曲を再生 (Space)</translation>
+    </message>
+    <message>
+        <source>Record samples from Audio-device</source>
+        <translation type="unfinished">オーディオデバイスからサンプルを録音</translation>
+    </message>
+    <message>
+        <source>Record samples from Audio-device while playing song or BB track</source>
+        <translation type="unfinished">曲またはBBトラックを再生中にオーディオデバイスからサンプルを録音</translation>
+    </message>
+    <message>
+        <source>Stop song (Space)</source>
+        <translation>曲を停止 (Space)</translation>
+    </message>
+    <message>
+        <source>Add beat/bassline</source>
+        <translation>ビート/ベースラインを追加</translation>
+    </message>
+    <message>
+        <source>Add sample-track</source>
+        <translation>サンプルトラックを追加</translation>
+    </message>
+    <message>
+        <source>Add automation-track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw mode</source>
+        <translation>描画モード</translation>
+    </message>
+    <message>
+        <source>Edit mode (select and move)</source>
+        <translation>編集モード (選択と移動)</translation>
+    </message>
+    <message>
+        <source>Click here, if you want to play your whole song. Playing will be started at the song-position-marker (green). You can also move it while playing.</source>
+        <translation type="unfinished">ここをクリックすると曲全体を再生します。ソングポジションマーカー（緑色）の位置から再生開始します。再生中にマーカーを移動させることもできます。</translation>
+    </message>
+    <message>
+        <source>Click here, if you want to stop playing of your song. The song-position-marker will be set to the start of your song.</source>
+        <translation type="unfinished">ここをクリックすると曲の再生を停止します。再生後、ソングポジションマーカーは曲の最初にセットされます。</translation>
     </message>
 </context>
 <context>
@@ -4384,50 +5823,53 @@ Reason: &quot;%2&quot;</source>
     </message>
 </context>
 <context>
+    <name>TabWidget</name>
+    <message>
+        <source>Settings for %1</source>
+        <translation>%1の設定</translation>
+    </message>
+</context>
+<context>
     <name>TempoSyncKnob</name>
     <message>
         <source>Tempo Sync</source>
-        <translation type="unfinished">テンポの同期</translation>
+        <translation>テンポの同期</translation>
     </message>
     <message>
         <source>No Sync</source>
-        <translation type="unfinished">非同期</translation>
+        <translation>非同期</translation>
     </message>
     <message>
         <source>Eight beats</source>
-        <translation type="unfinished">8ビート</translation>
+        <translation>8ビート</translation>
     </message>
     <message>
         <source>Whole note</source>
-        <translation type="unfinished">全音符</translation>
+        <translation>全音符</translation>
     </message>
     <message>
         <source>Half note</source>
-        <translation type="unfinished">二分音符</translation>
+        <translation>2分音符</translation>
     </message>
     <message>
         <source>Quarter note</source>
-        <translation type="unfinished">四分音符</translation>
+        <translation>4分音符</translation>
     </message>
     <message>
         <source>8th note</source>
-        <translation type="unfinished">八分音符</translation>
+        <translation>8分音符</translation>
     </message>
     <message>
         <source>16th note</source>
-        <translation type="unfinished">十六分音符</translation>
+        <translation>16分音符</translation>
     </message>
     <message>
         <source>32nd note</source>
-        <translation type="unfinished">三十二分音符</translation>
+        <translation>32分音符</translation>
     </message>
     <message>
         <source>Custom...</source>
         <translation>カスタム...</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>ヘルプ(&amp;H)</translation>
     </message>
     <message>
         <source>Custom </source>
@@ -4435,81 +5877,228 @@ Reason: &quot;%2&quot;</source>
     </message>
     <message>
         <source>Synced to Eight Beats</source>
-        <translation type="unfinished">8ビートに同期</translation>
+        <translation>8ビートに同期</translation>
     </message>
     <message>
         <source>Synced to Whole Note</source>
-        <translation type="unfinished">全音符に同期</translation>
+        <translation>全音符に同期</translation>
     </message>
     <message>
         <source>Synced to Half Note</source>
-        <translation type="unfinished">二分音符に同期</translation>
+        <translation>2分音符に同期</translation>
     </message>
     <message>
         <source>Synced to Quarter Note</source>
-        <translation type="unfinished">四分音符に同期</translation>
+        <translation>4分音符に同期</translation>
     </message>
     <message>
         <source>Synced to 8th Note</source>
-        <translation type="unfinished">八分音符に同期</translation>
+        <translation>8分音符に同期</translation>
     </message>
     <message>
         <source>Synced to 16th Note</source>
-        <translation type="unfinished">十六分音符に同期</translation>
+        <translation>16分音符に同期</translation>
     </message>
     <message>
         <source>Synced to 32nd Note</source>
-        <translation type="unfinished">三十二分音符に同期</translation>
+        <translation>32分音符に同期</translation>
     </message>
 </context>
 <context>
     <name>TimeDisplayWidget</name>
     <message>
         <source>click to change time units</source>
+        <translation>時間単位を変更するにはクリック</translation>
+    </message>
+</context>
+<context>
+    <name>TimeLineWidget</name>
+    <message>
+        <source>Enable/disable auto-scrolling</source>
+        <translation>自動スクロールを有効/無効</translation>
+    </message>
+    <message>
+        <source>Enable/disable loop-points</source>
+        <translation type="unfinished">ループポイントを有効/無効</translation>
+    </message>
+    <message>
+        <source>After stopping go back to begin</source>
+        <translation type="unfinished">終了後、開始位置に戻る</translation>
+    </message>
+    <message>
+        <source>After stopping go back to position at which playing was started</source>
+        <translation type="unfinished">終了後、再生が開始された位置に戻る</translation>
+    </message>
+    <message>
+        <source>After stopping keep position</source>
+        <translation type="unfinished">終了後、位置を保持する</translation>
+    </message>
+    <message>
+        <source>Hint</source>
+        <translation>ヒント</translation>
+    </message>
+    <message>
+        <source>Press &lt;Ctrl&gt; to disable magnetic loop points.</source>
+        <translation type="unfinished">マグネティック ループポイントを無効化するには&lt;Ctrl&gt;を押してください。</translation>
+    </message>
+    <message>
+        <source>Hold &lt;Shift&gt; to move the begin loop point; Press &lt;Ctrl&gt; to disable magnetic loop points.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Track</name>
+    <message>
+        <source>Mute</source>
+        <translation>ミュート</translation>
+    </message>
+    <message>
+        <source>Solo</source>
+        <translation>ソロ</translation>
     </message>
 </context>
 <context>
     <name>TrackContainer</name>
     <message>
         <source>Couldn&apos;t import file</source>
-        <translation type="unfinished">ファイルをインポートすることができませんでした</translation>
+        <translation>ファイルをインポートすることができませんでした</translation>
     </message>
     <message>
         <source>Couldn&apos;t find a filter for importing file %1.
 You should convert this file into a format supported by LMMS using another software.</source>
-        <translation type="unfinished">インポート中のファイル %1のフィルターが見つかりませんでした。
-他のソフトウェアで、このファイルをLMMSがサポートしてるフォーマットに変換してください。</translation>
+        <translation>インポート中のファイル %1 のフィルターが見つかりませんでした。
+他のソフトウェアで、このファイルをLMMSがサポートしてる形式に変換してください。</translation>
     </message>
     <message>
         <source>Couldn&apos;t open file</source>
-        <translation type="unfinished">ファイルを開くことができませんでした</translation>
+        <translation>ファイルを開くことができませんでした</translation>
     </message>
     <message>
         <source>Couldn&apos;t open file %1 for reading.
 Please make sure you have read-permission to the file and the directory containing the file and try again!</source>
-        <translation type="unfinished">ファイル %1 を読み込み用に開くことができませんでした。
-ファイルとファイルのディレクトリが読み込み可能かチェックしてから再度読み込んでください!</translation>
+        <translation>ファイル %1 を読み込み用に開くことができませんでした。
+ファイルとファイルのディレクトリが読み込み可能かチェックしてから再度開いてください！</translation>
     </message>
     <message>
         <source>Loading project...</source>
-        <translation type="unfinished">プロジェクトをロードしています...</translation>
+        <translation>プロジェクトを読み込んでいます...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">キャンセル</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished">お待ちください...</translation>
+        <translation>お待ちください...</translation>
     </message>
     <message>
         <source>Importing MIDI-file...</source>
-        <translation type="unfinished">MIDI-ファイルをインポートしています...</translation>
+        <translation>MIDIファイルをインポートしています...</translation>
     </message>
     <message>
         <source>Importing FLP-file...</source>
-        <translation type="unfinished">FLP-ファイルをインポートしています...</translation>
+        <translation>FLPファイルをインポートしています...</translation>
+    </message>
+</context>
+<context>
+    <name>TrackContentObject</name>
+    <message>
+        <source>Muted</source>
+        <translation type="unfinished">ミュート</translation>
+    </message>
+</context>
+<context>
+    <name>TrackContentObjectView</name>
+    <message>
+        <source>Current position</source>
+        <translation>現在位置</translation>
+    </message>
+    <message>
+        <source>Hint</source>
+        <translation>ヒント</translation>
+    </message>
+    <message>
+        <source>Press &lt;Ctrl&gt; and drag to make a copy.</source>
+        <translation>コピーするには&lt;Ctrl&gt;を押しながらドラッグしてください。</translation>
+    </message>
+    <message>
+        <source>Current length</source>
+        <translation>現在の長さ</translation>
+    </message>
+    <message>
+        <source>Press &lt;Ctrl&gt; for free resizing.</source>
+        <translation>フリーズ解除には&lt;Ctrl&gt;を押してください。</translation>
+    </message>
+    <message>
+        <source>%1:%2 (%3:%4 to %5:%6)</source>
+        <translation>%1:%2 (%3:%4 から %5:%6)</translation>
+    </message>
+    <message>
+        <source>Delete (middle mousebutton)</source>
+        <translation>削除 (マウス中ボタン)</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation>切り取り</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>コピー</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation>貼り付け</translation>
+    </message>
+    <message>
+        <source>Mute/unmute (&lt;Ctrl&gt; + middle click)</source>
+        <translation>ミュート/ミュート解除(&lt;Ctrl&gt; + 中ボタンクリック）</translation>
+    </message>
+</context>
+<context>
+    <name>TrackOperationsWidget</name>
+    <message>
+        <source>Press &lt;Ctrl&gt; while clicking on move-grip to begin a new drag&apos;n&apos;drop-action.</source>
+        <translation type="unfinished">新しいドラッグ＆ドロップアクションを開始するには、移動グリップをクリック中に &lt;Ctrl&gt;を押してください。</translation>
+    </message>
+    <message>
+        <source>Actions for this track</source>
+        <translation type="unfinished">このトラックのアクション</translation>
+    </message>
+    <message>
+        <source>Mute</source>
+        <translation>ミュート</translation>
+    </message>
+    <message>
+        <source>Solo</source>
+        <translation>ソロ</translation>
+    </message>
+    <message>
+        <source>Mute this track</source>
+        <translation>このトラックをミュート</translation>
+    </message>
+    <message>
+        <source>Clone this track</source>
+        <translation>このトラックを複製</translation>
+    </message>
+    <message>
+        <source>Remove this track</source>
+        <translation>このトラックを削除</translation>
+    </message>
+    <message>
+        <source>Clear this track</source>
+        <translation>このトラックをクリア</translation>
+    </message>
+    <message>
+        <source>FX %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn all recording on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn all recording off</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4579,7 +6168,7 @@ Please make sure you have read-permission to the file and the directory containi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>With this knob you can set the coarse detuning of oscillator %1. You can detune the oscillator 12 semitones (1 octave) up and down. This is useful for creating sounds with a chord.</source>
+        <source>With this knob you can set the coarse detuning of oscillator %1. You can detune the oscillator 24 semitones (2 octaves) up and down. This is useful for creating sounds with a chord.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4624,19 +6213,19 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Use a sine-wave for current oscillator.</source>
-        <translation type="unfinished">サイン波を現在のオシレータで使用</translation>
+        <translation type="unfinished">サイン波を現在のオシレータで使用。</translation>
     </message>
     <message>
         <source>Use a triangle-wave for current oscillator.</source>
-        <translation type="unfinished">三角波を現在のオシレータで使用</translation>
+        <translation type="unfinished">三角波を現在のオシレータで使用。</translation>
     </message>
     <message>
         <source>Use a saw-wave for current oscillator.</source>
-        <translation type="unfinished">のこぎり波を現在のオシレータで使用</translation>
+        <translation type="unfinished">のこぎり波を現在のオシレータで使用。</translation>
     </message>
     <message>
         <source>Use a square-wave for current oscillator.</source>
-        <translation type="unfinished">方形波を現在のオシレータで使用</translation>
+        <translation type="unfinished">方形波を現在のオシレータで使用。</translation>
     </message>
     <message>
         <source>Use a moog-like saw-wave for current oscillator.</source>
@@ -4648,40 +6237,29 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Use white-noise for current oscillator.</source>
-        <translation type="unfinished">ホワイトノイズを現在のオシレータで使用</translation>
+        <translation type="unfinished">ホワイトノイズを現在のオシレータで使用。</translation>
     </message>
     <message>
         <source>Use a user-defined waveform for current oscillator.</source>
-        <translation type="unfinished">ユーザー定義波形を現在のオシレータで使用</translation>
-    </message>
-</context>
-<context>
-    <name>Ui</name>
-    <message>
-        <source>Contributors ordered by number of commits:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Involved</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ユーザー定義波形を現在のオシレータで使用。</translation>
     </message>
 </context>
 <context>
     <name>VersionedSaveDialog</name>
     <message>
         <source>Increment version number</source>
-        <translation type="unfinished"></translation>
+        <translation>バージョン番号を大きくする</translation>
     </message>
     <message>
         <source>Decrement version number</source>
-        <translation type="unfinished"></translation>
+        <translation>バージョン番号を小さくする</translation>
     </message>
 </context>
 <context>
     <name>VestigeInstrumentView</name>
     <message>
         <source>Open other VST-plugin</source>
-        <translation type="unfinished">他の VST-プラグインを開く</translation>
+        <translation>他のVSTプラグインを開く</translation>
     </message>
     <message>
         <source>Click here, if you want to open another VST-plugin. After clicking on this button, a file-open-dialog appears and you can select your file.</source>
@@ -4689,7 +6267,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Show/hide GUI</source>
-        <translation type="unfinished">GUIを表示/非表示</translation>
+        <translation>GUIを表示/非表示</translation>
     </message>
     <message>
         <source>Click here to show or hide the graphical user interface (GUI) of your VST-plugin.</source>
@@ -4697,27 +6275,27 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Turn off all notes</source>
-        <translation type="unfinished">すべてのノートをオフにします。</translation>
+        <translation type="unfinished">すべてのノートをオフにします</translation>
     </message>
     <message>
         <source>Open VST-plugin</source>
-        <translation type="unfinished">VST-プラグインを開く</translation>
+        <translation>VSTプラグインを開く</translation>
     </message>
     <message>
         <source>DLL-files (*.dll)</source>
-        <translation type="unfinished">DLL-ファイル (*.dll)</translation>
+        <translation>DLLファイル (*.dll)</translation>
     </message>
     <message>
         <source>EXE-files (*.exe)</source>
-        <translation type="unfinished">EXE-ファイル (*.exe)</translation>
+        <translation>EXEファイル (*.exe)</translation>
     </message>
     <message>
         <source>No VST-plugin loaded</source>
-        <translation type="unfinished">VST-pluginはロードされてません</translation>
+        <translation>VSTプラグインは読み込まれていません</translation>
     </message>
     <message>
         <source>Control VST-plugin from LMMS host</source>
-        <translation type="unfinished"></translation>
+        <translation>LMMSホストからVSTプラグインをコントロール</translation>
     </message>
     <message>
         <source>Click here, if you want to control VST-plugin from host.</source>
@@ -4733,7 +6311,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Previous (-)</source>
-        <translation type="unfinished"></translation>
+        <translation>前 (-)</translation>
     </message>
     <message>
         <source>Click here, if you want to switch to another VST-plugin preset program.</source>
@@ -4741,7 +6319,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Save preset</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセットを保存</translation>
     </message>
     <message>
         <source>Click here, if you want to save current VST-plugin preset program.</source>
@@ -4749,7 +6327,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Next (+)</source>
-        <translation type="unfinished"></translation>
+        <translation>次 (+)</translation>
     </message>
     <message>
         <source>Click here to select presets that are currently loaded in VST.</source>
@@ -4757,7 +6335,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセット</translation>
     </message>
     <message>
         <source>by </source>
@@ -4769,14 +6347,25 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
 </context>
 <context>
+    <name>VisualizationWidget</name>
+    <message>
+        <source>click to enable/disable visualization of master-output</source>
+        <translation type="unfinished">ここをクリックするとマスター出力の表示/非表示を切り替えます</translation>
+    </message>
+    <message>
+        <source>Click to enable</source>
+        <translation>有効にするにはここをクリック</translation>
+    </message>
+</context>
+<context>
     <name>VstEffectControlDialog</name>
     <message>
         <source>Show/hide</source>
-        <translation type="unfinished"></translation>
+        <translation>表示/非表示</translation>
     </message>
     <message>
         <source>Control VST-plugin from LMMS host</source>
-        <translation type="unfinished"></translation>
+        <translation>LMMSホストからVSTプラグインをコントロール</translation>
     </message>
     <message>
         <source>Click here, if you want to control VST-plugin from host.</source>
@@ -4784,7 +6373,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Open VST-plugin preset</source>
-        <translation type="unfinished"></translation>
+        <translation>VSTプラグインプリセットを開く</translation>
     </message>
     <message>
         <source>Click here, if you want to open another *.fxp, *.fxb VST-plugin preset.</source>
@@ -4792,7 +6381,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Previous (-)</source>
-        <translation type="unfinished"></translation>
+        <translation>前 (-)</translation>
     </message>
     <message>
         <source>Click here, if you want to switch to another VST-plugin preset program.</source>
@@ -4800,7 +6389,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Next (+)</source>
-        <translation type="unfinished"></translation>
+        <translation>次 (+)</translation>
     </message>
     <message>
         <source>Click here to select presets that are currently loaded in VST.</source>
@@ -4808,7 +6397,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Save preset</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセットを保存</translation>
     </message>
     <message>
         <source>Click here, if you want to save current VST-plugin preset program.</source>
@@ -4820,101 +6409,97 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br /&gt;</translation>
     </message>
 </context>
 <context>
     <name>VstPlugin</name>
     <message>
         <source>Loading plugin</source>
-        <translation type="unfinished">プラグインをロード中</translation>
+        <translation>プラグインを読み込み中</translation>
     </message>
     <message>
         <source>Open Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセットを開く</translation>
     </message>
     <message>
         <source>Vst Plugin Preset (*.fxp *.fxb)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstプラグインプリセット (*.fxp *.fxb)</translation>
     </message>
     <message>
         <source>: default</source>
-        <translation type="unfinished"></translation>
+        <translation>: デフォルト</translation>
     </message>
     <message>
         <source>&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;</translation>
     </message>
     <message>
         <source>&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;</translation>
     </message>
     <message>
         <source>Save Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセットを保存</translation>
     </message>
     <message>
         <source>.fxp</source>
-        <translation type="unfinished"></translation>
+        <translation>.fxp</translation>
     </message>
     <message>
         <source>.FXP</source>
-        <translation type="unfinished"></translation>
+        <translation>.FXP</translation>
     </message>
     <message>
         <source>.FXB</source>
-        <translation type="unfinished"></translation>
+        <translation>.FXB</translation>
     </message>
     <message>
         <source>.fxb</source>
-        <translation type="unfinished"></translation>
+        <translation>.fxb</translation>
     </message>
     <message>
         <source>Please wait while loading VST plugin...</source>
-        <translation type="unfinished"></translation>
+        <translation>VSTプラグインの読み込みの間お待ちください...</translation>
     </message>
     <message>
-        <source>Failed loading VST plugin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The VST plugin %1 could not be loaded for some reason.</source>
-        <translation type="unfinished"></translation>
+        <source>The VST plugin %1 could not be loaded.</source>
+        <translation>VSTプラグイン %1 は読み込めません。</translation>
     </message>
 </context>
 <context>
     <name>WatsynInstrument</name>
     <message>
         <source>Volume A1</source>
-        <translation type="unfinished"></translation>
+        <translation>音量A1</translation>
     </message>
     <message>
         <source>Volume A2</source>
-        <translation type="unfinished"></translation>
+        <translation>音量A2</translation>
     </message>
     <message>
         <source>Volume B1</source>
-        <translation type="unfinished"></translation>
+        <translation>音量B1</translation>
     </message>
     <message>
         <source>Volume B2</source>
-        <translation type="unfinished"></translation>
+        <translation>音量B2</translation>
     </message>
     <message>
         <source>Panning A1</source>
-        <translation type="unfinished"></translation>
+        <translation>パニングA1</translation>
     </message>
     <message>
         <source>Panning A2</source>
-        <translation type="unfinished"></translation>
+        <translation>パニングA2</translation>
     </message>
     <message>
         <source>Panning B1</source>
-        <translation type="unfinished"></translation>
+        <translation>パニングB1</translation>
     </message>
     <message>
         <source>Panning B2</source>
-        <translation type="unfinished"></translation>
+        <translation>パニングB2</translation>
     </message>
     <message>
         <source>Freq. multiplier A1</source>
@@ -4998,7 +6583,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Selected graph</source>
-        <translation type="unfinished"></translation>
+        <translation>選択されたグラフ</translation>
     </message>
 </context>
 <context>
@@ -5053,11 +6638,11 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Draw your own waveform here by dragging your mouse on this graph.</source>
-        <translation type="unfinished">グラフの上でマウスドラッグしてここに波形を描きます</translation>
+        <translation>グラフの上でマウスをドラッグして波形を描きます。</translation>
     </message>
     <message>
         <source>Load waveform</source>
-        <translation type="unfinished">波形の読み込み</translation>
+        <translation>波形の読み込み</translation>
     </message>
     <message>
         <source>Click to load a waveform from a sample file</source>
@@ -5081,7 +6666,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Normalize</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ノーマライズ</translation>
     </message>
     <message>
         <source>Click to normalize</source>
@@ -5097,7 +6682,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Smooth</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">平滑化</translation>
     </message>
     <message>
         <source>Click to smooth</source>
@@ -5284,77 +6869,8 @@ Please make sure you have read-permission to the file and the directory containi
         <source>Sinc</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>bbEditor</name>
     <message>
-        <source>Beat+Bassline Editor</source>
-        <translation>Beat+Bassline-Editor</translation>
-    </message>
-    <message>
-        <source>Play/pause current beat/bassline (Space)</source>
-        <translation type="unfinished">現在の beat/bassline を 再生/一時停止 (Space)</translation>
-    </message>
-    <message>
-        <source>Add beat/bassline</source>
-        <translation type="unfinished">beat/bassline を追加</translation>
-    </message>
-    <message>
-        <source>Add automation-track</source>
-        <translation type="unfinished">オートメーショントラックを追加</translation>
-    </message>
-    <message>
-        <source>Stop playback of current beat/bassline (Space)</source>
-        <translation type="unfinished">beat/bassline の再生を停止 (Space)</translation>
-    </message>
-    <message>
-        <source>Click here to play the current beat/bassline.  The beat/bassline is automatically looped when its end is reached.</source>
-        <translation type="unfinished">クリックすると現在の beat/bassline を演奏します。　beat/bassline　は終了位置にくると自動的にループされます。</translation>
-    </message>
-    <message>
-        <source>Click here to stop playing of current beat/bassline.</source>
-        <translation type="unfinished">クリックすると現在の beat/bassline の演奏を停止します。</translation>
-    </message>
-    <message>
-        <source>Remove steps</source>
-        <translation type="unfinished">ステップ除去</translation>
-    </message>
-    <message>
-        <source>Add steps</source>
-        <translation type="unfinished">ステップ追加</translation>
-    </message>
-</context>
-<context>
-    <name>bbTCOView</name>
-    <message>
-        <source>Open in Beat+Bassline-Editor</source>
-        <translation>Beat+Bassline-Editor を開く</translation>
-    </message>
-    <message>
-        <source>Reset name</source>
-        <translation type="unfinished">名前をリセット</translation>
-    </message>
-    <message>
-        <source>Change name</source>
-        <translation type="unfinished">名前を変更</translation>
-    </message>
-    <message>
-        <source>Change color</source>
-        <translation type="unfinished">色を変更</translation>
-    </message>
-    <message>
-        <source>Reset color to default</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>bbTrack</name>
-    <message>
-        <source>Beat/Bassline %1</source>
-        <translation type="unfinished">beat/bassline %1</translation>
-    </message>
-    <message>
-        <source>Clone of %1</source>
+        <source>Sample not found: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5362,14 +6878,14 @@ Please make sure you have read-permission to the file and the directory containi
     <name>bitInvader</name>
     <message>
         <source>Samplelength</source>
-        <translation type="unfinished">サンプルの長さ</translation>
+        <translation>サンプルの長さ</translation>
     </message>
 </context>
 <context>
     <name>bitInvaderView</name>
     <message>
         <source>Sample Length</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプルの長さ</translation>
     </message>
     <message>
         <source>Sine wave</source>
@@ -5389,19 +6905,19 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>White noise wave</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ホワイトノイズ波形</translation>
     </message>
     <message>
         <source>User defined wave</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー定義波形</translation>
     </message>
     <message>
         <source>Smooth</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">平滑化</translation>
     </message>
     <message>
         <source>Click here to smooth waveform.</source>
-        <translation type="unfinished">クリックすると波形を平滑化します</translation>
+        <translation type="unfinished">クリックすると波形を平滑化します。</translation>
     </message>
     <message>
         <source>Interpolation</source>
@@ -5409,42 +6925,42 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Normalize</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ノーマライズ</translation>
     </message>
     <message>
         <source>Draw your own waveform here by dragging your mouse on this graph.</source>
-        <translation type="unfinished">グラフの上でマウスドラッグしてここに波形を描きます</translation>
+        <translation type="unfinished">グラフの上でマウスをドラッグしてここに波形を描きます。</translation>
     </message>
     <message>
         <source>Click for a sine-wave.</source>
-        <translation type="unfinished">クリックするとサイン波</translation>
+        <translation type="unfinished">クリックするとサイン波。</translation>
     </message>
     <message>
         <source>Click here for a triangle-wave.</source>
-        <translation type="unfinished">クリックすると三角波</translation>
+        <translation type="unfinished">クリックすると三角波。</translation>
     </message>
     <message>
         <source>Click here for a saw-wave.</source>
-        <translation type="unfinished">クリックするとのこぎり波</translation>
+        <translation type="unfinished">クリックするとのこぎり波。</translation>
     </message>
     <message>
         <source>Click here for a square-wave.</source>
-        <translation type="unfinished">クリックすると矩形波</translation>
+        <translation type="unfinished">クリックすると矩形波。</translation>
     </message>
     <message>
         <source>Click here for white-noise.</source>
-        <translation type="unfinished">クリックするとホワイトノイズ</translation>
+        <translation type="unfinished">クリックするとホワイトノイズ。</translation>
     </message>
     <message>
         <source>Click here for a user-defined shape.</source>
-        <translation type="unfinished">クリックするとユーザー波形</translation>
+        <translation type="unfinished">クリックするとユーザー定義波形。</translation>
     </message>
 </context>
 <context>
     <name>dynProcControlDialog</name>
     <message>
         <source>INPUT</source>
-        <translation type="unfinished"></translation>
+        <translation>入力</translation>
     </message>
     <message>
         <source>Input gain:</source>
@@ -5452,7 +6968,7 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>OUTPUT</source>
-        <translation type="unfinished"></translation>
+        <translation>出力</translation>
     </message>
     <message>
         <source>Output gain:</source>
@@ -5551,50 +7067,14 @@ Please make sure you have read-permission to the file and the directory containi
     </message>
     <message>
         <source>Stereo mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>exportProjectDialog</name>
-    <message>
-        <source>Could not open file</source>
-        <translation type="unfinished">ファイルをオープンできません</translation>
-    </message>
-    <message>
-        <source>Could not open file %1 for writing.
-Please make sure you have write-permission to the file and the directory containing the file and try again!</source>
-        <translation type="unfinished">ファイル %1 を書き込み用にオープンできません。
-このファイルとファイルを含むディレクトリの書き込み権限があるかを確認して再度書き込んでください。</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished">エラー</translation>
-    </message>
-    <message>
-        <source>Error while determining file-encoder device. Please try to choose a different output format.</source>
-        <translation type="unfinished">ファイルエンコーダデバイスを決定する際のエラー。異なる出力フォーマットを選んでください。</translation>
-    </message>
-    <message>
-        <source>Rendering: %1%</source>
-        <translation type="unfinished">レンダリング: %1%</translation>
-    </message>
-    <message>
-        <source>Export project to %1</source>
-        <translation type="unfinished">プロジェクトを %1 にエクスポート</translation>
-    </message>
-</context>
-<context>
-    <name>fader</name>
-    <message>
-        <source>Please enter a new value between %1 and %2:</source>
-        <translation type="unfinished">%1 と %2 の間の新しい値を入力してください:</translation>
+        <translation>ステレオモード</translation>
     </message>
 </context>
 <context>
     <name>graphModel</name>
     <message>
         <source>Graph</source>
-        <translation type="unfinished">グラフ</translation>
+        <translation>グラフ</translation>
     </message>
 </context>
 <context>
@@ -5609,11 +7089,11 @@ Please make sure you have write-permission to the file and the directory contain
     </message>
     <message>
         <source>Gain</source>
-        <translation type="unfinished"></translation>
+        <translation>ゲイン</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>長さ</translation>
     </message>
     <message>
         <source>Distortion Start</source>
@@ -5629,7 +7109,7 @@ Please make sure you have write-permission to the file and the directory contain
     </message>
     <message>
         <source>Noise</source>
-        <translation type="unfinished"></translation>
+        <translation>ノイズ</translation>
     </message>
     <message>
         <source>Click</source>
@@ -5660,7 +7140,7 @@ Please make sure you have write-permission to the file and the directory contain
     </message>
     <message>
         <source>Gain:</source>
-        <translation type="unfinished"></translation>
+        <translation>ゲイン:</translation>
     </message>
     <message>
         <source>Frequency Slope:</source>
@@ -5680,7 +7160,7 @@ Please make sure you have write-permission to the file and the directory contain
     </message>
     <message>
         <source>Noise:</source>
-        <translation type="unfinished"></translation>
+        <translation>ノイズ:</translation>
     </message>
     <message>
         <source>Distortion Start:</source>
@@ -5692,41 +7172,26 @@ Please make sure you have write-permission to the file and the directory contain
     </message>
 </context>
 <context>
-    <name>knob</name>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="unfinished">ヘルプ(&amp;H)</translation>
-    </message>
-    <message>
-        <source>Please enter a new value between -96.0 dBV and 6.0 dBV:</source>
-        <translation type="unfinished">-96.0 dBV と 6.0 dBV　の間の新しい値を入力してください:</translation>
-    </message>
-    <message>
-        <source>Please enter a new value between %1 and %2:</source>
-        <translation type="unfinished">%1 と %2 の間の新しい値を入力してください:</translation>
-    </message>
-</context>
-<context>
     <name>ladspaBrowserView</name>
     <message>
         <source>Available Effects</source>
-        <translation type="unfinished">利用可能エフェクト</translation>
+        <translation>利用可能エフェクト</translation>
     </message>
     <message>
         <source>Unavailable Effects</source>
-        <translation type="unfinished">利用不可エフェクト</translation>
+        <translation>利用不可エフェクト</translation>
     </message>
     <message>
         <source>Instruments</source>
-        <translation type="unfinished">楽器</translation>
+        <translation>楽器</translation>
     </message>
     <message>
         <source>Analysis Tools</source>
-        <translation type="unfinished">解析ツール</translation>
+        <translation>解析ツール</translation>
     </message>
     <message>
         <source>Don&apos;t know</source>
-        <translation type="unfinished">不明なツール</translation>
+        <translation>不明なツール</translation>
     </message>
     <message>
         <source>This dialog displays information on all of the LADSPA plugins LMMS was able to locate. The plugins are divided into five categories based upon an interpretation of the port types and names.
@@ -5756,18 +7221,18 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">タイプ</translation>
+        <translation type="unfinished">タイプ:</translation>
     </message>
 </context>
 <context>
     <name>ladspaDescription</name>
     <message>
         <source>Plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>プラグイン</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">説明</translation>
+        <translation>説明</translation>
     </message>
 </context>
 <context>
@@ -5778,7 +7243,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名前</translation>
     </message>
     <message>
         <source>Rate</source>
@@ -5786,7 +7251,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>向き</translation>
     </message>
     <message>
         <source>Type</source>
@@ -5794,7 +7259,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Min &lt; Default &lt; Max</source>
-        <translation type="unfinished"></translation>
+        <translation>最小 &lt; デフォルト &lt; 最大</translation>
     </message>
     <message>
         <source>Logarithmic</source>
@@ -5806,19 +7271,19 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>オーディオ</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"></translation>
+        <translation>コントロール</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>入力</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>出力</translation>
     </message>
     <message>
         <source>Toggled</source>
@@ -5826,7 +7291,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Integer</source>
-        <translation type="unfinished"></translation>
+        <translation>整数</translation>
     </message>
     <message>
         <source>Float</source>
@@ -5834,7 +7299,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">はい</translation>
+        <translation>はい</translation>
     </message>
 </context>
 <context>
@@ -5892,7 +7357,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Resonance:</source>
-        <translation type="unfinished"></translation>
+        <translation>レゾナンス:</translation>
     </message>
     <message>
         <source>Env Mod:</source>
@@ -5900,7 +7365,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Decay:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ディケイ:</translation>
     </message>
     <message>
         <source>303-es-que, 24dB/octave, 3 pole filter</source>
@@ -5920,7 +7385,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Click here for a saw-wave.</source>
-        <translation type="unfinished">クリックでのこぎり波</translation>
+        <translation type="unfinished">クリックでのこぎり波。</translation>
     </message>
     <message>
         <source>Triangle wave</source>
@@ -5928,7 +7393,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Click here for a triangle-wave.</source>
-        <translation type="unfinished">クリックで三角波</translation>
+        <translation type="unfinished">クリックで三角波。</translation>
     </message>
     <message>
         <source>Square wave</source>
@@ -5936,7 +7401,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Click here for a square-wave.</source>
-        <translation type="unfinished">クリックで方形波</translation>
+        <translation type="unfinished">クリックで矩形波。</translation>
     </message>
     <message>
         <source>Rounded square wave</source>
@@ -5944,7 +7409,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Click here for a square-wave with a rounded end.</source>
-        <translation type="unfinished">クリックで尻尾がまるまった方形波</translation>
+        <translation type="unfinished">クリックで尻尾が丸まった矩形波。</translation>
     </message>
     <message>
         <source>Moog wave</source>
@@ -5952,7 +7417,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Click here for a moog-like wave.</source>
-        <translation type="unfinished">クリックで Moog みたいな波形</translation>
+        <translation type="unfinished">クリックでモーグみたいな波形。</translation>
     </message>
     <message>
         <source>Sine wave</source>
@@ -5960,19 +7425,19 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Click for a sine-wave.</source>
-        <translation type="unfinished">クリックでサイン波</translation>
+        <translation type="unfinished">クリックでサイン波。</translation>
     </message>
     <message>
         <source>White noise wave</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ホワイトノイズ波</translation>
     </message>
     <message>
         <source>Click here for an exponential wave.</source>
-        <translation type="unfinished">クリックで指数波形</translation>
+        <translation type="unfinished">クリックで指数波。</translation>
     </message>
     <message>
         <source>Click here for white-noise.</source>
-        <translation type="unfinished">クリックでホワイトノイズ</translation>
+        <translation type="unfinished">クリックでホワイトノイズ。</translation>
     </message>
     <message>
         <source>Bandlimited saw wave</source>
@@ -6027,11 +7492,11 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Distortion</source>
-        <translation type="unfinished">説明</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Waveform</source>
-        <translation type="unfinished"></translation>
+        <translation>波形</translation>
     </message>
     <message>
         <source>Slide Decay</source>
@@ -6066,7 +7531,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Resonance:</source>
-        <translation type="unfinished"></translation>
+        <translation>レゾナンス:</translation>
     </message>
     <message>
         <source>RES</source>
@@ -6082,7 +7547,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Decay:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ディケイ:</translation>
     </message>
     <message>
         <source>DEC</source>
@@ -6125,7 +7590,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>位置</translation>
     </message>
     <message>
         <source>Vibrato Gain</source>
@@ -6241,14 +7706,14 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Your Stk-installation seems to be incomplete. Please make sure the full Stk-package is installed!</source>
-        <translation type="unfinished">Stk-インストールが完全でないようです。　Stk-パッケージがすべてインストールされてることを確認してください</translation>
+        <translation>Stkのインストールが未完了のようです。Stkパッケージがすべてインストールされていることを確認してください！</translation>
     </message>
 </context>
 <context>
     <name>malletsInstrumentView</name>
     <message>
         <source>Instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>楽器</translation>
     </message>
     <message>
         <source>Spread</source>
@@ -6268,11 +7733,11 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>位置</translation>
     </message>
     <message>
         <source>Position:</source>
-        <translation type="unfinished"></translation>
+        <translation>位置:</translation>
     </message>
     <message>
         <source>Vib Gain</source>
@@ -6360,11 +7825,11 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>速さ</translation>
     </message>
     <message>
         <source>Speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>速さ:</translation>
     </message>
     <message>
         <source>Vibrato</source>
@@ -6383,7 +7848,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>VST Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>VST同期</translation>
     </message>
     <message>
         <source>Click here if you want to synchronize all parameters with VST plugin.</source>
@@ -6399,7 +7864,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>    Close    </source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる</translation>
     </message>
     <message>
         <source>Close VST effect knob-controller window.</source>
@@ -6414,7 +7879,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>VST Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>VST同期</translation>
     </message>
     <message>
         <source>Click here if you want to synchronize all parameters with VST plugin.</source>
@@ -6430,7 +7895,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>    Close    </source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる</translation>
     </message>
     <message>
         <source>Close VST plugin knob-controller window.</source>
@@ -6438,17 +7903,10 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
 </context>
 <context>
-    <name>nineButtonSelector</name>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="unfinished">ヘルプ(&amp;H)</translation>
-    </message>
-</context>
-<context>
     <name>opl2instrument</name>
     <message>
         <source>Patch</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">パッチ</translation>
     </message>
     <message>
         <source>Op 1 Attack</source>
@@ -6567,11 +8025,11 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     <name>organicInstrument</name>
     <message>
         <source>Distortion</source>
-        <translation type="unfinished">説明</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished">ボリウム</translation>
+        <translation>音量</translation>
     </message>
 </context>
 <context>
@@ -6582,7 +8040,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>音量:</translation>
     </message>
     <message>
         <source>Randomise</source>
@@ -6645,7 +8103,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Channel 1 volume</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル1の音量</translation>
     </message>
     <message>
         <source>Volume sweep direction</source>
@@ -6657,15 +8115,15 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Channel 2 volume</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル2の音量</translation>
     </message>
     <message>
         <source>Channel 3 volume</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル3の音量</translation>
     </message>
     <message>
         <source>Channel 4 volume</source>
-        <translation type="unfinished"></translation>
+        <translation>チャンネル4の音量</translation>
     </message>
     <message>
         <source>Right Output level</source>
@@ -6812,11 +8270,11 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Bass:</source>
-        <translation type="unfinished"></translation>
+        <translation>ベース:</translation>
     </message>
     <message>
         <source>Bass</source>
-        <translation type="unfinished"></translation>
+        <translation>ベース</translation>
     </message>
     <message>
         <source>Sweep Direction</source>
@@ -6864,7 +8322,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Wave Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>波のパターン</translation>
     </message>
     <message>
         <source>The amount of increase or decrease in frequency</source>
@@ -6895,11 +8353,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     <name>pluginBrowser</name>
     <message>
         <source>no description</source>
-        <translation type="unfinished">説明なし</translation>
-    </message>
-    <message>
-        <source>Instrument plugins</source>
-        <translation type="unfinished">Instrument Plugins</translation>
+        <translation>説明なし</translation>
     </message>
     <message>
         <source>Incomplete monophonic imitation tb303</source>
@@ -6907,11 +8361,11 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>Plugin for freely manipulating stereo output</source>
-        <translation type="unfinished">ステレオ出力を自由に操作するプラグイン</translation>
+        <translation>ステレオ出力を自由に操作するプラグイン</translation>
     </message>
     <message>
         <source>Plugin for controlling knobs with sound peaks</source>
-        <translation type="unfinished">サウンドのピークをつまみでコントロールするプラグイン</translation>
+        <translation>サウンドのピークをつまみでコントロールするプラグイン</translation>
     </message>
     <message>
         <source>Plugin for enhancing stereo separation of a stereo input file</source>
@@ -6919,7 +8373,7 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>List installed LADSPA plugins</source>
-        <translation type="unfinished">インストールされている LADSPA プラグインのリスト</translation>
+        <translation>インストールされているLADSPAプラグインの一覧</translation>
     </message>
     <message>
         <source>Filter for importing FL Studio projects into LMMS</source>
@@ -6947,19 +8401,11 @@ Double clicking any of the plugins will bring up information on the ports.</sour
     </message>
     <message>
         <source>plugin for using arbitrary LADSPA-effects inside LMMS.</source>
-        <translation type="unfinished">任意の LADSPA エフェクトを LMMS で使うためのプラグイン</translation>
+        <translation>任意のLADSPAエフェクトをLMMSで使うためのプラグイン。</translation>
     </message>
     <message>
         <source>Filter for importing MIDI-files into LMMS</source>
         <translation type="unfinished">MIDI ファイルを LMMS にインポートするためのフィルター</translation>
-    </message>
-    <message>
-        <source>Instrument browser</source>
-        <translation type="unfinished">Instrument Browser</translation>
-    </message>
-    <message>
-        <source>Drag an instrument into either the Song-Editor, the Beat+Bassline Editor or into an existing instrument track.</source>
-        <translation type="unfinished">インストゥルメントをSong-EditorやBeat+Bassline Editorまたは存在する Instrument Trackにドラッグしてください。</translation>
     </message>
     <message>
         <source>Emulation of the MOS6581 and MOS8580 SID.
@@ -6969,7 +8415,7 @@ This chip was used in the Commodore 64 computer.</source>
     </message>
     <message>
         <source>Player for SoundFont files</source>
-        <translation type="unfinished">サウンドフォント ファイル用プレイヤー</translation>
+        <translation>サウンドフォントファイル用プレイヤー</translation>
     </message>
     <message>
         <source>Emulation of GameBoy (TM) APU</source>
@@ -7051,331 +8497,83 @@ This chip was used in the Commodore 64 computer.</source>
         <source>A NES-like synthesizer</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>projectNotes</name>
     <message>
-        <source>Project notes</source>
+        <source>Player for GIG files</source>
+        <translation>GIGファイル用プレイヤー</translation>
+    </message>
+    <message>
+        <source>A multitap echo delay plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Put down your project notes here.</source>
-        <translation type="unfinished">ここにプロジェクトに関するメモを記入してください。</translation>
-    </message>
-    <message>
-        <source>Edit Actions</source>
-        <translation type="unfinished">編集機能</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <translation type="unfinished">元に戻す(&amp;U)</translation>
-    </message>
-    <message>
-        <source>Ctrl+Z</source>
+        <source>A native flanger plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Redo</source>
-        <translation type="unfinished">やり直し(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Ctrl+Y</source>
+        <source>A native delay plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Copy</source>
-        <translation type="unfinished">コピー(&amp;C)</translation>
-    </message>
-    <message>
-        <source>Ctrl+C</source>
+        <source>An oversampling bitcrusher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cu&amp;t</source>
-        <translation type="unfinished">切り取り(&amp;t)</translation>
-    </message>
-    <message>
-        <source>Ctrl+X</source>
+        <source>A native eq plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Paste</source>
-        <translation type="unfinished">貼り付け(&amp;P)</translation>
-    </message>
-    <message>
-        <source>Ctrl+V</source>
+        <source>A 4-band Crossover Equalizer</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Format Actions</source>
-        <translation type="unfinished">フォーマット機能</translation>
-    </message>
-    <message>
-        <source>&amp;Bold</source>
-        <translation type="unfinished">太字(&amp;B)</translation>
-    </message>
-    <message>
-        <source>Ctrl+B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Italic</source>
-        <translation type="unfinished">斜体(&amp;I)</translation>
-    </message>
-    <message>
-        <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Underline</source>
-        <translation type="unfinished">下線(&amp;U)</translation>
-    </message>
-    <message>
-        <source>Ctrl+U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Left</source>
-        <translation type="unfinished">左揃え(&amp;L)</translation>
-    </message>
-    <message>
-        <source>Ctrl+L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C&amp;enter</source>
-        <translation type="unfinished">中央揃え(&amp;e)</translation>
-    </message>
-    <message>
-        <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Right</source>
-        <translation type="unfinished">右揃え(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Ctrl+R</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Justify</source>
-        <translation type="unfinished">両端揃え(&amp;J)</translation>
-    </message>
-    <message>
-        <source>Ctrl+J</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Color...</source>
-        <translation type="unfinished">文字の色(&amp;C)...</translation>
     </message>
 </context>
 <context>
-    <name>renameDialog</name>
+    <name>setupWidget</name>
     <message>
-        <source>Rename...</source>
-        <translation type="unfinished">名前の変更...</translation>
-    </message>
-</context>
-<context>
-    <name>setupDialog</name>
-    <message>
-        <source>Setup LMMS</source>
-        <translation type="unfinished">LMMS 設定</translation>
-    </message>
-    <message>
-        <source>General settings</source>
-        <translation type="unfinished">一般設定</translation>
-    </message>
-    <message>
-        <source>BUFFER SIZE</source>
-        <translation type="unfinished">バッファ サイズ</translation>
-    </message>
-    <message>
-        <source>Reset to default-value</source>
-        <translation type="unfinished">デフォルト値にリセット</translation>
-    </message>
-    <message>
-        <source>MISC</source>
-        <translation type="unfinished">その他</translation>
-    </message>
-    <message>
-        <source>Enable tooltips</source>
-        <translation type="unfinished">ツールチップを有効にする</translation>
-    </message>
-    <message>
-        <source>Show restart warning after changing settings</source>
-        <translation type="unfinished">設定変更後に「再起動警告」を表示する</translation>
-    </message>
-    <message>
-        <source>Display volume as dBV </source>
-        <translation type="unfinished">音量を dBV で表示する</translation>
-    </message>
-    <message>
-        <source>Compress project files per default</source>
-        <translation type="unfinished">プロジェクト ファイルの圧縮をデフォルトにする</translation>
-    </message>
-    <message>
-        <source>HQ-mode for output audio-device</source>
-        <translation type="unfinished">出力オーディオデバイスを高品質モードにする</translation>
-    </message>
-    <message>
-        <source>LMMS working directory</source>
-        <translation type="unfinished">LMMS作業ディレクトリー</translation>
-    </message>
-    <message>
-        <source>VST-plugin directory</source>
-        <translation type="unfinished">VST-プラグイン ディレクトリー</translation>
-    </message>
-    <message>
-        <source>Artwork directory</source>
-        <translation type="unfinished">アートワーク ディレクトリー</translation>
-    </message>
-    <message>
-        <source>FL Studio installation directory</source>
-        <translation type="unfinished">FL Studio のディレクトリー</translation>
-    </message>
-    <message>
-        <source>STK rawwave directory</source>
-        <translation type="unfinished">STK rawwave のディレクトリー</translation>
-    </message>
-    <message>
-        <source>Performance settings</source>
-        <translation type="unfinished">パフォーマンス設定</translation>
-    </message>
-    <message>
-        <source>UI effects vs. performance</source>
-        <translation type="unfinished">UI エフェクト vs. パフォーマンス</translation>
-    </message>
-    <message>
-        <source>Audio settings</source>
-        <translation type="unfinished">オーディオ設定</translation>
-    </message>
-    <message>
-        <source>AUDIO INTERFACE</source>
-        <translation type="unfinished">オーディオ インターフェース</translation>
-    </message>
-    <message>
-        <source>MIDI settings</source>
-        <translation type="unfinished">MIDI 設定</translation>
-    </message>
-    <message>
-        <source>MIDI INTERFACE</source>
-        <translation type="unfinished">MIDI インターフェース</translation>
-    </message>
-    <message>
-        <source>OK</source>
+        <source>JACK (JACK Audio Connection Kit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <source>Restart LMMS</source>
-        <translation type="unfinished">LMMS の再起動</translation>
-    </message>
-    <message>
-        <source>Please note that most changes won&apos;t take effect until you restart LMMS!</source>
-        <translation type="unfinished">変更した設定の大部分は、LMMSの再起動後に有効になります!</translation>
-    </message>
-    <message>
-        <source>Frames: %1
-Latency: %2 ms</source>
-        <translation type="unfinished">フレーム: %1
-レイテンシー: %2 ms</translation>
-    </message>
-    <message>
-        <source>Here you can setup the internal buffer-size used by LMMS. Smaller values result in a lower latency but also may cause unusable sound or bad performance, especially on older computers or systems with a non-realtime kernel.</source>
-        <translation type="unfinished">ここではLMMSで使用する内部バッファサイズを指定します。値が小さいとレイテンシーが小さくなるだけでなく、特に古いコンピュータやリアルタイムカーネルではないシステムでは酷い音やパフォーマンスの低下を引き起こします。</translation>
-    </message>
-    <message>
-        <source>Choose LMMS working directory</source>
-        <translation type="unfinished">LMMSの作業ディレクトリーを選択してください</translation>
-    </message>
-    <message>
-        <source>Choose your VST-plugin directory</source>
-        <translation type="unfinished">VSTプラグインディレクトリーを選択してください</translation>
-    </message>
-    <message>
-        <source>Choose artwork-theme directory</source>
-        <translation type="unfinished">アートワークテーマディレクトリーを選択してください</translation>
-    </message>
-    <message>
-        <source>Choose FL Studio installation directory</source>
-        <translation type="unfinished">FL Studioがインストールされているディレクトリーを選択してください</translation>
-    </message>
-    <message>
-        <source>Choose LADSPA plugin directory</source>
-        <translation type="unfinished">LADSPAプラグインのディレクトリーを選択してください</translation>
-    </message>
-    <message>
-        <source>Choose STK rawwave directory</source>
-        <translation type="unfinished">STK rawwave のディレクトリーを選択してください</translation>
-    </message>
-    <message>
-        <source>Here you can select your preferred audio-interface. Depending on the configuration of your system during compilation time you can choose between ALSA, JACK, OSS and more. Below you see a box which offers controls to setup the selected audio-interface.</source>
-        <translation type="unfinished">ここでは優先するオーディオインターフェースを選択することができます。コンパイル時のシステム設定によってALSA,JACK, OSS 等を選択することができます。選択したオーディオインターフェースのコントロール設定項目は下部にあります。</translation>
-    </message>
-    <message>
-        <source>Here you can select your preferred MIDI-interface. Depending on the configuration of your system during compilation time you can choose between ALSA, OSS and more. Below you see a box which offers controls to setup the selected MIDI-interface.</source>
-        <translation type="unfinished">ここではMIDI インターフェースを選択することができます。コンパイル時のシステム設定によって、ALSAやOSS等を選択することができます。選択したMIDIインターフェースのコントロール設定項目は下部にあります。</translation>
-    </message>
-    <message>
-        <source>Paths</source>
-        <translation type="unfinished">パス</translation>
-    </message>
-    <message>
-        <source>LADSPA plugin paths</source>
-        <translation type="unfinished">LADSAPA プラグインのパス</translation>
-    </message>
-    <message>
-        <source>Default Soundfont File</source>
-        <translation type="unfinished">デフォルト サウンドフォントファイル</translation>
-    </message>
-    <message>
-        <source>Background artwork</source>
-        <translation type="unfinished">背景用アートワーク</translation>
-    </message>
-    <message>
-        <source>Choose default SoundFont</source>
-        <translation type="unfinished">デフォルトのサウンドフォントを選択してください</translation>
-    </message>
-    <message>
-        <source>Choose background artwork</source>
-        <translation type="unfinished">背景用アートワークを選択してください</translation>
-    </message>
-    <message>
-        <source>One instrument track window mode</source>
+        <source>OSS Raw-MIDI (Open Sound System)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Compact track buttons</source>
+        <source>SDL (Simple DirectMedia Layer)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sync VST plugins to host playback</source>
+        <source>PulseAudio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable note labels in piano roll</source>
+        <source>Dummy (no MIDI support)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable waveform display by default</source>
-        <translation type="unfinished">デフォルトで波形表示を有効にする</translation>
+        <source>ALSA Raw-MIDI (Advanced Linux Sound Architecture)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Smooth scroll in Song Editor</source>
-        <translation type="unfinished">Song Editor でスムーズ スクロールする</translation>
+        <source>PortAudio</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable auto save feature</source>
-        <translation type="unfinished">自動保存機能を有効にする</translation>
+        <source>Dummy (no sound output)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show playback cursor in AudioFileProcessor</source>
+        <source>ALSA (Advanced Linux Sound Architecture)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OSS (Open Sound System)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WinMM MIDI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ALSA-Sequencer (Advanced Linux Sound Architecture)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7387,11 +8585,11 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Patch</source>
-        <translation type="unfinished">パッチ</translation>
+        <translation>パッチ</translation>
     </message>
     <message>
         <source>Gain</source>
-        <translation type="unfinished">ゲイン</translation>
+        <translation>ゲイン</translation>
     </message>
     <message>
         <source>Reverb</source>
@@ -7431,6 +8629,10 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Chorus Depth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A soundfont %1 could not be loaded.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7513,7 +8715,7 @@ Latency: %2 ms</source>
     <name>sfxrInstrument</name>
     <message>
         <source>Wave Form</source>
-        <translation type="unfinished"></translation>
+        <translation>波形</translation>
     </message>
 </context>
 <context>
@@ -7524,11 +8726,11 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Resonance</source>
-        <translation type="unfinished">レゾナンス</translation>
+        <translation>レゾナンス</translation>
     </message>
     <message>
         <source>Filter type</source>
-        <translation type="unfinished">フィルターの種類</translation>
+        <translation>フィルタの種類</translation>
     </message>
     <message>
         <source>Voice 3 off</source>
@@ -7536,7 +8738,7 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished">音量</translation>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Chip model</source>
@@ -7547,11 +8749,11 @@ Latency: %2 ms</source>
     <name>sidInstrumentView</name>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished">音量:</translation>
+        <translation>音量:</translation>
     </message>
     <message>
         <source>Resonance:</source>
-        <translation type="unfinished">レゾナンス:</translation>
+        <translation>レゾナンス:</translation>
     </message>
     <message>
         <source>Cutoff frequency:</source>
@@ -7631,11 +8833,11 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Pulse Wave</source>
-        <translation type="unfinished">パルス波形</translation>
+        <translation>パルス波</translation>
     </message>
     <message>
         <source>Triangle Wave</source>
-        <translation type="unfinished">三角波</translation>
+        <translation>三角波</translation>
     </message>
     <message>
         <source>SawTooth</source>
@@ -7643,11 +8845,11 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Noise</source>
-        <translation type="unfinished">ノイズ</translation>
+        <translation>ノイズ</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished">同期</translation>
+        <translation>同期</translation>
     </message>
     <message>
         <source>Sync synchronizes the fundamental frequency of Oscillator %1 with the fundamental frequency of Oscillator %2 producing &quot;Hard Sync&quot; effects.</source>
@@ -7659,7 +8861,7 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Ring-mod replaces the Triangle Waveform output of Oscillator %1 with a &quot;Ring Modulated&quot; combination of Oscillators %1 and %2.</source>
-        <translation type="unfinished">Ring-mod　オシレーター %1 の出力の三角形の波形を　オシレータ %1 と %2のリングモジュレートされてた組み合わせに置き換えます。</translation>
+        <translation type="unfinished">Ring-mod　オシレーター %1 の出力の三角波を　オシレータ %1 と %2のリングモジュレートされてた組み合わせに置き換えます。</translation>
     </message>
     <message>
         <source>Filtered</source>
@@ -7667,7 +8869,7 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>When Filtered is on, Voice %1 will be processed through the Filter. When Filtered is off, Voice %1 appears directly at the output, and the Filter has no effect on it.</source>
-        <translation type="unfinished">FilteredがONなら　ボイス %1 はフィルターを通って処理されます。　Filteredがオフなら　ボイス $1 は直接出力におくられてフィルターは出力に適用されません。</translation>
+        <translation>フィルタがONなら、ボイス %1 はフィルタを通って処理されます。フィルタがオフならボイス %1 は直接出力に送られてフィルタは出力に適用されません。</translation>
     </message>
     <message>
         <source>Test</source>
@@ -7679,77 +8881,6 @@ Latency: %2 ms</source>
     </message>
 </context>
 <context>
-    <name>song</name>
-    <message>
-        <source>Tempo</source>
-        <translation type="unfinished">テンポ</translation>
-    </message>
-    <message>
-        <source>Master volume</source>
-        <translation type="unfinished">マスター音量</translation>
-    </message>
-    <message>
-        <source>Master pitch</source>
-        <translation type="unfinished">マスターピッチ</translation>
-    </message>
-    <message>
-        <source>Project saved</source>
-        <translation type="unfinished">プロジェクトを保存しました</translation>
-    </message>
-    <message>
-        <source>The project %1 is now saved.</source>
-        <translation type="unfinished">プロジェクト %1 を保存しました</translation>
-    </message>
-    <message>
-        <source>Project NOT saved.</source>
-        <translation type="unfinished">プロジェクトは保存されていません。</translation>
-    </message>
-    <message>
-        <source>The project %1 was not saved!</source>
-        <translation type="unfinished">プロジェクト %1 は保存されませんでした!</translation>
-    </message>
-    <message>
-        <source>Import file</source>
-        <translation type="unfinished">ファイルのインポート</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select file for project-export...</source>
-        <translation type="unfinished">プロジェクトをエクスポートするファイルを選択してください...</translation>
-    </message>
-    <message>
-        <source>Empty project</source>
-        <translation type="unfinished">空のプロジェクト</translation>
-    </message>
-    <message>
-        <source>This project is empty so exporting makes no sense. Please put some items into Song Editor first!</source>
-        <translation type="unfinished">プロジェクトが空なのでエクスポートは無効です。Song Editor にアイテムを置いてからエクスポートしてください!</translation>
-    </message>
-    <message>
-        <source>MIDI sequences</source>
-        <translation type="unfinished">MIDI シーケンス</translation>
-    </message>
-    <message>
-        <source>FL Studio projects</source>
-        <translation type="unfinished">FL Studio プロジェクト</translation>
-    </message>
-    <message>
-        <source>All file types</source>
-        <translation type="unfinished">すべてのファイル</translation>
-    </message>
-    <message>
-        <source>Hydrogen projects</source>
-        <translation type="unfinished">Hydrogen プロジェクト</translation>
-    </message>
-    <message>
-        <source>Select directory for writing exported tracks...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>stereoEnhancerControlDialog</name>
     <message>
         <source>WIDE</source>
@@ -7757,223 +8888,70 @@ Latency: %2 ms</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">幅:</translation>
     </message>
 </context>
 <context>
     <name>stereoEnhancerControls</name>
     <message>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">幅</translation>
     </message>
 </context>
 <context>
     <name>stereoMatrixControlDialog</name>
     <message>
         <source>Left to Left Vol:</source>
-        <translation type="unfinished"></translation>
+        <translation>左から左の音量:</translation>
     </message>
     <message>
         <source>Left to Right Vol:</source>
-        <translation type="unfinished"></translation>
+        <translation>左から右の音量:</translation>
     </message>
     <message>
         <source>Right to Left Vol:</source>
-        <translation type="unfinished"></translation>
+        <translation>右から左の音量:</translation>
     </message>
     <message>
         <source>Right to Right Vol:</source>
-        <translation type="unfinished"></translation>
+        <translation>右から右の音量:</translation>
     </message>
 </context>
 <context>
     <name>stereoMatrixControls</name>
     <message>
         <source>Left to Left</source>
-        <translation type="unfinished"></translation>
+        <translation>左から左</translation>
     </message>
     <message>
         <source>Left to Right</source>
-        <translation type="unfinished"></translation>
+        <translation>左から右</translation>
     </message>
     <message>
         <source>Right to Left</source>
-        <translation type="unfinished"></translation>
+        <translation>右から左</translation>
     </message>
     <message>
         <source>Right to Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>timeLine</name>
-    <message>
-        <source>Enable/disable auto-scrolling</source>
-        <translation type="unfinished">オートスクロールを有効/無効</translation>
-    </message>
-    <message>
-        <source>Enable/disable loop-points</source>
-        <translation type="unfinished">ループポイントを有効/無効</translation>
-    </message>
-    <message>
-        <source>After stopping go back to begin</source>
-        <translation type="unfinished">終了後、開始位置に戻る</translation>
-    </message>
-    <message>
-        <source>After stopping go back to position at which playing was started</source>
-        <translation type="unfinished">終了後、再生が開始された位置に戻る</translation>
-    </message>
-    <message>
-        <source>After stopping keep position</source>
-        <translation type="unfinished">終了後、位置を保持する</translation>
-    </message>
-    <message>
-        <source>Hint</source>
-        <translation type="unfinished">ヒント</translation>
-    </message>
-    <message>
-        <source>Press &lt;Ctrl&gt; to disable magnetic loop points.</source>
-        <translation type="unfinished">マグネティック ループポイントを無効化するには&lt;Ctrl&gt;を押してください。</translation>
-    </message>
-    <message>
-        <source>Hold &lt;Shift&gt; to move the begin loop point; Press &lt;Ctrl&gt; to disable magnetic loop points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>track</name>
-    <message>
-        <source>Muted</source>
-        <translation type="unfinished">ミュート</translation>
-    </message>
-    <message>
-        <source>Solo</source>
-        <translation type="unfinished">ソロ</translation>
-    </message>
-</context>
-<context>
-    <name>trackContentObject</name>
-    <message>
-        <source>Muted</source>
-        <translation type="unfinished">ミュート</translation>
-    </message>
-</context>
-<context>
-    <name>trackContentObjectView</name>
-    <message>
-        <source>Current position</source>
-        <translation type="unfinished">現在位置</translation>
-    </message>
-    <message>
-        <source>Hint</source>
-        <translation type="unfinished">ヒント</translation>
-    </message>
-    <message>
-        <source>Press &lt;Ctrl&gt; and drag to make a copy.</source>
-        <translation type="unfinished">コピーするには&lt;Ctl&gt;＋ドラッグをしてください。</translation>
-    </message>
-    <message>
-        <source>Current length</source>
-        <translation type="unfinished">現在の長さ</translation>
-    </message>
-    <message>
-        <source>Press &lt;Ctrl&gt; for free resizing.</source>
-        <translation type="unfinished">フリーズ解除には&lt;Ctrl&gt;を押してください。</translation>
-    </message>
-    <message>
-        <source>%1:%2 (%3:%4 to %5:%6)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete (middle mousebutton)</source>
-        <translation type="unfinished">消去（マウス中ボタン）</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation type="unfinished">切り取り</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="unfinished">コピー</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation type="unfinished">貼り付け</translation>
-    </message>
-    <message>
-        <source>Mute/unmute (&lt;Ctrl&gt; + middle click)</source>
-        <translation type="unfinished">ミュート/ミュート解除(&lt;Ctrl&gt; + 中ボタンクリック）</translation>
-    </message>
-</context>
-<context>
-    <name>trackOperationsWidget</name>
-    <message>
-        <source>Press &lt;Ctrl&gt; while clicking on move-grip to begin a new drag&apos;n&apos;drop-action.</source>
-        <translation type="unfinished">新しいドラッグ＆ドロップアクションを開始するには、移動グリップをクリック中に &lt;Ctrl&gt;を押してください。</translation>
-    </message>
-    <message>
-        <source>Actions for this track</source>
-        <translation type="unfinished">このトラックのアクション</translation>
-    </message>
-    <message>
-        <source>Mute</source>
-        <translation type="unfinished">ミュート</translation>
-    </message>
-    <message>
-        <source>Mute this track</source>
-        <translation type="unfinished">このトラックをミュート</translation>
-    </message>
-    <message>
-        <source>Solo</source>
-        <translation type="unfinished">ソロ</translation>
-    </message>
-    <message>
-        <source>Clone this track</source>
-        <translation type="unfinished">このトラックを複製</translation>
-    </message>
-    <message>
-        <source>Remove this track</source>
-        <translation type="unfinished">このトラックを削除</translation>
-    </message>
-    <message>
-        <source>Clear this track</source>
-        <translation type="unfinished">このトラックをクリア</translation>
-    </message>
-    <message>
-        <source>Turn all recording on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Turn all recording off</source>
-        <translation type="unfinished"></translation>
+        <translation>右から右</translation>
     </message>
 </context>
 <context>
     <name>vestigeInstrument</name>
     <message>
         <source>Loading plugin</source>
-        <translation type="unfinished">プラグインを読み込んでいます</translation>
+        <translation>プラグインを読み込んでいます</translation>
     </message>
     <message>
         <source>Please wait while loading VST-plugin...</source>
-        <translation type="unfinished">VST-プラグインを読み込む間お待ちください...</translation>
-    </message>
-    <message>
-        <source>Failed loading VST-plugin</source>
-        <translation type="unfinished">VST-プラグインの読み込みに失敗しました</translation>
-    </message>
-    <message>
-        <source>The VST-plugin %1 could not be loaded for some reason.
-If it runs with other VST-software under Linux, please contact an LMMS-developer!</source>
-        <translation type="unfinished">VST-plugin %1 がいくつかの理由で読み込みできませんでした。
-もしその VST が Linuxの他のVST-ソフトウェアで動作するならば LMMS の開発者に連絡してください!</translation>
+        <translation>VSTプラグインを読み込む間お待ちください...</translation>
     </message>
 </context>
 <context>
     <name>vibed</name>
     <message>
         <source>String %1 volume</source>
-        <translation type="unfinished">ストリング %1 の音量</translation>
+        <translation>ストリング %1 の音量</translation>
     </message>
     <message>
         <source>String %1 stiffness</source>
@@ -7989,7 +8967,7 @@ If it runs with other VST-software under Linux, please contact an LMMS-developer
     </message>
     <message>
         <source>Pan %1</source>
-        <translation type="unfinished"></translation>
+        <translation>パニング %1</translation>
     </message>
     <message>
         <source>Detune %1</source>
@@ -8001,7 +8979,7 @@ If it runs with other VST-software under Linux, please contact an LMMS-developer
     </message>
     <message>
         <source>Length %1</source>
-        <translation type="unfinished"></translation>
+        <translation>長さ %1</translation>
     </message>
     <message>
         <source>Impulse %1</source>
@@ -8009,14 +8987,14 @@ If it runs with other VST-software under Linux, please contact an LMMS-developer
     </message>
     <message>
         <source>Octave %1</source>
-        <translation type="unfinished"></translation>
+        <translation>オクターブ %1</translation>
     </message>
 </context>
 <context>
     <name>vibedView</name>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished">音量:</translation>
+        <translation>音量:</translation>
     </message>
     <message>
         <source>The &apos;V&apos; knob sets the volume of the selected string.</source>
@@ -8048,7 +9026,7 @@ If it runs with other VST-software under Linux, please contact an LMMS-developer
     </message>
     <message>
         <source>Pan:</source>
-        <translation type="unfinished">パン:</translation>
+        <translation>パニング:</translation>
     </message>
     <message>
         <source>The Pan knob determines the location of the selected string in the stereo field.</source>
@@ -8072,7 +9050,7 @@ If it runs with other VST-software under Linux, please contact an LMMS-developer
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">長さ:</translation>
+        <translation>長さ:</translation>
     </message>
     <message>
         <source>The Length knob sets the length of the selected string.  Longer strings will both ring longer and sound brighter, however, they will also eat up more CPU cycles.</source>
@@ -8088,11 +9066,11 @@ If it runs with other VST-software under Linux, please contact an LMMS-developer
     </message>
     <message>
         <source>Octave</source>
-        <translation type="unfinished">オクターブ</translation>
+        <translation>オクターブ</translation>
     </message>
     <message>
         <source>The Octave selector is used to choose which harmonic of the note the string will ring at.  For example, &apos;-2&apos; means the string will ring two octaves below the fundamental, &apos;F&apos; means the string will ring at the fundamental, and &apos;6&apos; means the string will ring six octaves above the fundamental.</source>
-        <translation type="unfinished">オクターブセレクタは、ストリングをノートのどの倍音で鳴らすかを選択するために使用します。例えば、'-2'は基音の2オクターブ下まで鳴ることを意味し、'F'は、ストリングが基音で鳴ることを意味します。そして'6'は、ストリングが基本から6オクターブ上で鳴ることを意味します。</translation>
+        <translation type="unfinished">オクターブセレクタは、ストリングをノートのどの倍音で鳴らすかを選択するために使用します。例えば、&apos;-2&apos;は基音の2オクターブ下まで鳴ることを意味し、&apos;F&apos;は、ストリングが基音で鳴ることを意味します。そして&apos;6&apos;は、ストリングが基本から6オクターブ上で鳴ることを意味します。</translation>
     </message>
     <message>
         <source>Impulse Editor</source>
@@ -8106,7 +9084,7 @@ The waveform can also be drawn in the graph.
 The &apos;S&apos; button will smooth the waveform.
 
 The &apos;N&apos; button will normalize the waveform.</source>
-        <translation type="unfinished">波形エディターは、ストリングの振動開始時に使われる初期状態またはインパルスのコントロールに使用します。グラフの右側のボタンで波形を選択した種類に初期化します。'?' ボタンでファイルから波形を--最初の128個のサンプルのみ読み込みます。
+        <translation type="unfinished">波形エディターは、ストリングの振動開始時に使われる初期状態またはインパルスのコントロールに使用します。グラフの右側のボタンで波形を選択した種類に初期化します。&apos;?&apos; ボタンでファイルから波形を--最初の128個のサンプルのみ読み込みます。
 
 波形はグラフ内に描くこともできます。
 
@@ -8126,7 +9104,7 @@ The &apos;V&apos; knob controls the volume.  The &apos;S&apos; knob controls the
 The &apos;Length&apos; knob controls the length of the string.
 
 The LED in the lower right corner of the waveform editor determines whether the string is active in the current instrument.</source>
-        <translation type="unfinished">Vibed は独立して振動しているストリングを9つまでモデル化します。&apos;String&apos;セレクタでは、現在編集しているストリングを選ぶことができます。&apos;Imp&apos; セレクタでは、インパルスと、ストリングの初期状態のどちらをグラフで表すのかを選択します。'Octave' セレクタでは、どの倍音でストリングを振動させるのかを選択します。
+        <translation type="unfinished">Vibed は独立して振動しているストリングを9つまでモデル化します。&apos;String&apos;セレクタでは、現在編集しているストリングを選ぶことができます。&apos;Imp&apos; セレクタでは、インパルスと、ストリングの初期状態のどちらをグラフで表すのかを選択します。&apos;Octave&apos; セレクタでは、どの倍音でストリングを振動させるのかを選択します。
 
 グラフでは、動作中のストリングを設定する際に使用する、初期状態またはインパルスをコントールすることができます。
 
@@ -8156,23 +9134,23 @@ The LED in the lower right corner of the waveform editor determines whether the 
     </message>
     <message>
         <source>Sine wave</source>
-        <translation type="unfinished">サイン波形</translation>
+        <translation>サイン波</translation>
     </message>
     <message>
         <source>Triangle wave</source>
-        <translation type="unfinished">三角波形</translation>
+        <translation>三角波</translation>
     </message>
     <message>
         <source>Saw wave</source>
-        <translation type="unfinished">のこぎり波形</translation>
+        <translation>のこぎり波</translation>
     </message>
     <message>
         <source>Square wave</source>
-        <translation type="unfinished">方形波形</translation>
+        <translation>矩形波</translation>
     </message>
     <message>
         <source>White noise wave</source>
-        <translation type="unfinished">ホワイトノイズ波形</translation>
+        <translation type="unfinished">ホワイトノイズ波</translation>
     </message>
     <message>
         <source>User defined wave</source>
@@ -8195,28 +9173,24 @@ The LED in the lower right corner of the waveform editor determines whether the 
         <translation type="unfinished">ここをクリックすると波形をノーマライズ化します。</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>ヘルプ(&amp;H)</translation>
-    </message>
-    <message>
         <source>Use a sine-wave for current oscillator.</source>
-        <translation type="unfinished">サイン波形を現在のオシレータで使用する。</translation>
+        <translation type="unfinished">サイン波を現在のオシレータで使用する。</translation>
     </message>
     <message>
         <source>Use a triangle-wave for current oscillator.</source>
-        <translation type="unfinished">三角波形を現在のオシレータで使用する。</translation>
+        <translation type="unfinished">三角波を現在のオシレータで使用する。</translation>
     </message>
     <message>
         <source>Use a saw-wave for current oscillator.</source>
-        <translation type="unfinished">のこぎり波形を現在のオシレータで使用する。</translation>
+        <translation type="unfinished">のこぎり波を現在のオシレータで使用する。</translation>
     </message>
     <message>
         <source>Use a square-wave for current oscillator.</source>
-        <translation type="unfinished">方形波形を現在のオシレータで使用する。</translation>
+        <translation type="unfinished">矩形波を現在のオシレータで使用する。</translation>
     </message>
     <message>
         <source>Use white-noise for current oscillator.</source>
-        <translation type="unfinished">ホワイトノイズ波形を現在のオシレータで使用する。</translation>
+        <translation type="unfinished">ホワイトノイズ波を現在のオシレータで使用する。</translation>
     </message>
     <message>
         <source>Use a user-defined waveform for current oscillator.</source>
@@ -8224,21 +9198,10 @@ The LED in the lower right corner of the waveform editor determines whether the 
     </message>
 </context>
 <context>
-    <name>visualizationWidget</name>
-    <message>
-        <source>click to enable/disable visualization of master-output</source>
-        <translation type="unfinished">ここをクリックするとマスター出力の表示/非表示を切り替えます</translation>
-    </message>
-    <message>
-        <source>Click to enable</source>
-        <translation type="unfinished">有効にするにはここをクリック</translation>
-    </message>
-</context>
-<context>
     <name>voiceObject</name>
     <message>
         <source>Voice %1 pulse width</source>
-        <translation type="unfinished"></translation>
+        <translation>ボイス %1 のパルス幅</translation>
     </message>
     <message>
         <source>Voice %1 attack</source>
@@ -8266,7 +9229,7 @@ The LED in the lower right corner of the waveform editor determines whether the 
     </message>
     <message>
         <source>Voice %1 sync</source>
-        <translation type="unfinished"></translation>
+        <translation>ボイス %1 の同期</translation>
     </message>
     <message>
         <source>Voice %1 ring modulate</source>
@@ -8285,23 +9248,23 @@ The LED in the lower right corner of the waveform editor determines whether the 
     <name>waveShaperControlDialog</name>
     <message>
         <source>INPUT</source>
-        <translation type="unfinished"></translation>
+        <translation>入力</translation>
     </message>
     <message>
         <source>Input gain:</source>
-        <translation type="unfinished"></translation>
+        <translation>入力ゲイン:</translation>
     </message>
     <message>
         <source>OUTPUT</source>
-        <translation type="unfinished"></translation>
+        <translation>出力</translation>
     </message>
     <message>
         <source>Output gain:</source>
-        <translation type="unfinished"></translation>
+        <translation>出力ゲイン:</translation>
     </message>
     <message>
         <source>Reset waveform</source>
-        <translation type="unfinished"></translation>
+        <translation>波形をリセット</translation>
     </message>
     <message>
         <source>Click here to reset the wavegraph back to default</source>

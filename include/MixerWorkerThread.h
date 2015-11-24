@@ -25,18 +25,13 @@
 #ifndef MIXER_WORKER_THREAD_H
 #define MIXER_WORKER_THREAD_H
 
+#include <AtomicInt.h>
 #include <QtCore/QAtomicPointer>
 #include <QtCore/QThread>
 
-#include "ThreadableJob.h"
-#include "Mixer.h"
-
-#ifdef __SSE__
-#include <xmmintrin.h>
-#endif
-#ifdef __SSE3__
-#include <pmmintrin.h>
-#endif
+class QWaitCondition;
+class Mixer;
+class ThreadableJob;
 
 class MixerWorkerThread : public QThread
 {
@@ -63,14 +58,14 @@ public:
 
 		void addJob( ThreadableJob * _job );
 
-		void run( sampleFrame * _buffer );
+		void run();
 		void wait();
 
 	private:
 #define JOB_QUEUE_SIZE 1024
 		QAtomicPointer<ThreadableJob> m_items[JOB_QUEUE_SIZE];
-		QAtomicInt m_queueSize;
-		QAtomicInt m_itemsDone;
+		AtomicInt m_queueSize;
+		AtomicInt m_itemsDone;
 		OperationMode m_opMode;
 
 	} ;
@@ -115,7 +110,6 @@ private:
 	static QWaitCondition * queueReadyWaitCond;
 	static QList<MixerWorkerThread *> workerThreads;
 
-	sampleFrame * m_workingBuf;
 	volatile bool m_quit;
 
 } ;

@@ -27,14 +27,14 @@
 #define PATTERN_H
 
 #include <QtCore/QVector>
-#include <QtGui/QWidget>
-#include <QtGui/QDialog>
+#include <QWidget>
+#include <QDialog>
 #include <QtCore/QThread>
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 
-#include "note.h"
-#include "track.h"
+#include "Note.h"
+#include "Track.h"
 
 
 class QAction;
@@ -46,7 +46,7 @@ class SampleBuffer;
 
 
 
-class EXPORT Pattern : public trackContentObject
+class EXPORT Pattern : public TrackContentObject
 {
 	Q_OBJECT
 public:
@@ -67,13 +67,13 @@ public:
 	MidiTime beatPatternLength() const;
 
 	// note management
-	note * addNote( const note & _new_note, const bool _quant_pos = true );
+	Note * addNote( const Note & _new_note, const bool _quant_pos = true );
 
-	void removeNote( const note * _note_to_del );
+	void removeNote( const Note * _note_to_del );
 
-	note * noteAtStep( int _step );
+	Note * noteAtStep( int _step );
 
-	note * rearrangeNote( const note * _note_to_proc,
+	Note * rearrangeNote( const Note * _note_to_proc,
 						const bool _quant_pos = true );
 	void rearrangeAllNotes();
 	void clearNotes();
@@ -94,6 +94,10 @@ public:
 	void checkType();
 
 
+	// next/previous track based on position in the containing track
+	Pattern * previousPattern() const;
+	Pattern * nextPattern() const;
+
 	// settings-management
 	virtual void saveSettings( QDomDocument & _doc, QDomElement & _parent );
 	virtual void loadSettings( const QDomElement & _this );
@@ -110,7 +114,7 @@ public:
 	bool empty();
 
 
-	virtual trackContentObjectView * createView( trackView * _tv );
+	virtual TrackContentObjectView * createView( TrackView * _tv );
 
 
 	using Model::dataChanged;
@@ -123,6 +127,7 @@ protected:
 
 protected slots:
 	void addSteps();
+	void cloneSteps();
 	void removeSteps();
 	void clear();
 	void changeTimeSignature();
@@ -137,8 +142,10 @@ private:
 	NoteVector m_notes;
 	int m_steps;
 
+	Pattern * adjacentPatternByOffset(int offset) const;
+
 	friend class PatternView;
-	friend class bbEditor;
+	friend class BBTrackContainerView;
 
 
 signals:
@@ -148,7 +155,7 @@ signals:
 
 
 
-class PatternView : public trackContentObjectView
+class PatternView : public TrackContentObjectView
 {
 	Q_OBJECT
 
@@ -156,7 +163,7 @@ class PatternView : public trackContentObjectView
 	Q_PROPERTY( QColor fgColor READ fgColor WRITE setFgColor )
 	Q_PROPERTY( QColor textColor READ textColor WRITE setTextColor )
 public:
-	PatternView( Pattern* pattern, trackView* parent );
+	PatternView( Pattern* pattern, TrackView* parent );
 	virtual ~PatternView();
 
 
@@ -173,13 +180,13 @@ protected slots:
 
 protected:
 	virtual void constructContextMenu( QMenu * );
-	virtual void mouseDoubleClickEvent( QMouseEvent * _me );
 	virtual void mousePressEvent( QMouseEvent * _me );
+	virtual void mouseDoubleClickEvent( QMouseEvent * _me );
 	virtual void paintEvent( QPaintEvent * _pe );
 	virtual void resizeEvent( QResizeEvent * _re )
 	{
 		m_needsUpdate = true;
-		trackContentObjectView::resizeEvent( _re );
+		TrackContentObjectView::resizeEvent( _re );
 	}
 	virtual void wheelEvent( QWheelEvent * _we );
 

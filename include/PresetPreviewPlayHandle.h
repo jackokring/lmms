@@ -23,8 +23,8 @@
  *
  */
 
-#ifndef _PRESET_PREVIEW_PLAY_HANDLE_H
-#define _PRESET_PREVIEW_PLAY_HANDLE_H
+#ifndef PRESET_PREVIEW_PLAY_HANDLE_H
+#define PRESET_PREVIEW_PLAY_HANDLE_H
 
 #include "NotePlayHandle.h"
 
@@ -35,13 +35,13 @@ class PreviewTrackContainer;
 class EXPORT PresetPreviewPlayHandle : public PlayHandle
 {
 public:
-	PresetPreviewPlayHandle( const QString& presetFile, bool loadByPlugin = false );
+	PresetPreviewPlayHandle( const QString& presetFile, bool loadByPlugin = false, DataFile *dataFile = 0 );
 	virtual ~PresetPreviewPlayHandle();
 
 	virtual void play( sampleFrame* buffer );
 	virtual bool isFinished() const;
 
-	virtual bool isFromTrack( const track * _track ) const;
+	virtual bool isFromTrack( const Track * _track ) const;
 
 	static void init();
 	static void cleanup();

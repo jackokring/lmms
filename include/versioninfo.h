@@ -1,5 +1,5 @@
 #ifdef __GNUC__
-#define GCC_VERSION "GCC "__VERSION__
+#define GCC_VERSION "GCC " __VERSION__
 #else
 #define GCC_VERSION "unknown compiler"
 #endif
@@ -26,4 +26,8 @@
 
 #ifdef LMMS_BUILD_WIN32
 #define PLATFORM "win32"
+#endif
+
+#ifdef LMMS_BUILD_HAIKU
+#define PLATFORM "Haiku"
 #endif

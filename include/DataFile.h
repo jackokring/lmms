@@ -27,15 +27,16 @@
 #ifndef DATA_FILE_H
 #define DATA_FILE_H
 
-#include <QtXml/QDomDocument>
-#include <QTextStream>
+#include <QDomDocument>
 
 #include "export.h"
-#include "lmms_basics.h"
+#include "MemoryManager.h"
 
+class QTextStream;
 
 class EXPORT DataFile : public QDomDocument
 {
+	MM_OPERATORS
 public:
 	enum Types
 	{
@@ -56,6 +57,12 @@ public:
 	DataFile( Type type );
 
 	virtual ~DataFile();
+
+	///
+	/// \brief validate
+	/// performs basic validation, compared to file extension.
+	///
+	bool validate( QString extension );
 
 	QString nameWithExtension( const QString& fn ) const;
 
@@ -101,6 +108,20 @@ private:
 	static QString typeName( Type type );
 
 	void cleanMetaNodes( QDomElement de );
+
+	// helper upgrade routines
+	void upgrade_0_2_1_20070501();
+	void upgrade_0_2_1_20070508();
+	void upgrade_0_3_0_rc2();
+	void upgrade_0_3_0();
+	void upgrade_0_4_0_20080104();
+	void upgrade_0_4_0_20080118();
+	void upgrade_0_4_0_20080129();
+	void upgrade_0_4_0_20080409();
+	void upgrade_0_4_0_20080607();
+	void upgrade_0_4_0_20080622();
+	void upgrade_0_4_0_beta1();
+	void upgrade_0_4_0_rc2();
 
 	void upgrade();
 

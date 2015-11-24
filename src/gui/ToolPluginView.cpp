@@ -26,18 +26,19 @@
 #include "ToolPlugin.h"
 #include "ToolPluginView.h"
 
-#include <QtGui/QIcon>
-#include <QtGui/QMdiArea>
+#include <QIcon>
+#include <QMdiArea>
 
 #include "embed.h"
-#include "engine.h"
+#include "Engine.h"
+#include "GuiApplication.h"
 #include "MainWindow.h"
 
 
 ToolPluginView::ToolPluginView( ToolPlugin * _toolPlugin ) :
 	PluginView( _toolPlugin, NULL )
 {
-	engine::mainWindow()->workspace()->addSubWindow( this );
+	gui->mainWindow()->addWindowedWidget( this );
 	parentWidget()->setAttribute( Qt::WA_DeleteOnClose, false );
 
 	setWindowTitle( _toolPlugin->displayName() );

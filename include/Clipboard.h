@@ -22,11 +22,11 @@
  *
  */
 
-#ifndef _CLIPBOARD_H
-#define _CLIPBOARD_H
+#ifndef CLIPBOARD_H
+#define CLIPBOARD_H
 
 #include <QtCore/QMap>
-#include <QtXml/QDomElement>
+#include <QDomElement>
 
 
 class JournallingObject;

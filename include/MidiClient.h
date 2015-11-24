@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef _MIDI_CLIENT_H
-#define _MIDI_CLIENT_H
+#ifndef MIDI_CLIENT_H
+#define MIDI_CLIENT_H
 
 #include <QtCore/QStringList>
 #include <QtCore/QVector>
@@ -31,7 +31,7 @@
 
 #include "MidiEvent.h"
 #include "MidiEventProcessor.h"
-#include "tab_widget.h"
+#include "TabWidget.h"
 
 
 class MidiPort;
@@ -105,32 +105,6 @@ public:
 	// tries to open either MIDI-driver from config-file or (if it fails)
 	// any other working
 	static MidiClient * openMidiClient();
-
-
-	class setupWidget : public tabWidget
-	{
-	public:
-		setupWidget( const QString & _caption, QWidget * _parent ) :
-			tabWidget( tabWidget::tr( "Settings for %1" ).arg(
-					tr( _caption.toAscii() ) ).toUpper(),
-								_parent )
-		{
-		}
-
-		virtual ~setupWidget()
-		{
-		}
-
-		virtual void saveSettings() = 0;
-
-		virtual void show()
-		{
-			parentWidget()->show();
-			QWidget::show();
-		}
-
-	} ;
-
 
 protected:
 	QVector<MidiPort *> m_midiPorts;

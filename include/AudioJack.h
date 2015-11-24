@@ -22,20 +22,20 @@
  *
  */
 
-#ifndef _AUDIO_JACK_H
-#define _AUDIO_JACK_H
+#ifndef AUDIO_JACK_H
+#define AUDIO_JACK_H
 
 #include "lmmsconfig.h"
 
 #ifdef LMMS_HAVE_JACK
 #include <jack/jack.h>
-#endif
 
 #include <QtCore/QVector>
 #include <QtCore/QList>
 #include <QtCore/QMap>
 
 #include "AudioDevice.h"
+#include "AudioDeviceSetupWidget.h"
 
 
 class QLineEdit;
@@ -56,7 +56,7 @@ public:
 	}
 
 
-	class setupWidget : public AudioDevice::setupWidget
+	class setupWidget : public AudioDeviceSetupWidget
 	{
 	public:
 		setupWidget( QWidget * _parent );
@@ -75,7 +75,6 @@ private slots:
 	void restartAfterZombified();
 
 
-#ifdef LMMS_HAVE_JACK
 private:
 	bool initJackClient();
 
@@ -99,8 +98,6 @@ private:
 	bool m_active;
 	bool m_stopped;
 
-	QSemaphore m_stopSemaphore;
-
 	QVector<jack_port_t *> m_outputPorts;
 	jack_default_audio_sample_t * * m_tempOutBufs;
 	surroundSampleFrame * m_outBuf;
@@ -118,11 +115,12 @@ private:
 	typedef QMap<AudioPort *, StereoPort> JackPortMap;
 	JackPortMap m_portMap;
 #endif
-#endif
 
 signals:
 	void zombified();
 
 } ;
+
+#endif
 
 #endif

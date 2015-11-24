@@ -26,16 +26,14 @@
 #ifndef BANDLIMITEDWAVE_H
 #define BANDLIMITEDWAVE_H
 
-#include <QString>
-#include <QDataStream>
-#include <QFile>
+class QDataStream;
+class QString;
 
-#include "config_mgr.h"
 #include "export.h"
 #include "interpolation.h"
 #include "lmms_basics.h"
 #include "lmms_math.h"
-#include "engine.h"
+#include "Engine.h"
 #include "Mixer.h"
 
 #define MAXLEN 11
@@ -104,7 +102,7 @@ public:
 	 */
 	static inline float freqToLen( float f )
 	{
-		return freqToLen( f, engine::mixer()->processingSampleRate() );
+		return freqToLen( f, Engine::mixer()->processingSampleRate() );
 	}
 
 	/*! \brief This method converts frequency to wavelength, but you can use any custom sample rate with it.

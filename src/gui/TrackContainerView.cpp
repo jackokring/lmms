@@ -22,18 +22,19 @@
  *
  */
 
+#include <algorithm>
 
-#include <QtGui/QApplication>
-#include <QtGui/QLayout>
-#include <QtGui/QMdiArea>
-#include <QtGui/QProgressDialog>
-#include <QtGui/QScrollBar>
-#include <QtGui/QWheelEvent>
+#include <QApplication>
+#include <QLayout>
+#include <QMdiArea>
+#include <QProgressDialog>
+#include <QScrollBar>
+#include <QWheelEvent>
 
 
 #include "TrackContainerView.h"
 #include "TrackContainer.h"
-#include "bb_track.h"
+#include "BBTrack.h"
 #include "MainWindow.h"
 #include "debug.h"
 #include "FileBrowser.h"
@@ -41,10 +42,12 @@
 #include "Instrument.h"
 #include "InstrumentTrack.h"
 #include "DataFile.h"
-#include "rubberband.h"
-#include "song.h"
-#include "string_pair_drag.h"
-#include "track.h"
+#include "Rubberband.h"
+#include "Song.h"
+#include "StringPairDrag.h"
+#include "Track.h"
+#include "GuiApplication.h"
+#include "PluginFactory.h"
 
 
 TrackContainerView::TrackContainerView( TrackContainer * _tc ) :
@@ -57,7 +60,7 @@ TrackContainerView::TrackContainerView( TrackContainer * _tc ) :
 	m_trackViews(),
 	m_scrollArea( new scrollArea( this ) ),
 	m_ppt( DEFAULT_PIXELS_PER_TACT ),
-	m_rubberBand( new rubberBand( m_scrollArea ) ),
+	m_rubberBand( new RubberBand( m_scrollArea ) ),
 	m_origin()
 {
 	m_tc->setHook( this );
@@ -77,13 +80,14 @@ TrackContainerView::TrackContainerView( TrackContainer * _tc ) :
 
 	m_scrollArea->show();
 	m_rubberBand->hide();
+	m_rubberBand->setEnabled( false );
 
 	setAcceptDrops( true );
 
-	connect( engine::getSong(), SIGNAL( timeSignatureChanged( int, int ) ),
+	connect( Engine::getSong(), SIGNAL( timeSignatureChanged( int, int ) ),
 						this, SLOT( realignTracks() ) );
-	connect( m_tc, SIGNAL( trackAdded( track * ) ),
-			this, SLOT( createTrackView( track * ) ),
+	connect( m_tc, SIGNAL( trackAdded( Track * ) ),
+			this, SLOT( createTrackView( Track * ) ),
 			Qt::QueuedConnection );
 }
 
@@ -119,7 +123,7 @@ void TrackContainerView::loadSettings( const QDomElement & _this )
 
 
 
-trackView * TrackContainerView::addTrackView( trackView * _tv )
+TrackView * TrackContainerView::addTrackView( TrackView * _tv )
 {
 	m_trackViews.push_back( _tv );
 	m_scrollLayout->addWidget( _tv );
@@ -133,7 +137,7 @@ trackView * TrackContainerView::addTrackView( trackView * _tv )
 
 
 
-void TrackContainerView::removeTrackView( trackView * _tv )
+void TrackContainerView::removeTrackView( TrackView * _tv )
 {
 	int index = m_trackViews.indexOf( _tv );
 	if( index != -1 )
@@ -144,9 +148,9 @@ void TrackContainerView::removeTrackView( trackView * _tv )
 		m_scrollLayout->removeWidget( _tv );
 
 		realignTracks();
-		if( engine::getSong() )
+		if( Engine::getSong() )
 		{
-			engine::getSong()->setModified();
+			Engine::getSong()->setModified();
 		}
 	}
 }
@@ -154,47 +158,72 @@ void TrackContainerView::removeTrackView( trackView * _tv )
 
 
 
-void TrackContainerView::moveTrackViewUp( trackView * _tv )
+void TrackContainerView::moveTrackView( TrackView * trackView, int indexTo )
 {
-	for( int i = 1; i < m_trackViews.size(); ++i )
-	{
-		trackView * t = m_trackViews[i];
-		if( t == _tv )
-		{
-			bbTrack::swapBBTracks( t->getTrack(),
-					m_trackViews[i - 1]->getTrack() );
-			m_scrollLayout->removeWidget( t );
-			m_scrollLayout->insertWidget( i - 1, t );
-			qSwap( m_tc->m_tracks[i-1], m_tc->m_tracks[i] );
-			m_trackViews.swap( i - 1, i );
-			realignTracks();
-			break;
-		}
-	}
+	// Can't move out of bounds
+	if ( indexTo >= m_trackViews.size() || indexTo < 0 ) { return; }
+
+	// Does not need to move to itself
+	int indexFrom = m_trackViews.indexOf( trackView );
+	if ( indexFrom == indexTo ) { return; }
+
+	BBTrack::swapBBTracks( trackView->getTrack(),
+			m_trackViews[indexTo]->getTrack() );
+
+	m_scrollLayout->removeWidget( trackView );
+	m_scrollLayout->insertWidget( indexTo, trackView );
+
+	Track * track = m_tc->m_tracks[indexFrom];
+
+	m_tc->m_tracks.remove( indexFrom );
+	m_tc->m_tracks.insert( indexTo, track );
+	m_trackViews.move( indexFrom, indexTo );
+
+	realignTracks();
 }
 
 
 
 
-void TrackContainerView::moveTrackViewDown( trackView * _tv )
+void TrackContainerView::moveTrackViewUp( TrackView * trackView )
 {
-	for( int i = 0; i < m_trackViews.size()-1; ++i )
-	{
-		trackView * t = m_trackViews[i];
-		if( t == _tv )
-		{
-			bbTrack::swapBBTracks( t->getTrack(),
-					m_trackViews[i + 1]->getTrack() );
-			m_scrollLayout->removeWidget( t );
-			m_scrollLayout->insertWidget( i + 1, t );
-			qSwap( m_tc->m_tracks[i], m_tc->m_tracks[i+1] );
-			m_trackViews.swap( i, i + 1 );
-			realignTracks();
-			break;
-		}
-	}
+	int index = m_trackViews.indexOf( trackView );
+
+	moveTrackView( trackView, index - 1 );
 }
 
+
+
+
+void TrackContainerView::moveTrackViewDown( TrackView * trackView )
+{
+	int index = m_trackViews.indexOf( trackView );
+
+	moveTrackView( trackView, index + 1 );
+}
+
+void TrackContainerView::scrollToTrackView( TrackView * _tv )
+{
+	if (!m_trackViews.contains(_tv))
+	{
+		qWarning("TrackContainerView::scrollToTrackView: TrackView is not owned by this");
+	}
+	else
+	{
+		int currentScrollTop = m_scrollArea->verticalScrollBar()->value();
+		int scrollAreaHeight = m_scrollArea->size().height();
+		int trackViewTop = _tv->pos().y();
+		int trackViewBottom = trackViewTop + _tv->size().height();
+
+		// displayed_location = widget_location - currentScrollTop
+		// want to make sure that the widget top has displayed location > 0,
+		// and widget bottom < scrollAreaHeight
+		// trackViewTop - scrollY > 0 && trackViewBottom - scrollY < scrollAreaHeight
+		// therefore scrollY < trackViewTop && scrollY > trackViewBottom - scrollAreaHeight
+		int newScroll = std::max( trackViewBottom-scrollAreaHeight, std::min(currentScrollTop, trackViewTop) );
+		m_scrollArea->verticalScrollBar()->setValue(newScroll);
+	}
+}
 
 
 
@@ -217,33 +246,38 @@ void TrackContainerView::realignTracks()
 
 
 
-void TrackContainerView::createTrackView( track * _t )
+TrackView * TrackContainerView::createTrackView( Track * _t )
 {
 	//m_tc->addJournalCheckPoint();
 
-	_t->createView( this );
+	// Avoid duplicating track views
+	for( trackViewList::iterator it = m_trackViews.begin();
+						it != m_trackViews.end(); ++it )
+	{
+		if ( ( *it )->getTrack() == _t ) { return ( *it ); }
+	}
+
+	return _t->createView( this );
 }
 
 
 
 
-void TrackContainerView::deleteTrackView( trackView * _tv )
+void TrackContainerView::deleteTrackView( TrackView * _tv )
 {
 	//m_tc->addJournalCheckPoint();
 
-	track * t = _tv->getTrack();
+	Track * t = _tv->getTrack();
 	removeTrackView( _tv );
 	delete _tv;
 
-	engine::mixer()->lock();
-	delete t;
-	engine::mixer()->unlock();
+	t->deleteLater();
 }
 
 
 
 
-const trackView * TrackContainerView::trackViewAt( const int _y ) const
+const TrackView * TrackContainerView::trackViewAt( const int _y ) const
 {
 	const int abs_y = _y + m_scrollArea->verticalScrollBar()->value();
 	int y_cnt = 0;
@@ -294,8 +328,8 @@ void TrackContainerView::clearAllTracks()
 {
 	while( !m_trackViews.empty() )
 	{
-		trackView * tv = m_trackViews.takeLast();
-		track * t = tv->getTrack();
+		TrackView * tv = m_trackViews.takeLast();
+		Track * t = tv->getTrack();
 		delete tv;
 		delete t;
 	}
@@ -306,12 +340,25 @@ void TrackContainerView::clearAllTracks()
 
 void TrackContainerView::dragEnterEvent( QDragEnterEvent * _dee )
 {
-	stringPairDrag::processDragEnterEvent( _dee,
+	StringPairDrag::processDragEnterEvent( _dee,
 		QString( "presetfile,pluginpresetfile,samplefile,instrument,"
-				"importedproject,soundfontfile,vstpluginfile,"
+				"importedproject,soundfontfile,vstpluginfile,projectfile,"
 				"track_%1,track_%2" ).
-						arg( track::InstrumentTrack ).
-						arg( track::SampleTrack ) );
+						arg( Track::InstrumentTrack ).
+						arg( Track::SampleTrack ) );
+}
+
+void TrackContainerView::selectRegionFromPixels(int xStart, int xEnd)
+{
+	m_rubberBand->setEnabled( true );
+	m_rubberBand->show();
+	m_rubberBand->setGeometry( min( xStart, xEnd ), 0, max( xStart, xEnd ) - min( xStart, xEnd ), std::numeric_limits<int>::max() );
+}
+
+void TrackContainerView::stopRubberBand()
+{
+	m_rubberBand->hide();
+	m_rubberBand->setEnabled( false );
 }
 
 
@@ -319,15 +366,16 @@ void TrackContainerView::dragEnterEvent( QDragEnterEvent * _dee )
 
 void TrackContainerView::dropEvent( QDropEvent * _de )
 {
-	QString type = stringPairDrag::decodeKey( _de );
-	QString value = stringPairDrag::decodeValue( _de );
-	engine::mixer()->lock();
+	QString type = StringPairDrag::decodeKey( _de );
+	QString value = StringPairDrag::decodeValue( _de );
 	if( type == "instrument" )
 	{
 		InstrumentTrack * it = dynamic_cast<InstrumentTrack *>(
-				track::create( track::InstrumentTrack,
+				Track::create( Track::InstrumentTrack,
 								m_tc ) );
-		it->loadInstrument( value );
+		InstrumentLoaderThread *ilt = new InstrumentLoaderThread(
+					this, it, value );
+		ilt->start();
 		//it->toggledInstrumentTrackButton( true );
 		_de->accept();
 	}
@@ -335,11 +383,10 @@ void TrackContainerView::dropEvent( QDropEvent * _de )
 		|| type == "soundfontfile" || type == "vstpluginfile")
 	{
 		InstrumentTrack * it = dynamic_cast<InstrumentTrack *>(
-				track::create( track::InstrumentTrack,
+				Track::create( Track::InstrumentTrack,
 								m_tc ) );
 		Instrument * i = it->loadInstrument(
-			engine::pluginFileHandling()[FileItem::extension(
-								value )]);
+			pluginFactory->pluginSupportingExtension(FileItem::extension(value)).name());
 		i->loadFile( value );
 		//it->toggledInstrumentTrackButton( true );
 		_de->accept();
@@ -348,7 +395,7 @@ void TrackContainerView::dropEvent( QDropEvent * _de )
 	{
 		DataFile dataFile( value );
 		InstrumentTrack * it = dynamic_cast<InstrumentTrack *>(
-				track::create( track::InstrumentTrack,
+				Track::create( Track::InstrumentTrack,
 								m_tc ) );
 		it->setSimpleSerializing();
 		it->loadSettings( dataFile.content().toElement() );
@@ -360,13 +407,22 @@ void TrackContainerView::dropEvent( QDropEvent * _de )
 		ImportFilter::import( value, m_tc );
 		_de->accept();
 	}
+
+	else if( type == "projectfile")
+	{
+		if( gui->mainWindow()->mayChangeProject(true) )
+		{
+			Engine::getSong()->loadProject( value );
+		}
+		_de->accept();
+	}
+
 	else if( type.left( 6 ) == "track_" )
 	{
 		DataFile dataFile( value.toUtf8() );
-		track::create( dataFile.content().firstChild().toElement(), m_tc );
+		Track::create( dataFile.content().firstChild().toElement(), m_tc );
 		_de->accept();
 	}
-	engine::mixer()->unlock();
 }
 
 
@@ -377,6 +433,7 @@ void TrackContainerView::mousePressEvent( QMouseEvent * _me )
 	if( allowRubberband() == true )
 	{
 		m_origin = m_scrollArea->mapFromParent( _me->pos() );
+		m_rubberBand->setEnabled( true );
 		m_rubberBand->setGeometry( QRect( m_origin, QSize() ) );
 		m_rubberBand->show();
 	}
@@ -403,6 +460,7 @@ void TrackContainerView::mouseMoveEvent( QMouseEvent * _me )
 void TrackContainerView::mouseReleaseEvent( QMouseEvent * _me )
 {
 	m_rubberBand->hide();
+	m_rubberBand->setEnabled( false );
 	QWidget::mouseReleaseEvent( _me );
 }
 
@@ -454,6 +512,22 @@ void TrackContainerView::scrollArea::wheelEvent( QWheelEvent * _we )
 
 
 
+InstrumentLoaderThread::InstrumentLoaderThread( QObject *parent, InstrumentTrack *it, QString name ) :
+	QThread( parent ),
+	m_it( it ),
+	m_name( name )
+{
+	m_containerThread = thread();
+}
 
-#include "moc_TrackContainerView.cxx"
 
+
+
+void InstrumentLoaderThread::run()
+{
+	Instrument *i = m_it->loadInstrument( m_name );
+	QObject *parent = i->parent();
+	i->setParent( 0 );
+	i->moveToThread( m_containerThread );
+	i->setParent( parent );
+}

@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef _INSTRUMENT_SOUND_SHAPING_H
-#define _INSTRUMENT_SOUND_SHAPING_H
+#ifndef INSTRUMENT_SOUND_SHAPING_H
+#define INSTRUMENT_SOUND_SHAPING_H
 
 #include "Mixer.h"
 #include "ComboBoxModel.h"
@@ -75,14 +75,13 @@ private:
 	FloatModel m_filterCutModel;
 	FloatModel m_filterResModel;
 
+	static const QString targetNames[InstrumentSoundShaping::NumTargets][3];
+
 
 	friend class InstrumentSoundShapingView;
 	friend class FlpImport;
 
 } ;
-
-
-extern const QString __targetNames[InstrumentSoundShaping::NumTargets][3];
 
 
 #endif

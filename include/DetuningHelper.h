@@ -1,5 +1,5 @@
 /*
- * detuning_helper.h - detuning automation helper
+ * DetuningHelper.h - detuning automation helper
  *
  * Copyright (c) 2007 Javier Serrano Polo <jasp00/at/users.sourceforge.net>
  * Copyright (c) 2008-2010 Tobias Doerffel <tobydox/at/users.sourceforge.net>
@@ -23,14 +23,15 @@
  *
  */
 
-#ifndef _DETUNING_HELPER_H
-#define _DETUNING_HELPER_H
+#ifndef DETUNING_HELPER_H
+#define DETUNING_HELPER_H
 
 #include "InlineAutomation.h"
-
+#include "MemoryManager.h"
 
 class DetuningHelper : public InlineAutomation
 {
+	MM_OPERATORS
 public:
 	DetuningHelper() :
 		InlineAutomation()

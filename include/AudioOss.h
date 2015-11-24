@@ -22,14 +22,15 @@
  *
  */
 
-#ifndef _AUDIO_OSS_H
-#define _AUDIO_OSS_H
+#ifndef AUDIO_OSS_H
+#define AUDIO_OSS_H
 
 #include "lmmsconfig.h"
 
 #ifdef LMMS_HAVE_OSS
 
 #include "AudioDevice.h"
+#include "AudioDeviceSetupWidget.h"
 
 
 class LcdSpinBox;
@@ -50,7 +51,7 @@ public:
 	static QString probeDevice();
 
 
-	class setupWidget : public AudioDevice::setupWidget
+	class setupWidget : public AudioDeviceSetupWidget
 	{
 	public:
 		setupWidget( QWidget * _parent );

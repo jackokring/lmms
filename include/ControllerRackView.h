@@ -22,10 +22,11 @@
  *
  */
 
-#ifndef _CONTROLLER_RACK_VIEW_H
-#define _CONTROLLER_RACK_VIEW_H
+#ifndef CONTROLLER_RACK_VIEW_H
+#define CONTROLLER_RACK_VIEW_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
+#include <QCloseEvent>
 
 #include "SerializingObject.h"
 #include "lmms_basics.h"
@@ -33,8 +34,10 @@
 
 class QPushButton;
 class QScrollArea;
+class QVBoxLayout;
 
 class ControllerView;
+class Controller;
 
 
 class ControllerRackView : public QWidget, public SerializingObject
@@ -55,10 +58,13 @@ public:
 
 public slots:
 	void deleteController( ControllerView * _view );
+	void onControllerAdded( Controller * );
+	void onControllerRemoved( Controller * );
 
+protected:
+	virtual void closeEvent( QCloseEvent * _ce );
 
 private slots:
-	virtual void update();
 	void addController();
 
 
@@ -66,8 +72,12 @@ private:
 	QVector<ControllerView *> m_controllerViews;
 
 	QScrollArea * m_scrollArea;
+	QVBoxLayout * m_scrollAreaLayout;
 	QPushButton * m_addButton;
 
+	// Stores the index of where to insert the next ControllerView.
+	// Needed so that the StretchItem always stays at the last position.
+	int m_nextIndex;
 } ;
 
 #endif

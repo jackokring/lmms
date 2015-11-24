@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef _MIDI_OSS_H
-#define _MIDI_OSS_H
+#ifndef MIDI_OSS_H
+#define MIDI_OSS_H
 
 #include "lmmsconfig.h"
 
@@ -49,24 +49,14 @@ public:
 
 	inline static QString name()
 	{
-		return( QT_TRANSLATE_NOOP( "setupWidget",
+		return( QT_TRANSLATE_NOOP( "MidiSetupWidget",
 			"OSS Raw-MIDI (Open Sound System)" ) );
 	}
 
-
-	class setupWidget : public MidiClientRaw::setupWidget
+	inline static QString configSection()
 	{
-	public:
-		setupWidget( QWidget * _parent );
-		virtual ~setupWidget();
-
-		virtual void saveSettings();
-
-	private:
-		QLineEdit * m_device;
-
-	} ;
-
+		return "midioss";
+	}
 
 protected:
 	virtual void sendByte( const unsigned char c );

@@ -22,10 +22,10 @@
  *
  */
 
-#ifndef _PLUGIN_VIEW_H
-#define _PLUGIN_VIEW_H
+#ifndef PLUGIN_VIEW_H
+#define PLUGIN_VIEW_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "Plugin.h"
 #include "ModelView.h"

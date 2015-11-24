@@ -22,15 +22,15 @@
  *
  */
 
-#ifndef _AUDIO_DEVICE_H
-#define _AUDIO_DEVICE_H
+#ifndef AUDIO_DEVICE_H
+#define AUDIO_DEVICE_H
 
 #include <QtCore/QPair>
 #include <QtCore/QMutex>
 #include <QtCore/QThread>
 
 #include "Mixer.h"
-#include "tab_widget.h"
+#include "TabWidget.h"
 
 
 class AudioPort;
@@ -87,32 +87,6 @@ public:
 	virtual void stopProcessing();
 
 	virtual void applyQualitySettings();
-
-
-
-	class setupWidget : public tabWidget
-	{
-	public:
-		setupWidget( const QString & _caption, QWidget * _parent ) :
-			tabWidget( tabWidget::tr( "Settings for %1" ).arg(
-					tabWidget::tr( _caption.toAscii() ) ).
-							toUpper(), _parent )
-		{
-		}
-
-		virtual ~setupWidget()
-		{
-		}
-
-		virtual void saveSettings() = 0;
-
-		virtual void show()
-		{
-			parentWidget()->show();
-			QWidget::show();
-		}
-
-	} ;
 
 
 

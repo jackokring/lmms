@@ -27,26 +27,20 @@
 #include "lmmsversion.h"
 #include "versioninfo.h"
 
-// denormals stripping
-#ifdef __SSE__
-#include <xmmintrin.h>
-#endif
-#ifdef __SSE3__
-#include <pmmintrin.h>
-#endif
+#include "denormals.h"
 
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QLocale>
-#include <QtCore/QProcess>
-#include <QtCore/QTimer>
-#include <QtCore/QTranslator>
-#include <QtGui/QApplication>
-#include <QtGui/QBitmap>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QMessageBox>
-#include <QtGui/QPainter>
-#include <QtGui/QSplashScreen>
+#include <QFileInfo>
+#include <QLocale>
+#include <QDate>
+#include <QTimer>
+#include <QTranslator>
+#include <QApplication>
+#include <QMessageBox>
+#include <QTextStream>
+
+#ifdef LMMS_BUILD_WIN32
+#include <windows.h>
+#endif
 
 #ifdef LMMS_HAVE_SCHED_H
 #include <sched.h>
@@ -64,67 +58,149 @@
 #include <unistd.h>
 #endif
 
-#include "config_mgr.h"
-#include "embed.h"
-#include "engine.h"
-#include "LmmsStyle.h"
+#include "MemoryManager.h"
+#include "ConfigManager.h"
+#include "NotePlayHandle.h"
+#include "Engine.h"
+#include "GuiApplication.h"
 #include "ImportFilter.h"
 #include "MainWindow.h"
 #include "ProjectRenderer.h"
+#include "RenderManager.h"
 #include "DataFile.h"
-#include "song.h"
-#include "LmmsPalette.h"
+#include "Song.h"
+#include "SetupDialog.h"
 
-static inline QString baseName( const QString & _file )
+static inline QString baseName( const QString & file )
 {
-	return( QFileInfo( _file ).absolutePath() + "/" +
-			QFileInfo( _file ).completeBaseName() );
+	return QFileInfo( file ).absolutePath() + "/" +
+			QFileInfo( file ).completeBaseName();
 }
 
 
-inline void loadTranslation( const QString & _tname,
-	const QString & _dir = configManager::inst()->localeDir() )
+
+
+static std::string getCurrentYear()
+{
+	return QString::number( QDate::currentDate().year() ).toStdString();
+}
+
+
+
+
+inline void loadTranslation( const QString & tname,
+	const QString & dir = ConfigManager::inst()->localeDir() )
 {
 	QTranslator * t = new QTranslator( QCoreApplication::instance() );
-	QString name = _tname + ".qm";
+	QString name = tname + ".qm";
 
-	t->load( name, _dir );
+	t->load( name, dir );
 
 	QCoreApplication::instance()->installTranslator( t );
 }
 
 
 
+
+void printVersion( char *executableName )
+{
+	printf( "LMMS %s\n(%s %s, Qt %s, %s)\n\n"
+		"Copyright (c) 2004-%s LMMS developers.\n\n"
+		"This program is free software; you can redistribute it and/or\n"
+		"modify it under the terms of the GNU General Public\n"
+		"License as published by the Free Software Foundation; either\n"
+		"version 2 of the License, or (at your option) any later version.\n\n"
+		"Try \"%s --help\" for more information.\n\n", LMMS_VERSION,
+		PLATFORM, MACHINE, QT_VERSION_STR, GCC_VERSION,
+		getCurrentYear().c_str(), executableName );
+}
+
+
+
+
+void printHelp()
+{
+	printf( "LMMS %s\n"
+		"Copyright (c) 2004-%s LMMS developers.\n\n"
+		"Usage: lmms [ -r <project file> ] [ options ]\n"
+		"            [ -u <in> <out> ]\n"
+		"            [ -d <in> ]\n"
+		"            [ -h ]\n"
+		"            [ <file to load> ]\n\n"
+		"-r, --render <project file>	Render given project file\n"
+		"    --rendertracks <project>	Render each track to a different file\n"
+		"-o, --output <path>		Render into <path>\n"
+		"				For --render, provide a file path\n"
+		"				For --rendertracks, provide a directory path\n"
+		"-f, --format <format>		Specify format of render-output where\n"
+		"				Format is either 'wav' or 'ogg'.\n"
+		"-s, --samplerate <samplerate>	Specify output samplerate in Hz\n"
+		"				Range: 44100 (default) to 192000\n"
+		"-b, --bitrate <bitrate>		Specify output bitrate in KBit/s\n"
+		"				Default: 160.\n"
+		"-i, --interpolation <method>	Specify interpolation method\n"
+		"				Possible values:\n"
+		"				   - linear\n"
+		"				   - sincfastest (default)\n"
+		"				   - sincmedium\n"
+		"				   - sincbest\n"
+		"-x, --oversampling <value>	Specify oversampling\n"
+		"				Possible values: 1, 2, 4, 8\n"
+		"				Default: 2\n"
+		"-a, --float			32bit float bit depth\n"
+		"-l, --loop			Render as a loop\n"
+		"-u, --upgrade <in> [out]	Upgrade file <in> and save as <out>\n"
+		"       Standard out is used if no output file is specifed\n"
+		"-d, --dump <in>			Dump XML of compressed file <in>\n"
+		"-v, --version			Show version information and exit.\n"
+		"    --allowroot			Bypass root user startup check (use with caution).\n"
+		"-h, --help			Show this usage information and exit.\n\n",
+		LMMS_VERSION, getCurrentYear().c_str() );
+}
+
+
+
+
 int main( int argc, char * * argv )
 {
+	// initialize memory managers
+	MemoryManager::init();
+	NotePlayHandleManager::init();
+
 	// intialize RNG
 	srand( getpid() + time( 0 ) );
 
-	// set denormal protection for this thread
-	#ifdef __SSE3__
-	/* DAZ flag */
-	_MM_SET_DENORMALS_ZERO_MODE( _MM_DENORMALS_ZERO_ON );
-	#endif
-	#ifdef __SSE__
-	/* FTZ flag */
-	_MM_SET_FLUSH_ZERO_MODE( _MM_FLUSH_ZERO_ON );
-	#endif
+	disable_denormals();
 
-	bool core_only = false;
+	bool coreOnly = false;
 	bool fullscreen = true;
-	bool exit_after_import = false;
-	QString file_to_load, file_to_save, file_to_import, render_out, profilerOutputFile;
+	bool exitAfterImport = false;
+	bool allowRoot = false;
+	bool renderLoop = false;
+	bool renderTracks = false;
+	QString fileToLoad, fileToImport, renderOut, profilerOutputFile;
 
+	// first of two command-line parsing stages
 	for( int i = 1; i < argc; ++i )
 	{
-		if( argc > i && ( ( QString( argv[i] ) == "--render" ||
-					QString( argv[i] ) == "-r" ) ||
-				( QString( argv[i] ) == "--help" ||
-						QString( argv[i] ) == "-h" ) ) )
+		QString arg = argv[i];
+
+		if( arg == "--help"    || arg == "-h" ||
+		    arg == "--version" || arg == "-v" ||
+		    arg == "--render"  || arg == "-r" )
 		{
-			core_only = true;
+			coreOnly = true;
 		}
-		else if( argc > i && QString( argv[i] ) == "-geometry" )
+		else if( arg == "--rendertracks" )
+		{
+			coreOnly = true;
+			renderTracks = true;
+		}
+		else if( arg == "--allowroot" )
+		{
+			allowRoot = true;
+		}
+		else if( arg == "-geometry" )
 		{
 			// option -geometry is filtered by Qt later,
 			// so we need to check its presence now to
@@ -134,7 +210,15 @@ int main( int argc, char * * argv )
 		}
 	}
 
-	QCoreApplication * app = core_only ?
+#ifndef LMMS_BUILD_WIN32
+	if ( ( getuid() == 0 || geteuid() == 0 ) && !allowRoot )
+	{
+		printf( "LMMS cannot be run as root.\nUse \"--allowroot\" to override.\n\n" );
+		return EXIT_FAILURE;
+	}	
+#endif
+
+	QCoreApplication * app = coreOnly ?
 			new QCoreApplication( argc, argv ) :
 					new QApplication( argc, argv ) ;
 
@@ -143,104 +227,125 @@ int main( int argc, char * * argv )
 						ProjectRenderer::Depth_16Bit );
 	ProjectRenderer::ExportFileFormats eff = ProjectRenderer::WaveFile;
 
-
+	// second of two command-line parsing stages
 	for( int i = 1; i < argc; ++i )
 	{
-		if( QString( argv[i] ) == "--version" ||
-						QString( argv[i] ) == "-v" )
-		{
-			printf( "LMMS %s\n(%s %s, Qt %s, %s)\n\n"
-	"Copyright (c) 2004-2014 LMMS developers.\n\n"
-	"This program is free software; you can redistribute it and/or\n"
-	"modify it under the terms of the GNU General Public\n"
-	"License as published by the Free Software Foundation; either\n"
-	"version 2 of the License, or (at your option) any later version.\n\n"
-	"Try \"%s --help\" for more information.\n\n", LMMS_VERSION,
-				PLATFORM, MACHINE, QT_VERSION_STR, GCC_VERSION,
-				argv[0] );
+		QString arg = argv[i];
 
-			return( EXIT_SUCCESS );
-		}
-		else if( argc > i && ( QString( argv[i] ) == "--help" ||
-						QString( argv[i] ) == "-h" ) )
+		if( arg == "--version" || arg == "-v" )
 		{
-			printf( "LMMS %s\n"
-	"Copyright (c) 2004-2014 LMMS developers.\n\n"
-	"usage: lmms [ -r <project file> ] [ options ]\n"
-	"            [ -u <in> <out> ]\n"
-	"            [ -d <in> ]\n"
-	"            [ -h ]\n"
-	"            [ <file to load> ]\n\n"
-	"-r, --render <project file>	render given project file\n"
-	"-o, --output <file>		render into <file>\n"
-	"-f, --output-format <format>	specify format of render-output where\n"
-	"				format is either 'wav' or 'ogg'.\n"
-	"-s, --samplerate <samplerate>	specify output samplerate in Hz\n"
-	"				range: 44100 (default) to 192000\n"
-	"-b, --bitrate <bitrate>		specify output bitrate in kHz\n"
-	"				default: 160.\n"
-	"-i, --interpolation <method>	specify interpolation method\n"
-	"				possible values:\n"
-	"				   - linear\n"
-	"				   - sincfastest (default)\n"
-	"				   - sincmedium\n"
-	"				   - sincbest\n"
-	"-x, --oversampling <value>	specify oversampling\n"
-	"				possible values: 1, 2, 4, 8\n"
-	"				default: 2\n"
-	"-u, --upgrade <in> [out]	upgrade file <in> and save as <out>\n"
-	"       standard out is used if no output file is specifed\n"
-	"-d, --dump <in>			dump XML of compressed file <in>\n"
-	"-v, --version			show version information and exit.\n"
-	"-h, --help			show this usage information and exit.\n\n",
-							LMMS_VERSION );
-			return( EXIT_SUCCESS );
+			printVersion( argv[0] );
+			return EXIT_SUCCESS;
 		}
-		else if( argc > i+1 && ( QString( argv[i] ) == "--upgrade" ||
-						QString( argv[i] ) == "-u" ) )
+		else if( arg == "--help" || arg  == "-h" )
 		{
-			QString inFile( argv[i + 1] );
-			DataFile dataFile( inFile );
-			if (argc > i+2)
+			printHelp();
+			return EXIT_SUCCESS;
+		}
+		else if( arg == "--upgrade" || arg == "-u" )
+		{
+			++i;
+
+			if( i == argc )
 			{
-				const QString outFile = argv[i + 2];
-				dataFile.writeFile( outFile );
+				printf( "\nNo input file specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
 			}
-			else
+
+
+			DataFile dataFile( QString::fromLocal8Bit( argv[i] ) );
+
+			if( argc > i+1 ) // output file specified
+			{
+				dataFile.writeFile( QString::fromLocal8Bit( argv[i+1] ) );
+			}
+			else // no output file specified; use stdout
 			{
 				QTextStream ts( stdout );
 				dataFile.write( ts );
 				fflush( stdout );
 			}
-			return( EXIT_SUCCESS );
+
+			return EXIT_SUCCESS;
 		}
-		else if( argc > i && ( QString( argv[i] ) == "--dump" ||
-						QString( argv[i] ) == "-d" ) )
+		else if( arg == "--allowroot" )
 		{
-			QFile f( argv[i + 1] );
+			// Ignore, processed earlier
+#ifdef LMMS_BUILD_WIN32
+			if( allowRoot )
+			{
+				printf( "\nOption \"--allowroot\" will be ignored on this platform.\n\n" );
+			}
+#endif
+			
+		}
+		else if( arg == "--dump" || arg == "-d" )
+		{
+			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo input file specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			QFile f( QString::fromLocal8Bit( argv[i] ) );
 			f.open( QIODevice::ReadOnly );
 			QString d = qUncompress( f.readAll() );
 			printf( "%s\n", d.toUtf8().constData() );
-			return( EXIT_SUCCESS );
+
+			return EXIT_SUCCESS;
 		}
-		else if( argc > i && ( QString( argv[i] ) == "--render" ||
-						QString( argv[i] ) == "-r" ) )
+		else if( arg == "--render" || arg == "-r" || arg == "--rendertracks" )
 		{
-			file_to_load = QString( argv[i + 1] );
-			render_out = baseName( file_to_load ) + ".";
 			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo input file specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			fileToLoad = QString::fromLocal8Bit( argv[i] );
+			renderOut = fileToLoad;
 		}
-		else if( argc > i && ( QString( argv[i] ) == "--output" ||
-						QString( argv[i] ) == "-o" ) )
+		else if( arg == "--loop" || arg == "-l" )
 		{
-			render_out = baseName( QString( argv[i + 1] ) ) + ".";
+			renderLoop = true;
+		}
+		else if( arg == "--output" || arg == "-o" )
+		{
 			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo output file specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			renderOut = QString::fromLocal8Bit( argv[i] );
 		}
-		else if( argc > i &&
-				( QString( argv[i] ) == "--format" ||
-						QString( argv[i] ) == "-f" ) )
+		else if( arg == "--format" || arg == "-f" )
 		{
-			const QString ext = QString( argv[i + 1] );
+			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo output format specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			const QString ext = QString( argv[i] );
+
 			if( ext == "wav" )
 			{
 				eff = ProjectRenderer::WaveFile;
@@ -254,16 +359,23 @@ int main( int argc, char * * argv )
 			else
 			{
 				printf( "\nInvalid output format %s.\n\n"
-	"Try \"%s --help\" for more information.\n\n", argv[i + 1], argv[0] );
-				return( EXIT_FAILURE );
+	"Try \"%s --help\" for more information.\n\n", argv[i], argv[0] );
+				return EXIT_FAILURE;
 			}
-			++i;
 		}
-		else if( argc > i &&
-				( QString( argv[i] ) == "--samplerate" ||
-						QString( argv[i] ) == "-s" ) )
+		else if( arg == "--samplerate" || arg == "-s" )
 		{
-			sample_rate_t sr = QString( argv[i + 1] ).toUInt();
+			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo samplerate specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			sample_rate_t sr = QString( argv[i] ).toUInt();
 			if( sr >= 44100 && sr <= 192000 )
 			{
 				os.samplerate = sr;
@@ -271,16 +383,24 @@ int main( int argc, char * * argv )
 			else
 			{
 				printf( "\nInvalid samplerate %s.\n\n"
-	"Try \"%s --help\" for more information.\n\n", argv[i + 1], argv[0] );
-				return( EXIT_FAILURE );
+	"Try \"%s --help\" for more information.\n\n", argv[i], argv[0] );
+				return EXIT_FAILURE;
 			}
-			++i;
 		}
-		else if( argc > i &&
-				( QString( argv[i] ) == "--bitrate" ||
-						QString( argv[i] ) == "-b" ) )
+		else if( arg == "--bitrate" || arg == "-b" )
 		{
-			int br = QString( argv[i + 1] ).toUInt();
+			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo bitrate specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			int br = QString( argv[i] ).toUInt();
+
 			if( br >= 64 && br <= 384 )
 			{
 				os.bitrate = br;
@@ -288,16 +408,28 @@ int main( int argc, char * * argv )
 			else
 			{
 				printf( "\nInvalid bitrate %s.\n\n"
-	"Try \"%s --help\" for more information.\n\n", argv[i + 1], argv[0] );
-				return( EXIT_FAILURE );
+	"Try \"%s --help\" for more information.\n\n", argv[i], argv[0] );
+				return EXIT_FAILURE;
 			}
-			++i;
 		}
-		else if( argc > i &&
-				( QString( argv[i] ) == "--interpolation" ||
-						QString( argv[i] ) == "-i" ) )
+		else if( arg =="--float" || arg == "-a" )
 		{
-			const QString ip = QString( argv[i + 1] );
+			os.depth = ProjectRenderer::Depth_32Bit;
+		}
+		else if( arg == "--interpolation" || arg == "-i" )
+		{
+			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo interpolation method specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			const QString ip = QString( argv[i] );
+
 			if( ip == "linear" )
 			{
 		qs.interpolation = Mixer::qualitySettings::Interpolation_Linear;
@@ -317,16 +449,24 @@ int main( int argc, char * * argv )
 			else
 			{
 				printf( "\nInvalid interpolation method %s.\n\n"
-	"Try \"%s --help\" for more information.\n\n", argv[i + 1], argv[0] );
-				return( EXIT_FAILURE );
+	"Try \"%s --help\" for more information.\n\n", argv[i], argv[0] );
+				return EXIT_FAILURE;
 			}
-			++i;
 		}
-		else if( argc > i &&
-				( QString( argv[i] ) == "--oversampling" ||
-						QString( argv[i] ) == "-x" ) )
+		else if( arg == "--oversampling" || arg == "-x" )
 		{
-			int o = QString( argv[i + 1] ).toUInt();
+			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo oversampling specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			int o = QString( argv[i] ).toUInt();
+
 			switch( o )
 			{
 				case 1:
@@ -343,26 +483,44 @@ int main( int argc, char * * argv )
 		break;
 				default:
 				printf( "\nInvalid oversampling %s.\n\n"
-	"Try \"%s --help\" for more information.\n\n", argv[i + 1], argv[0] );
-				return( EXIT_FAILURE );
+	"Try \"%s --help\" for more information.\n\n", argv[i], argv[0] );
+				return EXIT_FAILURE;
 			}
-			++i;
 		}
-		else if( argc > i &&
-				( QString( argv[i] ) == "--import" ) )
+		else if( arg == "--import" )
 		{
-			file_to_import = argv[i+1];
 			++i;
-			// exit after import? (only for debugging)
-			if( argc > i && QString( argv[i+1] ) == "-e" )
+
+			if( i == argc )
 			{
-				exit_after_import = true;
+				printf( "\nNo file specified for importing.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			fileToImport = QString::fromLocal8Bit( argv[i] );
+
+			// exit after import? (only for debugging)
+			if( QString( argv[i + 1] ) == "-e" )
+			{
+				exitAfterImport = true;
+				++i;
 			}
 		}
-		else if( argc > i && ( QString( argv[i] ) == "--profile" || QString( argv[i] ) == "-p" ) )
+		else if( arg == "--profile" || arg == "-p" )
 		{
-			profilerOutputFile = argv[i+1];
 			++i;
+
+			if( i == argc )
+			{
+				printf( "\nNo profile specified.\n\n"
+	"Try \"%s --help\" for more information.\n\n", argv[0] );
+				return EXIT_FAILURE;
+			}
+
+
+			profilerOutputFile = QString::fromLocal8Bit( argv[1] );
 		}
 		else
 		{
@@ -370,18 +528,25 @@ int main( int argc, char * * argv )
 			{
 				printf( "\nInvalid option %s.\n\n"
 	"Try \"%s --help\" for more information.\n\n", argv[i], argv[0] );
-				return( EXIT_FAILURE );
+				return EXIT_FAILURE;
 			}
-			file_to_load = argv[i];
+			fileToLoad = QString::fromLocal8Bit( argv[i] );
 		}
 	}
 
 
-	QString pos = QLocale::system().name().left( 2 );
+	ConfigManager::inst()->loadConfigFile();
+
+	// set language
+	QString pos = ConfigManager::inst()->value( "app", "language" );
+	if( pos.isEmpty() )
+	{
+		pos = QLocale::system().name().left( 2 );
+	}
 
 #ifdef LMMS_BUILD_WIN32
 #undef QT_TRANSLATIONS_DIR
-#define QT_TRANSLATIONS_DIR configManager::inst()->localeDir()
+#define QT_TRANSLATIONS_DIR ConfigManager::inst()->localeDir()
 #endif
 
 #ifdef QT_TRANSLATIONS_DIR
@@ -408,106 +573,42 @@ int main( int argc, char * * argv )
 #endif
 #endif
 
-	configManager::inst()->loadConfigFile();
-
-	if( render_out.isEmpty() )
+#ifdef LMMS_BUILD_WIN32
+	if( !SetPriorityClass( GetCurrentProcess(), HIGH_PRIORITY_CLASS ) )
 	{
-		// init style and palette
-		LmmsStyle * lmmsstyle = new LmmsStyle();
-		QApplication::setStyle( lmmsstyle );
-
-		LmmsPalette * lmmspal = new LmmsPalette( NULL, lmmsstyle );
-		QPalette lpal = lmmspal->palette();
-
-		QApplication::setPalette( lpal );
-		LmmsStyle::s_palette = &lpal;
-
-
-		// show splash screen
-		QSplashScreen splashScreen( embed::getIconPixmap( "splash" ) );
-		splashScreen.show();
-		splashScreen.showMessage( MainWindow::tr( "Version %1" ).arg( LMMS_VERSION ),
-									Qt::AlignRight | Qt::AlignBottom, Qt::white );
-		qApp->processEvents();
-
-		// init central engine which handles all components of LMMS
-		engine::init();
-
-		splashScreen.hide();
-
-		// re-intialize RNG - shared libraries might have srand() or
-		// srandom() calls in their init procedure
-		srand( getpid() + time( 0 ) );
-
-		// recover a file?
-		QString recoveryFile = QDir(configManager::inst()->workingDir()).absoluteFilePath("recover.mmp");
-		if( QFileInfo(recoveryFile).exists() &&
-			QMessageBox::question( engine::mainWindow(), MainWindow::tr( "Project recovery" ),
-						MainWindow::tr( "It looks like the last session did not end properly. "
-										"Do you want to recover the project of this session?" ),
-						QMessageBox::Yes | QMessageBox::No ) == QMessageBox::Yes )
-		{
-			file_to_load = recoveryFile;
-		}
-
-		// we try to load given file
-		if( !file_to_load.isEmpty() )
-		{
-			engine::mainWindow()->show();
-			if( fullscreen )
-			{
-				engine::mainWindow()->showMaximized();
-			}
-			if( file_to_load == recoveryFile )
-			{
-				engine::getSong()->createNewProjectFromTemplate( file_to_load );
-			}
-			else
-			{
-				engine::getSong()->loadProject( file_to_load );
-			}
-		}
-		else if( !file_to_import.isEmpty() )
-		{
-			ImportFilter::import( file_to_import, engine::getSong() );
-			if( exit_after_import )
-			{
-				return 0;
-			}
-
-			engine::mainWindow()->show();
-			if( fullscreen )
-			{
-				engine::mainWindow()->showMaximized();
-			}
-		}
-		else
-		{
-			engine::getSong()->createNewProject();
-
-			// [Settel] workaround: showMaximized() doesn't work with
-			// FVWM2 unless the window is already visible -> show() first
-			engine::mainWindow()->show();
-			if( fullscreen )
-			{
-				engine::mainWindow()->showMaximized();
-			}
-		}
+		printf( "Notice: could not set high priority.\n" );
 	}
-	else
+#endif
+
+	// if we have an output file for rendering, just render the song
+	// without starting the GUI
+	if( !renderOut.isEmpty() )
 	{
-		// we're going to render our song
-		engine::init( false );
-		printf( "loading project...\n" );
-		engine::getSong()->loadProject( file_to_load );
-		printf( "done\n" );
+		Engine::init( true );
+
+		QFileInfo fileInfo( fileToLoad );
+		if ( !fileInfo.exists() )
+		{
+			printf("The file %s does not exist!\n", fileToLoad.toStdString().c_str());
+			exit( 1 );
+		}
+
+		printf( "Loading project...\n" );
+		Engine::getSong()->loadProject( fileToLoad );
+		printf( "Done\n" );
+
+		Engine::getSong()->setExportLoop( renderLoop );
+
+		// when rendering multiple tracks, renderOut is a directory
+		// otherwise, it is a file, so we need to append the file extension
+		if ( !renderTracks )
+		{
+			renderOut = baseName( renderOut ) +
+				ProjectRenderer::getFileExtensionFromFormat(eff);
+		}
 
 		// create renderer
-		ProjectRenderer * r = new ProjectRenderer( qs, os, eff,
-			render_out +
-				QString( ( eff ==
-					ProjectRenderer::WaveFile ) ?
-						"wav" : "ogg" ) );
+		RenderManager * r = new RenderManager( qs, os, eff, renderOut );
 		QCoreApplication::instance()->connect( r,
 				SIGNAL( finished() ), SLOT( quit() ) );
 
@@ -519,17 +620,113 @@ int main( int argc, char * * argv )
 
 		if( profilerOutputFile.isEmpty() == false )
 		{
-			engine::mixer()->profiler().setOutputFile( profilerOutputFile );
+			Engine::mixer()->profiler().setOutputFile( profilerOutputFile );
 		}
 
 		// start now!
-		r->startProcessing();
+		if ( renderTracks )
+		{
+			r->renderTracks();
+		}
+		else
+		{
+			r->renderProject();
+		}
+	}
+	else // otherwise, start the GUI
+	{
+		new GuiApplication();
+
+		// re-intialize RNG - shared libraries might have srand() or
+		// srandom() calls in their init procedure
+		srand( getpid() + time( 0 ) );
+
+		// recover a file?
+		QString recoveryFile = ConfigManager::inst()->recoveryFile();
+
+		if( QFileInfo(recoveryFile).exists() &&
+			QMessageBox::question( gui->mainWindow(), MainWindow::tr( "Project recovery" ),
+						MainWindow::tr( "It looks like the last session did not end properly. "
+										"Do you want to recover the project of this session?" ),
+						QMessageBox::Yes | QMessageBox::No ) == QMessageBox::Yes )
+		{
+			fileToLoad = recoveryFile;
+		}
+
+		// we try to load given file
+		if( !fileToLoad.isEmpty() )
+		{
+			gui->mainWindow()->show();
+			if( fullscreen )
+			{
+				gui->mainWindow()->showMaximized();
+			}
+
+			if( fileToLoad == recoveryFile )
+			{
+				Engine::getSong()->createNewProjectFromTemplate( fileToLoad );
+			}
+			else
+			{
+				Engine::getSong()->loadProject( fileToLoad );
+			}
+		}
+		else if( !fileToImport.isEmpty() )
+		{
+			ImportFilter::import( fileToImport, Engine::getSong() );
+			if( exitAfterImport )
+			{
+				return EXIT_SUCCESS;
+			}
+
+			gui->mainWindow()->show();
+			if( fullscreen )
+			{
+				gui->mainWindow()->showMaximized();
+			}
+		}
+		else
+		{
+
+		// If enabled, open last project if there is one. Else, create
+		// a new one.
+		if( ConfigManager::inst()->
+				value( "app", "openlastproject" ).toInt() &&
+		!ConfigManager::inst()->recentlyOpenedProjects().isEmpty() )
+		{
+			QString f = ConfigManager::inst()->
+						recentlyOpenedProjects().first();
+			QFileInfo recentFile( f );
+
+			if ( recentFile.exists() )
+			{
+				Engine::getSong()->loadProject( f );
+			}
+			else
+			{
+				Engine::getSong()->createNewProject();
+			}
+		}
+		else
+		{
+		Engine::getSong()->createNewProject();
+		}
+
+			// [Settel] workaround: showMaximized() doesn't work with
+			// FVWM2 unless the window is already visible -> show() first
+			gui->mainWindow()->show();
+			if( fullscreen )
+			{
+				gui->mainWindow()->showMaximized();
+			}
+		}
 	}
 
 	const int ret = app->exec();
 	delete app;
-	return( ret );
+
+	// cleanup memory managers
+	MemoryManager::cleanup();
+
+	return ret;
 }
-
-
-/* vim: set tw=0 noexpandtab: */

@@ -22,7 +22,7 @@
  *
  */
 
-#include <QtGui/QLayout>
+#include <QLayout>
 
 #include "BassBoosterControlDialog.h"
 #include "BassBoosterControls.h"
@@ -44,20 +44,20 @@ BassBoosterControlDialog::BassBoosterControlDialog( BassBoosterControls* control
 
 	QHBoxLayout * l = new QHBoxLayout;
 
-	knob * freqKnob = new knob( knobBright_26, this);
+	Knob * freqKnob = new Knob( knobBright_26, this);
 	freqKnob->setModel( &controls->m_freqModel );
 	freqKnob->setLabel( tr( "FREQ" ) );
-	freqKnob->setHintText( tr( "Frequency:" ) + " ", "Hz" );
+	freqKnob->setHintText( tr( "Frequency:" ) , "Hz" );
 
-	knob * gainKnob = new knob( knobBright_26, this );
+	Knob * gainKnob = new Knob( knobBright_26, this );
 	gainKnob->setModel( &controls->m_gainModel );
 	gainKnob->setLabel( tr( "GAIN" ) );
-	gainKnob->setHintText( tr( "Gain:" ) + " ", "" );
+	gainKnob->setHintText( tr( "Gain:" ) , "" );
 
-	knob * ratioKnob = new knob( knobBright_26, this );
+	Knob * ratioKnob = new Knob( knobBright_26, this );
 	ratioKnob->setModel( &controls->m_ratioModel );
 	ratioKnob->setLabel( tr( "RATIO" ) );
-	ratioKnob->setHintText( tr( "Ratio:" ) + " ", "" );
+	ratioKnob->setHintText( tr( "Ratio:" ) , "" );
 
 	l->addWidget( freqKnob );
 	l->addWidget( gainKnob );
@@ -67,4 +67,3 @@ BassBoosterControlDialog::BassBoosterControlDialog( BassBoosterControls* control
 	setLayout( tl );
 }
 
-#include "moc_BassBoosterControlDialog.cxx"

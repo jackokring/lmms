@@ -26,12 +26,12 @@
 
 #ifdef LMMS_HAVE_SDL
 
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
+#include <QLabel>
+#include <QLineEdit>
 
-#include "engine.h"
+#include "Engine.h"
 #include "debug.h"
-#include "config_mgr.h"
+#include "ConfigManager.h"
 #include "gui_templates.h"
 #include "templates.h"
 
@@ -42,8 +42,7 @@ AudioSdl::AudioSdl( bool & _success_ful, Mixer*  _mixer ) :
 	AudioDevice( DEFAULT_CHANNELS, _mixer ),
 	m_outBuf( new surroundSampleFrame[mixer()->framesPerPeriod()] ),
 	m_convertedBufPos( 0 ),
-	m_convertEndian( false ),
-	m_stopSemaphore( 1 )
+	m_convertEndian( false )
 {
 	_success_ful = false;
 
@@ -78,8 +77,6 @@ AudioSdl::AudioSdl( bool & _success_ful, Mixer*  _mixer ) :
 	}
 	m_convertEndian = ( m_audioHandle.format != actual.format );
 
-	m_stopSemaphore.acquire();
-
 	_success_ful = true;
 }
 
@@ -89,7 +86,6 @@ AudioSdl::AudioSdl( bool & _success_ful, Mixer*  _mixer ) :
 AudioSdl::~AudioSdl()
 {
 	stopProcessing();
-	m_stopSemaphore.release();
 
 	SDL_CloseAudio();
 	SDL_Quit();
@@ -114,9 +110,8 @@ void AudioSdl::stopProcessing()
 {
 	if( SDL_GetAudioStatus() == SDL_AUDIO_PLAYING )
 	{
-		m_stopSemaphore.acquire();
-
 		SDL_LockAudio();
+		m_stopped = true;
 		SDL_PauseAudio( 1 );
 		SDL_UnlockAudio();
 	}
@@ -131,7 +126,7 @@ void AudioSdl::applyQualitySettings()
 	{
 		SDL_CloseAudio();
 
-		setSampleRate( engine::mixer()->processingSampleRate() );
+		setSampleRate( Engine::mixer()->processingSampleRate() );
 
 		m_audioHandle.freq = sampleRate();
 
@@ -176,8 +171,6 @@ void AudioSdl::sdlAudioCallback( Uint8 * _buf, int _len )
 			const fpp_t frames = getNextBuffer( m_outBuf );
 			if( !frames )
 			{
-				m_stopped = true;
-				m_stopSemaphore.release();
 				memset( _buf, 0, _len );
 				return;
 			}
@@ -203,9 +196,9 @@ void AudioSdl::sdlAudioCallback( Uint8 * _buf, int _len )
 
 
 AudioSdl::setupWidget::setupWidget( QWidget * _parent ) :
-	AudioDevice::setupWidget( AudioSdl::name(), _parent )
+	AudioDeviceSetupWidget( AudioSdl::name(), _parent )
 {
-	QString dev = configManager::inst()->value( "audiosdl", "device" );
+	QString dev = ConfigManager::inst()->value( "audiosdl", "device" );
 	m_device = new QLineEdit( dev, this );
 	m_device->setGeometry( 10, 20, 160, 20 );
 
@@ -227,7 +220,7 @@ AudioSdl::setupWidget::~setupWidget()
 
 void AudioSdl::setupWidget::saveSettings()
 {
-	configManager::inst()->setValue( "audiosdl", "device",
+	ConfigManager::inst()->setValue( "audiosdl", "device",
 							m_device->text() );
 }
 

@@ -35,7 +35,8 @@
 #include "Piano.h"
 #include "PianoView.h"
 #include "Pitch.h"
-#include "track.h"
+#include "Track.h"
+
 
 
 class QLineEdit;
@@ -44,22 +45,27 @@ class InstrumentFunctionArpeggioView;
 class InstrumentFunctionNoteStackingView;
 class EffectRackView;
 class InstrumentSoundShapingView;
-class fadeButton;
+class FadeButton;
 class Instrument;
 class InstrumentTrackWindow;
 class InstrumentMidiIOView;
-class knob;
+class InstrumentMiscView;
+class Knob;
 class LcdSpinBox;
+class LeftRightNav;
 class midiPortMenu;
 class DataFile;
 class PluginView;
-class tabWidget;
-class trackLabelButton;
+class TabWidget;
+class TrackLabelButton;
+class LedCheckBox;
+class QLabel;
 
 
-class EXPORT InstrumentTrack : public track, public MidiEventProcessor
+class EXPORT InstrumentTrack : public Track, public MidiEventProcessor
 {
 	Q_OBJECT
+	MM_OPERATORS
 	mapPropertyFromModel(int,getVolume,setVolume,m_volumeModel);
 public:
 	InstrumentTrack( TrackContainer* tc );
@@ -124,10 +130,10 @@ public:
 	virtual bool play( const MidiTime & _start, const fpp_t _frames,
 						const f_cnt_t _frame_base, int _tco_num = -1 );
 	// create new view for me
-	virtual trackView * createView( TrackContainerView* tcv );
+	virtual TrackView * createView( TrackContainerView* tcv );
 
 	// create new track-content-object = pattern
-	virtual trackContentObject * createTCO( const MidiTime & _pos );
+	virtual TrackContentObject * createTCO( const MidiTime & _pos );
 
 
 	// called by track
@@ -135,7 +141,7 @@ public:
 							QDomElement & _parent );
 	virtual void loadTrackSpecificSettings( const QDomElement & _this );
 
-	using track::setJournalling;
+	using Track::setJournalling;
 
 
 	// load instrument whose name matches given one
@@ -204,10 +210,10 @@ public:
 
 signals:
 	void instrumentChanged();
-	void newNote();
-	void midiNoteOn( const note& );
-	void midiNoteOff( const note& );
+	void midiNoteOn( const Note& );
+	void midiNoteOff( const Note& );
 	void nameChanged();
+	void newNote();
 
 
 protected:
@@ -224,11 +230,14 @@ protected slots:
 
 
 private:
-	AudioPort m_audioPort;
 	MidiPort m_midiPort;
 
 	NotePlayHandle* m_notes[NumKeys];
+	QMutex m_notesMutex;
+
 	int m_runningMidiNotes[NumKeys];
+	QMutex m_midiNotesMutex;
+
 	bool m_sustainPedalPressed;
 
 	bool m_silentBuffersProcessed;
@@ -239,9 +248,13 @@ private:
 
 	FloatModel m_volumeModel;
 	FloatModel m_panningModel;
+	
+	AudioPort m_audioPort;
+	
 	FloatModel m_pitchModel;
 	IntModel m_pitchRangeModel;
 	IntModel m_effectChannelModel;
+	BoolModel m_useMasterPitchModel;
 
 
 	Instrument * m_instrument;
@@ -256,13 +269,14 @@ private:
 	friend class InstrumentTrackWindow;
 	friend class NotePlayHandle;
 	friend class FlpImport;
+	friend class InstrumentMiscView;
 
 } ;
 
 
 
 
-class InstrumentTrackView : public trackView
+class InstrumentTrackView : public TrackView
 {
 	Q_OBJECT
 public:
@@ -292,6 +306,9 @@ public:
 
 	static void cleanupWindowCache();
 
+	// Create a menu for assigning/creating channels for this track
+	QMenu * createFxMenu( QString title, QString newFxLabel );
+
 
 protected:
 	virtual void dragEnterEvent( QDragEnterEvent * _dee );
@@ -306,6 +323,10 @@ private slots:
 	void midiInSelected();
 	void midiOutSelected();
 	void midiConfigChanged();
+	void muteChanged();
+
+	void assignFxLine( int channelIndex );
+	void createFxLine();
 
 
 private:
@@ -314,10 +335,10 @@ private:
 	static QQueue<InstrumentTrackWindow *> s_windowCache;
 
 	// widgets in track-settings-widget
-	trackLabelButton * m_tlb;
-	knob * m_volumeKnob;
-	knob * m_panningKnob;
-	fadeButton * m_activityIndicator;
+	TrackLabelButton * m_tlb;
+	Knob * m_volumeKnob;
+	Knob * m_panningKnob;
+	FadeButton * m_activityIndicator;
 
 	QMenu * m_midiMenu;
 
@@ -343,7 +364,7 @@ public:
 	virtual ~InstrumentTrackWindow();
 
 	// parent for all internal tab-widgets
-	tabWidget * tabWidgetParent()
+	TabWidget * tabWidgetParent()
 	{
 		return m_tabWidget;
 	}
@@ -359,6 +380,12 @@ public:
 	}
 
 	void setInstrumentTrackView( InstrumentTrackView * _tv );
+
+	InstrumentTrackView *instrumentTrackView()
+	{
+		return m_itv;
+	}
+
 
 	PianoView * pianoView()
 	{
@@ -389,31 +416,39 @@ protected:
 
 protected slots:
 	void saveSettingsBtnClicked();
-
+	void viewNextInstrument();
+	void viewPrevInstrument();
 
 private:
 	virtual void modelChanged();
+	void viewInstrumentInDirection(int d);
 
 	InstrumentTrack * m_track;
 	InstrumentTrackView * m_itv;
 
 	// widgets on the top of an instrument-track-window
 	QLineEdit * m_nameLineEdit;
-	knob * m_volumeKnob;
-	knob * m_panningKnob;
-	knob * m_pitchKnob;
+	LeftRightNav * m_leftRightNav;
+	Knob * m_volumeKnob;
+	Knob * m_panningKnob;
+	Knob * m_pitchKnob;
+	QLabel * m_pitchLabel;
 	LcdSpinBox* m_pitchRangeSpinBox;
+	QLabel * m_pitchRangeLabel;
 	LcdSpinBox * m_effectChannelNumber;
 
 
+
 	// tab-widget with all children
-	tabWidget * m_tabWidget;
+	TabWidget * m_tabWidget;
 	PluginView * m_instrumentView;
 	InstrumentSoundShapingView * m_ssView;
 	InstrumentFunctionNoteStackingView* m_noteStackingView;
 	InstrumentFunctionArpeggioView* m_arpeggioView;
 	InstrumentMidiIOView * m_midiView;
 	EffectRackView * m_effectView;
+	InstrumentMiscView *m_miscView;
+
 
 	// test-piano at the bottom of every instrument-settings-window
 	PianoView * m_pianoView;

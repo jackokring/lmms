@@ -22,8 +22,8 @@
  *
  */
 
-#ifndef _AUDIO_PULSEAUDIO_H
-#define _AUDIO_PULSEAUDIO_H
+#ifndef AUDIO_PULSEAUDIO_H
+#define AUDIO_PULSEAUDIO_H
 
 #include "lmmsconfig.h"
 
@@ -32,6 +32,7 @@
 #include <pulse/pulseaudio.h>
 
 #include "AudioDevice.h"
+#include "AudioDeviceSetupWidget.h"
 
 
 class LcdSpinBox;
@@ -46,13 +47,13 @@ public:
 
 	inline static QString name()
 	{
-		return QT_TRANSLATE_NOOP( "setupWidget", "PulseAudio (bad latency!)" );
+		return QT_TRANSLATE_NOOP( "setupWidget", "PulseAudio" );
 	}
 
 	static QString probeDevice();
 
 
-	class setupWidget : public AudioDevice::setupWidget
+	class setupWidget : public AudioDeviceSetupWidget
 	{
 	public:
 		setupWidget( QWidget * _parent );

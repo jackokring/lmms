@@ -22,12 +22,12 @@
  *
  */
 
-#ifndef _EFFECT_SELECT_DIALOG_H
-#define _EFFECT_SELECT_DIALOG_H
+#ifndef EFFECT_SELECT_DIALOG_H
+#define EFFECT_SELECT_DIALOG_H
 
-#include <QtGui/QDialog>
-#include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QStandardItemModel>
+#include <QDialog>
+#include <QSortFilterProxyModel>
+#include <QStandardItemModel>
 
 #include "EffectChain.h"
 #include "Effect.h"
@@ -55,7 +55,6 @@ protected slots:
 private:
 	Ui::EffectSelectDialog * ui;
 
-	Plugin::DescriptorList m_pluginDescriptors;
 	EffectKeyList m_effectKeys;
 	EffectKey m_currentSelection;
 

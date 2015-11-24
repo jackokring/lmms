@@ -22,15 +22,12 @@
  *
  */
 
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-
 #include "MidiWinMM.h"
-#include "config_mgr.h"
-#include "engine.h"
+#include "ConfigManager.h"
+#include "Engine.h"
 #include "gui_templates.h"
 #include "MidiPort.h"
-#include "note.h"
+#include "Note.h"
 
 
 #ifdef LMMS_BUILD_WIN32
@@ -147,7 +144,7 @@ void MidiWinMM::subscribeReadablePort( MidiPort* port, const QString& dest, bool
 {
 	if( subscribe && port->isInputEnabled() == false )
 	{
-		qWarning( "port %s can't be (un)subscribed!\n", port->displayName().toAscii().constData() );
+		qWarning( "port %s can't be (un)subscribed!\n", port->displayName().toLatin1().constData() );
 		return;
 	}
 
@@ -165,7 +162,7 @@ void MidiWinMM::subscribeWritablePort( MidiPort* port, const QString& dest, bool
 {
 	if( subscribe && port->isOutputEnabled() == false )
 	{
-		qWarning( "port %s can't be (un)subscribed!\n", port->displayName().toAscii().constData() );
+		qWarning( "port %s can't be (un)subscribed!\n", port->displayName().toLatin1().constData() );
 		return;
 	}
 
@@ -305,26 +302,6 @@ void MidiWinMM::openDevices()
 		}
 	}
 }
-
-
-
-
-MidiWinMM::setupWidget::setupWidget( QWidget* parent ) :
-	MidiClient::setupWidget( MidiWinMM::name(), parent )
-{
-}
-
-
-
-
-MidiWinMM::setupWidget::~setupWidget()
-{
-}
-
-
-
-
-#include "moc_MidiWinMM.cxx"
 
 
 #endif
