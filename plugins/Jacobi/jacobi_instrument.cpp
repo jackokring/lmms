@@ -1,8 +1,7 @@
 /*
- * sid_instrument.cpp - ResID based software-synthesizer
+ * jacobi_instrument.cpp - software-synthesizer
  *
- * Copyright (c) 2008 Csaba Hruska <csaba.hruska/at/gmail.com>
- *                    Attila Herman <attila589/at/gmail.com>
+ * Copyright (c) 2015 Simon Jackson <jackokring/at/gmail.com>
  * 
  * This file is part of LMMS - http://lmms.io
  *
@@ -29,9 +28,7 @@
 
 #include <cstdio>
 
-#include "sid.h"
-
-#include "sid_instrument.h"
+#include "jacobi_instrument.h"
 #include "Engine.h"
 #include "InstrumentTrack.h"
 #include "Knob.h"
@@ -41,42 +38,15 @@
 
 #include "embed.cpp"
 
-#define C64_PAL_CYCLES_PER_SEC  985248
-
-#define NUMSIDREGS 0x19
-#define SIDWRITEDELAY 9 // lda $xxxx,x 4 cycles, sta $d400,x 5 cycles
-#define SIDWAVEDELAY 4 // and $xxxx,x 4 cycles extra
-
-unsigned char sidorder[] =
-  {0x15,0x16,0x18,0x17,
-   0x05,0x06,0x02,0x03,0x00,0x01,0x04,
-   0x0c,0x0d,0x09,0x0a,0x07,0x08,0x0b,
-   0x13,0x14,0x10,0x11,0x0e,0x0f,0x12};
-
-static const char *attackTime[16] = { "2 mS", "8 mS", "16 mS", "24 mS",
-									"38 mS", "56 mS", "68 mS", "80 mS",
-									"100 mS", "250 mS", "500 mS", "800 mS",
-									"1 S", "3 S", "5 S", "8 S" };
-static const char *decRelTime[16] = { "6 mS", "24 mS", "48 mS", "72 mS",
-									"114 mS", "168 mS", "204 mS", "240 mS",
-									"300 mS", "750 mS", "1.5 S", "2.4 S",
-									"3 S", "9 S", "15 S", "24 S" };
-// release time time in ms
-static const int relTime[16] = { 6, 24, 48, 72, 114, 168, 204, 240, 300, 750,
-								1500, 2400, 3000, 9000, 15000, 24000 };
-
 
 extern "C"
 {
-Plugin::Descriptor PLUGIN_EXPORT sid_plugin_descriptor =
+Plugin::Descriptor PLUGIN_EXPORT jacobi_plugin_descriptor =
 {
 	STRINGIFY( PLUGIN_NAME ),
-	"SID",
-	QT_TRANSLATE_NOOP( "pluginBrowser", "Emulation of the MOS6581 and MOS8580 "
-					"SID.\nThis chip was used in the Commodore 64 computer." ),
-
-	"Csaba Hruska <csaba.hruska/at/gmail.com>"
-	"Attila Herman <attila589/at/gmail.com>",
+	"JACOBI",
+	QT_TRANSLATE_NOOP( "pluginBrowser", "An PM subtractive wave shaping hybrid." ),
+	"Simon Jackson <jackokring/at/gmail.com>",
 	0x0100,
 	Plugin::Instrument,
 	new PluginPixmapLoader( "logo" ),
@@ -116,8 +86,8 @@ voiceObject::~voiceObject()
 }
 
 
-sidInstrument::sidInstrument( InstrumentTrack * _instrument_track ) :
-	Instrument( _instrument_track, &sid_plugin_descriptor ),
+jacobiInstrument::jacobiInstrument( InstrumentTrack * _instrument_track ) :
+	Instrument( _instrument_track, &jacobi_plugin_descriptor ),
 	// filter	
 	m_filterFCModel( 1024.0f, 0.0f, 2047.0f, 1.0f, this, tr( "Cutoff" ) ),
 	m_filterResonanceModel( 8.0f, 0.0f, 15.0f, 1.0f, this, tr( "Resonance" ) ),
@@ -126,7 +96,7 @@ sidInstrument::sidInstrument( InstrumentTrack * _instrument_track ) :
 	// misc
 	m_voice3OffModel( false, this, tr( "Voice 3 off" ) ),
 	m_volumeModel( 15.0f, 0.0f, 15.0f, 1.0f, this, tr( "Volume" ) ),
-	m_chipModel( sidMOS8580, 0, NumChipModels-1, this, tr( "Chip model" ) )
+	m_chipModel( jacobiMOS8580, 0, NumChipModels-1, this, tr( "Chip model" ) )
 {
 	for( int i = 0; i < 3; ++i )
 	{
@@ -135,12 +105,12 @@ sidInstrument::sidInstrument( InstrumentTrack * _instrument_track ) :
 }
 
 
-sidInstrument::~sidInstrument()
+jacobiInstrument::~jacobiInstrument()
 {
 }
 
 
-void sidInstrument::saveSettings( QDomDocument & _doc,
+void jacobiInstrument::saveSettings( QDomDocument & _doc,
 							QDomElement & _this )
 {
 	// voices
@@ -186,7 +156,7 @@ void sidInstrument::saveSettings( QDomDocument & _doc,
 
 
 
-void sidInstrument::loadSettings( const QDomElement & _this )
+void jacobiInstrument::loadSettings( const QDomElement & _this )
 {
 	// voices
 	for( int i = 0; i < 3; ++i )
@@ -220,15 +190,15 @@ void sidInstrument::loadSettings( const QDomElement & _this )
 
 
 
-QString sidInstrument::nodeName() const
+QString jacobiInstrument::nodeName() const
 {
-	return( sid_plugin_descriptor.name );
+	return( jacobi_plugin_descriptor.name );
 }
 
 
 
 
-f_cnt_t sidInstrument::desiredReleaseFrames() const
+f_cnt_t jacobiInstrument::desiredReleaseFrames() const
 {
 	const float samplerate = Engine::mixer()->processingSampleRate();
 	int maxrel = 0;
@@ -244,53 +214,53 @@ f_cnt_t sidInstrument::desiredReleaseFrames() const
 
 
 
-static int sid_fillbuffer(unsigned char* sidreg, cSID *sid, int tdelta, short *ptr, int samples)
+static int jacobi_fillbuffer(unsigned char* jacobireg, cjacobi *jacobi, int tdelta, short *ptr, int samples)
 {
   int tdelta2;
   int result;
   int total = 0;
   int c;
 //  customly added
-  int residdelay = 0;
+  int rejacobidelay = 0;
 
-  int badline = rand() % NUMSIDREGS;
+  int badline = rand() % NUMjacobiREGS;
 
-  for (c = 0; c < NUMSIDREGS; c++)
+  for (c = 0; c < NUMjacobiREGS; c++)
   {
-    unsigned char o = sidorder[c];
+    unsigned char o = jacobiorder[c];
 
   	// Extra delay for loading the waveform (and mt_chngate,x)
   	if ((o == 4) || (o == 11) || (o == 18))
   	{
-  	  tdelta2 = SIDWAVEDELAY;
-      result = sid->clock(tdelta2, ptr, samples);
+  	  tdelta2 = jacobiWAVEDELAY;
+      result = jacobi->clock(tdelta2, ptr, samples);
       total += result;
       ptr += result;
       samples -= result;
-      tdelta -= SIDWAVEDELAY;
+      tdelta -= jacobiWAVEDELAY;
     }
 
     // Possible random badline delay once per writing
-    if ((badline == c) && (residdelay))
+    if ((badline == c) && (rejacobidelay))
   	{
-      tdelta2 = residdelay;
-      result = sid->clock(tdelta2, ptr, samples);
+      tdelta2 = rejacobidelay;
+      result = jacobi->clock(tdelta2, ptr, samples);
       total += result;
       ptr += result;
       samples -= result;
-      tdelta -= residdelay;
+      tdelta -= rejacobidelay;
     }
 
-    sid->write(o, sidreg[o]);
+    jacobi->write(o, jacobireg[o]);
 
-    tdelta2 = SIDWRITEDELAY;
-    result = sid->clock(tdelta2, ptr, samples);
+    tdelta2 = jacobiWRITEDELAY;
+    result = jacobi->clock(tdelta2, ptr, samples);
     total += result;
     ptr += result;
     samples -= result;
-    tdelta -= SIDWRITEDELAY;
+    tdelta -= jacobiWRITEDELAY;
   }
-  result = sid->clock(tdelta, ptr, samples);
+  result = jacobi->clock(tdelta, ptr, samples);
   total += result;
 
   return total;
@@ -299,7 +269,7 @@ static int sid_fillbuffer(unsigned char* sidreg, cSID *sid, int tdelta, short *p
 
 
 
-void sidInstrument::playNote( NotePlayHandle * _n,
+void jacobiInstrument::playNote( NotePlayHandle * _n,
 						sampleFrame * _working_buffer )
 {
 	const f_cnt_t tfp = _n->totalFramesPlayed();
@@ -309,33 +279,33 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 
 	if ( tfp == 0 )
 	{
-		cSID *sid = new cSID();
-		sid->set_sampling_parameters( clockrate, SAMPLE_FAST, samplerate );
-		sid->set_chip_model( MOS8580 );
-		sid->enable_filter( true );
-		sid->reset();
-		_n->m_pluginData = sid;
+		cjacobi *jacobi = new cjacobi();
+		jacobi->set_sampling_parameters( clockrate, SAMPLE_FAST, samplerate );
+		jacobi->set_chip_model( MOS8580 );
+		jacobi->enable_filter( true );
+		jacobi->reset();
+		_n->m_pluginData = jacobi;
 	}
 	const fpp_t frames = _n->framesLeftForCurrentPeriod();
 	const f_cnt_t offset = _n->noteOffset();
 
-	cSID *sid = static_cast<cSID *>( _n->m_pluginData );
+	cjacobi *jacobi = static_cast<cjacobi *>( _n->m_pluginData );
 	int delta_t = clockrate * frames / samplerate + 4;
 	short buf[frames];
-	unsigned char sidreg[NUMSIDREGS];
+	unsigned char jacobireg[NUMjacobiREGS];
 
-	for (int c = 0; c < NUMSIDREGS; c++)
+	for (int c = 0; c < NUMjacobiREGS; c++)
 	{
-		sidreg[c] = 0x00;
+		jacobireg[c] = 0x00;
 	}
 
-	if( (ChipModel)m_chipModel.value() == sidMOS6581 )
+	if( (ChipModel)m_chipModel.value() == jacobiMOS6581 )
 	{
-		sid->set_chip_model( MOS6581 );
+		jacobi->set_chip_model( MOS6581 );
 	}
 	else
 	{
-		sid->set_chip_model( MOS8580 );
+		jacobi->set_chip_model( MOS8580 );
 	}
 
 	// voices
@@ -354,13 +324,13 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 		freq = 440.0 * pow( 2.0, (note-69.0)/12.0 );
 		data16 = int( freq / float(clockrate) * 16777216.0 );
 
-		sidreg[base+0] = data16&0x00FF;
-		sidreg[base+1] = (data16>>8)&0x00FF;
+		jacobireg[base+0] = data16&0x00FF;
+		jacobireg[base+1] = (data16>>8)&0x00FF;
 		// pw
 		data16 = (int)m_voice[i]->m_pulseWidthModel.value();
 		
-		sidreg[base+2] = data16&0x00FF;
-		sidreg[base+3] = (data16>>8)&0x000F;
+		jacobireg[base+2] = data16&0x00FF;
+		jacobireg[base+3] = (data16>>8)&0x000F;
 		// control: wave form, (test), ringmod, sync, gate
 		data8 = _n->isReleased()?0:1;
 		data8 += m_voice[i]->m_syncModel.value()?2:0;
@@ -374,7 +344,7 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 			case voiceObject::SawWave:		data8 += 32; break;
 			case voiceObject::TriangleWave:	data8 += 16; break;
 		}
-		sidreg[base+4] = data8&0x00FF;
+		jacobireg[base+4] = data8&0x00FF;
 		// ad
 		data16 = (int)m_voice[i]->m_attackModel.value();
 
@@ -382,7 +352,7 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 		data16 = (int)m_voice[i]->m_decayModel.value();
 
 		data8 += (data16&0x0F);
-		sidreg[base+5] = data8&0x00FF;
+		jacobireg[base+5] = data8&0x00FF;
 		// sr
 		data16 = (int)m_voice[i]->m_sustainModel.value();
 
@@ -390,14 +360,14 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 		data16 = (int)m_voice[i]->m_releaseModel.value();
 
 		data8 += (data16&0x0F);
-		sidreg[base+6] = data8&0x00FF;
+		jacobireg[base+6] = data8&0x00FF;
 	}
 	// filtered
 
 	// FC (FilterCutoff)
 	data16 = (int)m_filterFCModel.value();
-	sidreg[21] = data16&0x0007;
-	sidreg[22] = (data16>>3)&0x00FF;
+	jacobireg[21] = data16&0x0007;
+	jacobireg[22] = (data16>>3)&0x00FF;
 	
 	// res, filt ex,3,2,1
 	data16 = (int)m_filterResonanceModel.value();
@@ -405,7 +375,7 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 	data8 += m_voice[2]->m_filteredModel.value()?4:0;
 	data8 += m_voice[1]->m_filteredModel.value()?2:0;
 	data8 += m_voice[0]->m_filteredModel.value()?1:0;
-	sidreg[23] = data8&0x00FF;
+	jacobireg[23] = data8&0x00FF;
 
 	// mode vol
 	data16 = (int)m_volumeModel.value();
@@ -420,9 +390,9 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 		case HighPass:	data8 += 64; break;
 	}
 
-	sidreg[24] = data8&0x00FF;
+	jacobireg[24] = data8&0x00FF;
 		
-	int num = sid_fillbuffer(sidreg, sid,delta_t,buf, frames);
+	int num = jacobi_fillbuffer(jacobireg, jacobi,delta_t,buf, frames);
 	if(num!=frames)
 		printf("!!!Not enough samples\n");
 
@@ -441,26 +411,26 @@ void sidInstrument::playNote( NotePlayHandle * _n,
 
 
 
-void sidInstrument::deleteNotePluginData( NotePlayHandle * _n )
+void jacobiInstrument::deleteNotePluginData( NotePlayHandle * _n )
 {
-	delete static_cast<cSID *>( _n->m_pluginData );
+	delete static_cast<cjacobi *>( _n->m_pluginData );
 }
 
 
 
 
-PluginView * sidInstrument::instantiateView( QWidget * _parent )
+PluginView * jacobiInstrument::instantiateView( QWidget * _parent )
 {
-	return( new sidInstrumentView( this, _parent ) );
+	return( new jacobiInstrumentView( this, _parent ) );
 }
 
 
 
 
-class sidKnob : public Knob
+class jacobiKnob : public Knob
 {
 public:
-	sidKnob( QWidget * _parent ) :
+	jacobiKnob( QWidget * _parent ) :
 			Knob( knobStyled, _parent )
 	{
 		setFixedSize( 16, 16 );
@@ -476,7 +446,7 @@ public:
 
 
 
-sidInstrumentView::sidInstrumentView( Instrument * _instrument,
+jacobiInstrumentView::jacobiInstrumentView( Instrument * _instrument,
 							QWidget * _parent ) :
 	InstrumentView( _instrument, _parent )
 {
@@ -486,15 +456,15 @@ sidInstrumentView::sidInstrumentView( Instrument * _instrument,
 	pal.setBrush( backgroundRole(), PLUGIN_NAME::getIconPixmap( "artwork" ) );
 	setPalette( pal );
 
-	m_volKnob = new sidKnob( this );
+	m_volKnob = new jacobiKnob( this );
 	m_volKnob->setHintText( tr( "Volume:" ), "" );
 	m_volKnob->move( 7, 64 );
 
-	m_resKnob = new sidKnob( this );
+	m_resKnob = new jacobiKnob( this );
 	m_resKnob->setHintText( tr( "Resonance:" ), "" );
 	m_resKnob->move( 7 + 28, 64 );
 
-	m_cutKnob = new sidKnob( this );
+	m_cutKnob = new jacobiKnob( this );
 	m_cutKnob->setHintText( tr( "Cutoff frequency:" ), "Hz" );
 	m_cutKnob->move( 7 + 2*28, 64 );
 
@@ -532,46 +502,46 @@ sidInstrumentView::sidInstrumentView( Instrument * _instrument,
 	mos6581_btn->move( 170, 59 );
 	mos6581_btn->setActiveGraphic( PLUGIN_NAME::getIconPixmap( "6581red" ) );
 	mos6581_btn->setInactiveGraphic( PLUGIN_NAME::getIconPixmap( "6581" ) );
-	ToolTip::add( mos6581_btn, tr( "MOS6581 SID ") );
+	ToolTip::add( mos6581_btn, tr( "MOS6581 jacobi ") );
 
 	PixmapButton * mos8580_btn = new PixmapButton( this, NULL );
 	mos8580_btn->move( 207, 59 );
 	mos8580_btn->setActiveGraphic( PLUGIN_NAME::getIconPixmap( "8580red" ) );
 	mos8580_btn->setInactiveGraphic( PLUGIN_NAME::getIconPixmap( "8580" ) );
-	ToolTip::add( mos8580_btn, tr( "MOS8580 SID ") );
+	ToolTip::add( mos8580_btn, tr( "MOS8580 jacobi ") );
 
-	m_sidTypeBtnGrp = new automatableButtonGroup( this );
-	m_sidTypeBtnGrp->addButton( mos6581_btn );
-	m_sidTypeBtnGrp->addButton( mos8580_btn );
+	m_jacobiTypeBtnGrp = new automatableButtonGroup( this );
+	m_jacobiTypeBtnGrp->addButton( mos6581_btn );
+	m_jacobiTypeBtnGrp->addButton( mos8580_btn );
 
 	for( int i = 0; i < 3; i++ ) 
 	{
-		Knob *ak = new sidKnob( this );
+		Knob *ak = new jacobiKnob( this );
 		ak->setHintText( tr("Attack:"), "" );
 		ak->move( 7, 114 + i*50 );
 		ak->setWhatsThis( tr ( "Attack rate determines how rapidly the output "
 				"of Voice %1 rises from zero to peak amplitude." ).arg( i+1 ) );
 
-		Knob *dk = new sidKnob( this );
+		Knob *dk = new jacobiKnob( this );
 		dk->setHintText( tr("Decay:") , "" );
 		dk->move( 7 + 28, 114 + i*50 );
 		dk->setWhatsThis( tr ( "Decay rate determines how rapidly the output "
 				"falls from the peak amplitude to the selected Sustain level." ) );
 
-		Knob *sk = new sidKnob( this );
+		Knob *sk = new jacobiKnob( this );
 		sk->setHintText( tr("Sustain:"), "" );
 		sk->move( 7 + 2*28, 114 + i*50 );
 		sk->setWhatsThis( tr ( "Output of Voice %1 will remain at the selected "
 				"Sustain amplitude as long as the note is held." ).arg( i+1 ) );
 
-		Knob *rk = new sidKnob( this );
+		Knob *rk = new jacobiKnob( this );
 		rk->setHintText( tr("Release:"), "" );
 		rk->move( 7 + 3*28, 114 + i*50 );
 		rk->setWhatsThis( tr ( "The output of of Voice %1 will fall from "
 				"Sustain amplitude to zero amplitude at the selected Release "
 				"rate." ).arg( i+1 ) );
 
-		Knob *pwk = new sidKnob( this );
+		Knob *pwk = new jacobiKnob( this );
 		pwk->setHintText( tr("Pulse Width:"), "" );
 		pwk->move( 7 + 4*28, 114 + i*50 );
 		pwk->setWhatsThis( tr ( "The Pulse Width resolution allows the width "
@@ -579,7 +549,7 @@ sidInstrumentView::sidInstrumentView( Instrument * _instrument,
 				"waveform on Oscillator %1 must be selected to have any audible"
 				" effect." ).arg( i+1 ) );
 
-		Knob *crsk = new sidKnob( this );
+		Knob *crsk = new jacobiKnob( this );
 		crsk->setHintText( tr("Coarse:"), " semitones" );
 		crsk->move( 147, 114 + i*50 );
 		crsk->setWhatsThis( tr ( "The Coarse detuning allows to detune Voice "
@@ -683,13 +653,13 @@ sidInstrumentView::sidInstrumentView( Instrument * _instrument,
 }
 
 
-sidInstrumentView::~sidInstrumentView()
+jacobiInstrumentView::~jacobiInstrumentView()
 {
 }
 
-void sidInstrumentView::updateKnobHint()
+void jacobiInstrumentView::updateKnobHint()
 {
-	sidInstrument * k = castModel<sidInstrument>();
+	jacobiInstrument * k = castModel<jacobiInstrument>();
 
 	for( int i = 0; i < 3; ++i )
 	{
@@ -728,9 +698,9 @@ void sidInstrumentView::updateKnobHint()
 
 
 
-void sidInstrumentView::updateKnobToolTip()
+void jacobiInstrumentView::updateKnobToolTip()
 {
-	sidInstrument * k = castModel<sidInstrument>();
+	jacobiInstrument * k = castModel<jacobiInstrument>();
 	for( int i = 0; i < 3; ++i )
 	{
 		ToolTip::add( m_voiceKnobs[i].m_sustKnob,
@@ -748,16 +718,16 @@ void sidInstrumentView::updateKnobToolTip()
 
 
 
-void sidInstrumentView::modelChanged()
+void jacobiInstrumentView::modelChanged()
 {
-	sidInstrument * k = castModel<sidInstrument>();
+	jacobiInstrument * k = castModel<jacobiInstrument>();
 
 	m_volKnob->setModel( &k->m_volumeModel );
 	m_resKnob->setModel( &k->m_filterResonanceModel );
 	m_cutKnob->setModel( &k->m_filterFCModel );
 	m_passBtnGrp->setModel( &k->m_filterModeModel );
 	m_offButton->setModel(  &k->m_voice3OffModel );
-	m_sidTypeBtnGrp->setModel(  &k->m_chipModel );
+	m_jacobiTypeBtnGrp->setModel(  &k->m_chipModel );
 
 	for( int i = 0; i < 3; ++i )
 	{
@@ -822,7 +792,7 @@ extern "C"
 // necessary for getting instance out of shared lib
 Plugin * PLUGIN_EXPORT lmms_plugin_main( Model *, void * _data )
 {
-	return( new sidInstrument(
+	return( new jacobiInstrument(
 				static_cast<InstrumentTrack *>( _data ) ) );
 }
 

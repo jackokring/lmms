@@ -1,8 +1,7 @@
 /*
- * sid_Instrument.h - ResID based software-synthesizer
+ * jacobi_Instrument.h - software-synthesizer
  *
- * Copyright (c) 2008 Csaba Hruska <csaba.hruska/at/gmail.com>
- *                    Attila Herman <attila589/at/gmail.com>
+ * Copyright (c) 2015 Simon Jackson <jackokring/at/gmail.com>
  * 
  * This file is part of LMMS - http://lmms.io
  *
@@ -24,8 +23,8 @@
  */
 
 
-#ifndef _SID_H
-#define _SID_H
+#ifndef _JACOBI_H
+#define _JACOBI_H
 
 #include <QObject>
 #include "Instrument.h"
@@ -33,23 +32,16 @@
 #include "Knob.h"
 
 
-class sidInstrumentView;
+class jacobiInstrumentView;
 class NotePlayHandle;
 class automatableButtonGroup;
-class PixmapButton;
+class PixmapButton; //randomize button?
 
 class voiceObject : public Model
 {
 	Q_OBJECT
 	MM_OPERATORS
 public:
-	enum WaveForm {
-		SquareWave = 0,
-		TriangleWave,
-		SawWave,
-		NoiseWave,
-		NumWaveShapes
-	};
 	voiceObject( Model * _parent, int _idx );
 	virtual ~voiceObject();
 
@@ -67,35 +59,19 @@ private:
 	BoolModel m_filteredModel;
 	BoolModel m_testModel;
 
-	friend class sidInstrument;
-	friend class sidInstrumentView;
+	friend class jacobiInstrument;
+	friend class jacobiInstrumentView;
 } ;
 
-class sidInstrument : public Instrument
+class jacobiInstrument : public Instrument
 {
 	Q_OBJECT
 public:
-	enum FilerType {
-		HighPass = 0,
-		BandPass,
-		LowPass,
-		NumFilterTypes
-	};
-	
-	enum ChipModel {
-		sidMOS6581 = 0,
-		sidMOS8580,
-		NumChipModels
-	};
+	jacobiInstrument( InstrumentTrack * _instrument_track );
+	virtual ~jacobiInstrument();
 
-
-	sidInstrument( InstrumentTrack * _instrument_track );
-	virtual ~sidInstrument();
-
-	virtual void playNote( NotePlayHandle * _n,
-						sampleFrame * _working_buffer );
+	virtual void playNote( NotePlayHandle * _n, sampleFrame * _working_buffer );
 	virtual void deleteNotePluginData( NotePlayHandle * _n );
-
 
 	virtual void saveSettings( QDomDocument & _doc, QDomElement & _parent );
 	virtual void loadSettings( const QDomElement & _this );
@@ -105,11 +81,6 @@ public:
 	virtual f_cnt_t desiredReleaseFrames() const;
 
 	virtual PluginView * instantiateView( QWidget * _parent );
-
-
-/*public slots:
-	void updateKnobHint();
-	void updateKnobToolTip();*/
 
 private:
 	// voices
@@ -126,24 +97,24 @@ private:
 
 	IntModel m_chipModel;
 
-	friend class sidInstrumentView;
+	friend class jacobiInstrumentView;
 
 } ;
 
 
 
-class sidInstrumentView : public InstrumentView
+class jacobiInstrumentView : public InstrumentView
 {
 	Q_OBJECT
 public:
-	sidInstrumentView( Instrument * _instrument, QWidget * _parent );
-	virtual ~sidInstrumentView();
+	jacobiInstrumentView( Instrument * _instrument, QWidget * _parent );
+	virtual ~jacobiInstrumentView();
 
 private:
 	virtual void modelChanged();
 	
 	automatableButtonGroup * m_passBtnGrp;
-	automatableButtonGroup * m_sidTypeBtnGrp;
+	automatableButtonGroup * m_jacobiTypeBtnGrp;
 
 	struct voiceKnobs
 	{
