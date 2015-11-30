@@ -58,374 +58,114 @@ Plugin::Descriptor PLUGIN_EXPORT jacobi_plugin_descriptor =
 
 voiceObject::voiceObject( Model * _parent, int _idx ) :
 	Model( _parent ),
-	m_pulseWidthModel( 2048.0f, 0.0f, 4095.0f, 1.0f, this,
-					tr( "Voice %1 pulse width" ).arg( _idx+1 ) ),
-	m_attackModel( 8.0f, 0.0f, 15.0f, 1.0f, this,
-					tr( "Voice %1 attack" ).arg( _idx+1 ) ),
-	m_decayModel( 8.0f, 0.0f, 15.0f, 1.0f, this,
-					tr( "Voice %1 decay" ).arg( _idx+1 ) ),
-	m_sustainModel( 15.0f, 0.0f, 15.0f, 1.0f, this,
-					tr( "Voice %1 sustain" ).arg( _idx+1 ) ),
-	m_releaseModel( 8.0f, 0.0f, 15.0f, 1.0f, this,
-					tr( "Voice %1 release" ).arg( _idx+1 ) ),
-	m_coarseModel( 0.0f, -24.0, 24.0, 1.0f, this,
-					tr( "Voice %1 coarse detuning" ).arg( _idx+1 ) ),
-	m_waveFormModel( TriangleWave, 0, NumWaveShapes-1, this,
-					tr( "Voice %1 wave shape" ).arg( _idx+1 ) ),
-
-	m_syncModel( false, this, tr( "Voice %1 sync" ).arg( _idx+1 ) ),
-	m_ringModModel( false, this, tr( "Voice %1 ring modulate" ).arg( _idx+1 ) ),
-	m_filteredModel( false, this, tr( "Voice %1 filtered" ).arg( _idx+1 ) ),
-	m_testModel( false, this, tr( "Voice %1 test" ).arg( _idx+1 ) )
+	m_bnk( 2048.0f, 0.0f, 4095.0f, 1.0f, this,
+					tr( "Row %1 bank select" ).arg( _idx+1 ) ) 
 {
+	for(int i = 0; i < BNK; ++i) {
+		m_sld[i]( 8.0f, 0.0f, 15.0f, 1.0f, this,
+						tr( "Row %1 parameter slide" ).arg( _idx+1 ) );
+		m_rto_drv[i]( 8.0f, 0.0f, 15.0f, 1.0f, this,
+						tr( "Row %1 frequency ratio or drive" ).arg( _idx+1 ) );
+		m_mod_gen[i]( 15.0f, 0.0f, 15.0f, 1.0f, this,
+						tr( "Row %1 modulation depth or generation" ).arg( _idx+1 ) );
+		m_fhc_wso_trt[i]( 8.0f, 0.0f, 15.0f, 1.0f, this,
+						tr( "Row %1 effect A" ).arg( _idx+1 ) );
+		m_gnm_rdf_sso_pq[i]( 0.0f, -24.0, 24.0, 1.0f, this,
+						tr( "Row %1 effect B" ).arg( _idx+1 ) );
+		m_cut[i]( 0.0f, -24.0, 24.0, 1.0f, this,
+						tr( "Row %1 filter cutoff" ).arg( _idx+1 ) );
+		m_rez[i]( 0.0f, -24.0, 24.0, 1.0f, this,
+						tr( "Row %1 LPF to BPF resonnance" ).arg( _idx+1 ) );
+	}
+	
 }
-
 
 voiceObject::~voiceObject()
 {
 }
 
-
 jacobiInstrument::jacobiInstrument( InstrumentTrack * _instrument_track ) :
-	Instrument( _instrument_track, &jacobi_plugin_descriptor ),
-	// filter	
-	m_filterFCModel( 1024.0f, 0.0f, 2047.0f, 1.0f, this, tr( "Cutoff" ) ),
-	m_filterResonanceModel( 8.0f, 0.0f, 15.0f, 1.0f, this, tr( "Resonance" ) ),
-	m_filterModeModel( LowPass, 0, NumFilterTypes-1, this, tr( "Filter type" )),
-	
-	// misc
-	m_voice3OffModel( false, this, tr( "Voice 3 off" ) ),
-	m_volumeModel( 15.0f, 0.0f, 15.0f, 1.0f, this, tr( "Volume" ) ),
-	m_chipModel( jacobiMOS8580, 0, NumChipModels-1, this, tr( "Chip model" ) )
+	Instrument( _instrument_track, &jacobi_plugin_descriptor )
 {
-	for( int i = 0; i < 3; ++i )
+	for( int i = 0; i < 4; ++i )
 	{
 		m_voice[i] = new voiceObject( this, i );
 	}
 }
 
-
 jacobiInstrument::~jacobiInstrument()
 {
+	for( int i = 0; i < 4; ++i )
+	{
+		//avoid memory leaks
+		delete m_voice[i];
+	}
 }
-
 
 void jacobiInstrument::saveSettings( QDomDocument & _doc,
 							QDomElement & _this )
 {
 	// voices
-	for( int i = 0; i < 3; ++i )
+	for( int i = 0; i < 4; ++i )
 	{
-		const QString is = QString::number( i );
-
-		m_voice[i]->m_pulseWidthModel.saveSettings(
-										_doc, _this, "pulsewidth" + is );
-		m_voice[i]->m_attackModel.saveSettings(
-										_doc, _this, "attack" + is );
-		m_voice[i]->m_decayModel.saveSettings(
-										_doc, _this, "decay" + is );
-		m_voice[i]->m_sustainModel.saveSettings(
-										_doc, _this, "sustain" + is );
-		m_voice[i]->m_releaseModel.saveSettings(
-										_doc, _this, "release" + is );
-		m_voice[i]->m_coarseModel.saveSettings(
-										_doc, _this, "coarse" + is );
-		m_voice[i]->m_waveFormModel.saveSettings(
-										_doc, _this,"waveform" + is );
-		m_voice[i]->m_syncModel.saveSettings(
-										_doc, _this, "sync" + is );
-		m_voice[i]->m_ringModModel.saveSettings(
-										_doc, _this, "ringmod" + is );
-		m_voice[i]->m_filteredModel.saveSettings(
-										_doc, _this,"filtered" + is );
-		m_voice[i]->m_testModel.saveSettings(
-										_doc, _this, "test" + is );
+		const QString isb = QString::number( i );
+		m_voice[i]->m_bnk.saveSettings(_doc, _this, "bnk" + isb );
+		for( int j = 0; j < BNK; ++j )
+		{
+			const QString is = isb + "_" + QString::number( j );
+			m_voice[i]->m_sld[j].saveSettings(_doc, _this, "sld" + is );
+			m_voice[i]->m_rto_drv[j].saveSettings(_doc, _this, "rto" + is );
+			m_voice[i]->m_mod_gen[j].saveSettings(_doc, _this, "mod" + is );
+			m_voice[i]->m_fhc_wso_trt[j].saveSettings(_doc, _this, "fhc" + is );
+			m_voice[i]->m_gnm_rdf_sso_pq[j].saveSettings(_doc, _this, "gnm" + is );
+			m_voice[i]->m_cut[j].saveSettings(_doc, _this, "cut" + is );
+			m_voice[i]->m_rez[j].saveSettings(_doc, _this,"rez" + is );
+		}
 	}
-
-	// filter	
-	m_filterFCModel.saveSettings( _doc, _this, "filterFC" );
-	m_filterResonanceModel.saveSettings( _doc, _this, "filterResonance" );
-	m_filterModeModel.saveSettings( _doc, _this, "filterMode" );
-	
-	// misc
-	m_voice3OffModel.saveSettings( _doc, _this, "voice3Off" );
-	m_volumeModel.saveSettings( _doc, _this, "volume" );
-	m_chipModel.saveSettings( _doc, _this, "chipModel" );
 }
-
-
-
 
 void jacobiInstrument::loadSettings( const QDomElement & _this )
 {
 	// voices
-	for( int i = 0; i < 3; ++i )
+	for( int i = 0; i < 4; ++i )
 	{
-		const QString is = QString::number( i );
-
-		m_voice[i]->m_pulseWidthModel.loadSettings( _this, "pulsewidth" + is );
-		m_voice[i]->m_attackModel.loadSettings( _this, "attack" + is );
-		m_voice[i]->m_decayModel.loadSettings( _this, "decay" + is );
-		m_voice[i]->m_sustainModel.loadSettings( _this, "sustain" + is );
-		m_voice[i]->m_releaseModel.loadSettings( _this, "release" + is );
-		m_voice[i]->m_coarseModel.loadSettings( _this, "coarse" + is );
-		m_voice[i]->m_waveFormModel.loadSettings( _this, "waveform" + is );
-		m_voice[i]->m_syncModel.loadSettings( _this, "sync" + is );
-		m_voice[i]->m_ringModModel.loadSettings( _this, "ringmod" + is );
-		m_voice[i]->m_filteredModel.loadSettings( _this, "filtered" + is );
-		m_voice[i]->m_testModel.loadSettings( _this, "test" + is );
+		const QString isb = QString::number( i );
+		m_voice[i]->m_bnk.loadSettings(_this, "bnk" + isb );
+		for( int j = 0; j < BNK; ++j )
+		{
+			const QString is = isb + "_" + QString::number( j );
+			m_voice[i]->m_sld[j].loadSettings(_this, "sld" + is );
+			m_voice[i]->m_rto_drv[j].loadSettings(_this, "rto" + is );
+			m_voice[i]->m_mod_gen[j].loadSettings(_this, "mod" + is );
+			m_voice[i]->m_fhc_wso_trt[j].loadSettings(_this, "fhc" + is );
+			m_voice[i]->m_gnm_rdf_sso_pq[j].loadSettings(_this, "gnm" + is );
+			m_voice[i]->m_cut[j].loadSettings(_this, "cut" + is );
+			m_voice[i]->m_rez[j].loadSettings(_this,"rez" + is );
+		}
 	}
-	
-	// filter	
-	m_filterFCModel.loadSettings( _this, "filterFC" );
-	m_filterResonanceModel.loadSettings( _this, "filterResonance" );
-	m_filterModeModel.loadSettings( _this, "filterMode" );
-	
-	// misc
-	m_voice3OffModel.loadSettings( _this, "voice3Off" );
-	m_volumeModel.loadSettings( _this, "volume" );
-	m_chipModel.loadSettings( _this, "chipModel" );
 }
-
-
-
 
 QString jacobiInstrument::nodeName() const
 {
 	return( jacobi_plugin_descriptor.name );
 }
 
-
-
-
-f_cnt_t jacobiInstrument::desiredReleaseFrames() const
-{
-	const float samplerate = Engine::mixer()->processingSampleRate();
-	int maxrel = 0;
-	for( int i = 0 ; i < 3 ; ++i )
-	{
-		if( maxrel < m_voice[i]->m_releaseModel.value() )
-			maxrel = (int)m_voice[i]->m_releaseModel.value();
-	}
-
-	return f_cnt_t( float(relTime[maxrel])*samplerate/1000.0 );
-}
-
-
-
-
-static int jacobi_fillbuffer(unsigned char* jacobireg, cjacobi *jacobi, int tdelta, short *ptr, int samples)
-{
-  int tdelta2;
-  int result;
-  int total = 0;
-  int c;
-//  customly added
-  int rejacobidelay = 0;
-
-  int badline = rand() % NUMjacobiREGS;
-
-  for (c = 0; c < NUMjacobiREGS; c++)
-  {
-    unsigned char o = jacobiorder[c];
-
-  	// Extra delay for loading the waveform (and mt_chngate,x)
-  	if ((o == 4) || (o == 11) || (o == 18))
-  	{
-  	  tdelta2 = jacobiWAVEDELAY;
-      result = jacobi->clock(tdelta2, ptr, samples);
-      total += result;
-      ptr += result;
-      samples -= result;
-      tdelta -= jacobiWAVEDELAY;
-    }
-
-    // Possible random badline delay once per writing
-    if ((badline == c) && (rejacobidelay))
-  	{
-      tdelta2 = rejacobidelay;
-      result = jacobi->clock(tdelta2, ptr, samples);
-      total += result;
-      ptr += result;
-      samples -= result;
-      tdelta -= rejacobidelay;
-    }
-
-    jacobi->write(o, jacobireg[o]);
-
-    tdelta2 = jacobiWRITEDELAY;
-    result = jacobi->clock(tdelta2, ptr, samples);
-    total += result;
-    ptr += result;
-    samples -= result;
-    tdelta -= jacobiWRITEDELAY;
-  }
-  result = jacobi->clock(tdelta, ptr, samples);
-  total += result;
-
-  return total;
-}
-
-
-
-
 void jacobiInstrument::playNote( NotePlayHandle * _n,
 						sampleFrame * _working_buffer )
 {
-	const f_cnt_t tfp = _n->totalFramesPlayed();
-
-	const int clockrate = C64_PAL_CYCLES_PER_SEC;
-	const int samplerate = Engine::mixer()->processingSampleRate();
-
-	if ( tfp == 0 )
-	{
-		cjacobi *jacobi = new cjacobi();
-		jacobi->set_sampling_parameters( clockrate, SAMPLE_FAST, samplerate );
-		jacobi->set_chip_model( MOS8580 );
-		jacobi->enable_filter( true );
-		jacobi->reset();
-		_n->m_pluginData = jacobi;
-	}
-	const fpp_t frames = _n->framesLeftForCurrentPeriod();
-	const f_cnt_t offset = _n->noteOffset();
-
-	cjacobi *jacobi = static_cast<cjacobi *>( _n->m_pluginData );
-	int delta_t = clockrate * frames / samplerate + 4;
-	short buf[frames];
-	unsigned char jacobireg[NUMjacobiREGS];
-
-	for (int c = 0; c < NUMjacobiREGS; c++)
-	{
-		jacobireg[c] = 0x00;
-	}
-
-	if( (ChipModel)m_chipModel.value() == jacobiMOS6581 )
-	{
-		jacobi->set_chip_model( MOS6581 );
-	}
-	else
-	{
-		jacobi->set_chip_model( MOS8580 );
-	}
-
-	// voices
-	reg8 data8 = 0;
-	reg8 data16 = 0;
-	reg8 base = 0;
-	float freq = 0.0;
-	float note = 0.0;
-	for( reg8 i = 0 ; i < 3 ; ++i )
-	{
-		base = i*7;
-		// freq ( Fn = Fout / Fclk * 16777216 ) + coarse detuning
-		freq = _n->frequency();
-		note = 69.0 + 12.0 * log( freq / 440.0 ) / log( 2 );
-		note += m_voice[i]->m_coarseModel.value();
-		freq = 440.0 * pow( 2.0, (note-69.0)/12.0 );
-		data16 = int( freq / float(clockrate) * 16777216.0 );
-
-		jacobireg[base+0] = data16&0x00FF;
-		jacobireg[base+1] = (data16>>8)&0x00FF;
-		// pw
-		data16 = (int)m_voice[i]->m_pulseWidthModel.value();
-		
-		jacobireg[base+2] = data16&0x00FF;
-		jacobireg[base+3] = (data16>>8)&0x000F;
-		// control: wave form, (test), ringmod, sync, gate
-		data8 = _n->isReleased()?0:1;
-		data8 += m_voice[i]->m_syncModel.value()?2:0;
-		data8 += m_voice[i]->m_ringModModel.value()?4:0;
-		data8 += m_voice[i]->m_testModel.value()?8:0;
-		switch( m_voice[i]->m_waveFormModel.value() )
-		{	
-			default: break;
-			case voiceObject::NoiseWave:	data8 += 128; break;
-			case voiceObject::SquareWave:	data8 += 64; break;
-			case voiceObject::SawWave:		data8 += 32; break;
-			case voiceObject::TriangleWave:	data8 += 16; break;
-		}
-		jacobireg[base+4] = data8&0x00FF;
-		// ad
-		data16 = (int)m_voice[i]->m_attackModel.value();
-
-		data8 = (data16&0x0F)<<4;
-		data16 = (int)m_voice[i]->m_decayModel.value();
-
-		data8 += (data16&0x0F);
-		jacobireg[base+5] = data8&0x00FF;
-		// sr
-		data16 = (int)m_voice[i]->m_sustainModel.value();
-
-		data8 = (data16&0x0F)<<4;
-		data16 = (int)m_voice[i]->m_releaseModel.value();
-
-		data8 += (data16&0x0F);
-		jacobireg[base+6] = data8&0x00FF;
-	}
-	// filtered
-
-	// FC (FilterCutoff)
-	data16 = (int)m_filterFCModel.value();
-	jacobireg[21] = data16&0x0007;
-	jacobireg[22] = (data16>>3)&0x00FF;
-	
-	// res, filt ex,3,2,1
-	data16 = (int)m_filterResonanceModel.value();
-	data8 = (data16&0x000F)<<4;
-	data8 += m_voice[2]->m_filteredModel.value()?4:0;
-	data8 += m_voice[1]->m_filteredModel.value()?2:0;
-	data8 += m_voice[0]->m_filteredModel.value()?1:0;
-	jacobireg[23] = data8&0x00FF;
-
-	// mode vol
-	data16 = (int)m_volumeModel.value();
-	data8 = data16&0x000F;
-	data8 += m_voice3OffModel.value()?128:0;
-
-	switch( m_filterModeModel.value() )
-	{	
-		default: break;
-		case LowPass:	data8 += 16; break;
-		case BandPass:	data8 += 32; break;
-		case HighPass:	data8 += 64; break;
-	}
-
-	jacobireg[24] = data8&0x00FF;
-		
-	int num = jacobi_fillbuffer(jacobireg, jacobi,delta_t,buf, frames);
-	if(num!=frames)
-		printf("!!!Not enough samples\n");
-
-	for( fpp_t frame = 0; frame < frames; ++frame )
-	{
-		sample_t s = float(buf[frame])/32768.0;
-		for( ch_cnt_t ch = 0; ch < DEFAULT_CHANNELS; ++ch )
-		{
-			_working_buffer[frame+offset][ch] = s;
-		}
-	}
-
+	//TODO
 	instrumentTrack()->processAudioBuffer( _working_buffer, frames + offset, _n );
 }
-
-
-
 
 void jacobiInstrument::deleteNotePluginData( NotePlayHandle * _n )
 {
 	delete static_cast<cjacobi *>( _n->m_pluginData );
 }
 
-
-
-
 PluginView * jacobiInstrument::instantiateView( QWidget * _parent )
 {
 	return( new jacobiInstrumentView( this, _parent ) );
 }
-
-
-
 
 class jacobiKnob : public Knob
 {
@@ -442,9 +182,6 @@ public:
 		setLineWidth( 2 );
 	}
 };
-
-
-
 
 jacobiInstrumentView::jacobiInstrumentView( Instrument * _instrument,
 							QWidget * _parent ) :
@@ -715,9 +452,6 @@ void jacobiInstrumentView::updateKnobToolTip()
 					QString::number( (int)k->m_filterResonanceModel.value() ) );
 }
 
-
-
-
 void jacobiInstrumentView::modelChanged()
 {
 	jacobiInstrument * k = castModel<jacobiInstrument>();
@@ -781,10 +515,6 @@ void jacobiInstrumentView::modelChanged()
 	updateKnobHint();
 	updateKnobToolTip();
 }
-
-
-
-
 
 extern "C"
 {
