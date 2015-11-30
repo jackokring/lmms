@@ -26,6 +26,8 @@
 #ifndef _JACOBI_H
 #define _JACOBI_H
 
+#define BNK 16
+
 #include <QObject>
 #include "Instrument.h"
 #include "InstrumentView.h"
@@ -34,8 +36,6 @@
 
 class jacobiInstrumentView;
 class NotePlayHandle;
-class automatableButtonGroup;
-class PixmapButton; //randomize button?
 
 class voiceObject : public Model
 {
@@ -45,19 +45,15 @@ public:
 	voiceObject( Model * _parent, int _idx );
 	virtual ~voiceObject();
 
-
 private:
-	FloatModel m_pulseWidthModel;
-	FloatModel m_attackModel;
-	FloatModel m_decayModel;
-	FloatModel m_sustainModel;
-	FloatModel m_releaseModel;
-	FloatModel m_coarseModel;
-	IntModel m_waveFormModel;
-	BoolModel m_syncModel;
-	BoolModel m_ringModModel;
-	BoolModel m_filteredModel;
-	BoolModel m_testModel;
+	IntModel m_bnk;
+	FloatModel m_sld[BNK];
+	FloatModel m_rto_drv[BNK];
+	FloatModel m_mod_gen[BNK];
+	FloatModel m_fhc_wso_trt[BNK];
+	FloatModel m_gnm_rdf_sso_pq[BNK];
+	FloatModel m_cut[BNK];
+	FloatModel m_rez[BNK];
 
 	friend class jacobiInstrument;
 	friend class jacobiInstrumentView;
@@ -78,24 +74,11 @@ public:
 
 	virtual QString nodeName() const;
 
-	virtual f_cnt_t desiredReleaseFrames() const;
-
 	virtual PluginView * instantiateView( QWidget * _parent );
 
 private:
-	// voices
-	voiceObject * m_voice[3];
-
-	// filter	
-	FloatModel m_filterFCModel;
-	FloatModel m_filterResonanceModel;
-	IntModel m_filterModeModel;
-	
-	// misc
-	BoolModel m_voice3OffModel;
-	FloatModel m_volumeModel;
-
-	IntModel m_chipModel;
+	// voices (well oscillators and shaper)
+	voiceObject * m_voice[4];
 
 	friend class jacobiInstrumentView;
 
@@ -112,58 +95,41 @@ public:
 
 private:
 	virtual void modelChanged();
-	
-	automatableButtonGroup * m_passBtnGrp;
-	automatableButtonGroup * m_jacobiTypeBtnGrp;
 
 	struct voiceKnobs
 	{
 		voiceKnobs( Knob * a,
-					Knob * d,
-					Knob * s,
-					Knob * r,
-					Knob * pw,
-					Knob * crs,
-					automatableButtonGroup * wfbg,
-					PixmapButton * syncb,
-					PixmapButton * ringb,
-					PixmapButton * filterb,
-					PixmapButton * testb ) :
-			m_attKnob( a ),
-			m_decKnob( d ),
-			m_sustKnob( s ),
-			m_relKnob( r ),
-			m_pwKnob( pw ),
-			m_crsKnob( crs ),
-			m_waveFormBtnGrp( wfbg ),
-			m_syncButton( syncb ),
-			m_ringModButton( ringb ),
-			m_filterButton( filterb ),
-			m_testButton( testb )
+				Knob * b,
+				Knob * c,
+				Knob * d,
+				Knob * e,
+				Knob * f,
+				Knob * g,
+				Knob * h ) :
+			m_bnkKnob( a ),
+			m_sldKnob( b ),
+			m_rtoKnob( c ),
+			m_modKnob( d ),
+			m_fhcKnob( e ),
+			m_gnmKnob( f ),
+			m_cutKnob( g ),
+			m_rezKnob( h )
 		{
 		}
 		voiceKnobs()
 		{
 		}
-		Knob * m_attKnob;
-		Knob * m_decKnob;
-		Knob * m_sustKnob;
-		Knob * m_relKnob;
-		Knob * m_pwKnob;
-		Knob * m_crsKnob;
-		automatableButtonGroup * m_waveFormBtnGrp;
-		PixmapButton * m_syncButton;
-		PixmapButton * m_ringModButton;
-		PixmapButton * m_filterButton;
-		PixmapButton * m_testButton;
+		Knob * m_bnkKnob;
+		Knob * m_sldKnob;
+		Knob * m_rtoKnob;
+		Knob * m_modKnob;
+		Knob * m_fhcKnob;
+		Knob * m_gnmKnob;
+		Knob * m_cutKnob;
+		Knob * m_rezKnob;
 	} ;
 
-	voiceKnobs m_voiceKnobs[3];
-
-	Knob * m_volKnob;
-	Knob * m_resKnob;
-	Knob * m_cutKnob;
-	PixmapButton * m_offButton;
+	voiceKnobs m_voiceKnobs[4];
 
 protected slots:
 	void updateKnobHint();
