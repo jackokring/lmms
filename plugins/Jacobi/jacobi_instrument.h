@@ -55,6 +55,14 @@ private:
 	FloatModel m_cut[BNK];
 	FloatModel m_rez[BNK];
 
+	//the internal state
+	float rto_drv;
+	float mod_gen;
+	float fhc_wso_trt;
+	float gnm_rdf_sso_pq;
+	float cut;
+	float rez;
+
 	friend class jacobiInstrument;
 	friend class jacobiInstrumentView;
 } ;
